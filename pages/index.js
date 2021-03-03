@@ -6,10 +6,15 @@ import SearchInput from "../components/searchInput";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
 import {
+  Img,
+  Button,
   Container,
+  Grid,
   Input,
   VStack,
   Box,
+  LinkBox,
+  LinkOverlay,
   Table,
   Thead,
   Tbody,
@@ -47,7 +52,7 @@ function Home({ countries }) {
         <Head>
           <title>{SiteConfig.title}</title>
         </Head>
-        <Container maxW="container.xl">
+        <Container maxW="container.lg">
           <button onClick={getRegion}>Get Europe</button>
           <p>Found {countries.length} countries</p>
 
@@ -55,15 +60,32 @@ function Home({ countries }) {
 
           {/* <SearchInput placeholder="Filter by Name" onChange={onInputChange} /> */}
 
-          {/* <VStack spacing={4} align="stretch">
-            {filteredCountries.map((country) => (
-              <Box key={country.alpha3Code} h="40px">
-                {country.name}
-              </Box>
-            ))}
-          </VStack> */}
+          {filteredCountries.map((country) => (
+            <LinkBox
+              key={country.alpha3Code}
+              as="article"
+              m="5"
+              p="5"
+              rounded="md"
+              boxShadow="base"
+            >
+              <Grid templateColumns="repeat(4, 1fr)" gap={0}>
+                <Box>
+                  <LinkOverlay href="#">
+                    <Img src={country.flag} width="60px" height="40px" />
+                  </LinkOverlay>
+                </Box>
+                <Box>{country.name}</Box>
+                <Box>
+                  {country.population}
+                  {/* <Button colorScheme="gray">Click me</Button> */}
+                </Box>
+                <Box>{country.area}</Box>
+              </Grid>
+            </LinkBox>
+          ))}
 
-          <Table variant="simple">
+          {/* <Table variant="simple">
             <TableCaption>Imperial to metric conversion factors</TableCaption>
             <Thead>
               <Tr>
@@ -81,7 +103,7 @@ function Home({ countries }) {
                 </Tr>
               ))}
             </Tbody>
-          </Table>
+          </Table> */}
 
           {/* <ul className="thlist">
             {filteredCountries.map((country) => (
