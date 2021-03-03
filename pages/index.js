@@ -5,6 +5,20 @@ import Layout from "../components/layout";
 import SearchInput from "../components/searchInput";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
+import {
+  Container,
+  Input,
+  VStack,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+} from "@chakra-ui/react";
 
 function Home({ countries }) {
   const [keyword, setKeyword] = useState("");
@@ -24,10 +38,7 @@ function Home({ countries }) {
   function getRegion(e) {
     e.preventDefault();
     console.log("Get Europe");
-    const filteredRegion = countries.filter((country) =>
-      country.region.toLowerCase().includes("europe")
-    );
-    console.log(filteredRegion);
+    setKeyword("asia");
   }
 
   return (
@@ -36,15 +47,48 @@ function Home({ countries }) {
         <Head>
           <title>{SiteConfig.title}</title>
         </Head>
-        <button onClick={getRegion}>Get Europe</button>
-        <SearchInput placeholder="Filter by Name" onChange={onInputChange} />
+        <Container maxW="container.xl">
+          <button onClick={getRegion}>Get Europe</button>
+          <p>Found {countries.length} countries</p>
 
-        <p>Found {countries.length} countries</p>
-        <ul className="thlist">
-          {filteredCountries.map((country) => (
-            <li key={country.alpha3Code}>{country.name}</li>
-          ))}
-        </ul>
+          <Input placeholder="Filter by Name" onChange={onInputChange} />
+
+          {/* <SearchInput placeholder="Filter by Name" onChange={onInputChange} /> */}
+
+          {/* <VStack spacing={4} align="stretch">
+            {filteredCountries.map((country) => (
+              <Box key={country.alpha3Code} h="40px">
+                {country.name}
+              </Box>
+            ))}
+          </VStack> */}
+
+          <Table variant="simple">
+            <TableCaption>Imperial to metric conversion factors</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>Name</Th>
+                <Th>Region</Th>
+                <Th isNumeric>multiply by</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {filteredCountries.map((country) => (
+                <Tr key={country.alpha3Code}>
+                  <Td>{country.name}</Td>
+                  <Td>{country.region}</Td>
+                  <Td isNumeric>25.4</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+
+          {/* <ul className="thlist">
+            {filteredCountries.map((country) => (
+              <li key={country.alpha3Code}>{country.name}</li>
+            ))}
+          </ul> */}
+        </Container>
       </Layout>
     </>
   );

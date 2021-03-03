@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SiteConfig from "../site.config";
+import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 function Layout({ children }) {
   return (
@@ -13,6 +14,7 @@ function Layout({ children }) {
         <p>
           {SiteConfig.title} - {SiteConfig.description}
         </p>
+        <ColorModeSwitcher />
       </header>
       <main>{children}</main>
       <footer className={styles.footer}>footer</footer>
