@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
-
+import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
 import SearchInput from "../components/searchInput";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
+import { REGION } from "../constants";
 import {
   Img,
+  Flex,
+  Avatar,
+  Stack,
+  Spacer,
   Button,
+  ButtonGroup,
+  Badge,
+  Text,
   Container,
   Grid,
   Input,
@@ -26,6 +34,17 @@ import {
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
+  // const numberFormat = (value) =>
+  //   new Intl.NumberFormat("en-IN", {
+  //     style: "currency",
+  //     currency: "INR",
+  //   }).format(value);
+  function NumberFormat(amount) {
+    return new Intl.NumberFormat("en-GB", {
+      maximumSignificantDigits: 3,
+    }).format(amount);
+  }
+
   const [keyword, setKeyword] = useState("");
 
   const filteredCountries = countries.filter(
@@ -42,8 +61,9 @@ function Home({ countries }) {
 
   function getRegion(e) {
     e.preventDefault();
-    console.log("Get Europe");
-    setKeyword("asia");
+    let dataRegion = e.target.getAttribute("data-region");
+    console.log(dataRegion);
+    setKeyword(dataRegion);
   }
 
   return (
@@ -53,57 +73,83 @@ function Home({ countries }) {
           <title>{SiteConfig.title}</title>
         </Head>
         <Container maxW="container.lg">
-          <button onClick={getRegion}>Get Europe</button>
-          <p>Found {countries.length} countries</p>
+          <Flex mt="30px">
+            <Box flex="1">
+              <Input
+                borderWidth="2px"
+                placeholder="Filter by Country Name"
+                onChange={onInputChange}
+              />
+            </Box>
+          </Flex>
+          <Text as="small" color="gray">
+            Found {filteredCountries.length} countries
+          </Text>
+          <ButtonGroup
+            mt="30px"
+            mb="30px"
+            ml="20px"
+            size="xs"
+            variant="solid"
+            spacing="2"
+          >
+            {REGION.map((item) => {
+              // const showTitle = !flat && menu.title.length > 0
+              // const selected = router.pathname === menu.path
 
-          <Input placeholder="Filter by Name" onChange={onInputChange} />
+              return (
+                <Button
+                  key={item.region}
+                  data-region={item.region}
+                  onClick={getRegion}
+                  colorScheme={item.colorscheme}
+                >
+                  {item.title}
+                </Button>
+              );
+            })}
+          </ButtonGroup>
 
-          {/* <SearchInput placeholder="Filter by Name" onChange={onInputChange} /> */}
-
-          {filteredCountries.map((country) => (
-            <LinkBox
-              key={country.alpha3Code}
-              as="article"
-              m="5"
-              p="5"
-              rounded="md"
-              boxShadow="base"
-            >
-              <Grid templateColumns="repeat(4, 1fr)" gap={0}>
-                <Box>
-                  <LinkOverlay href="#">
-                    <Img src={country.flag} width="60px" height="40px" />
-                  </LinkOverlay>
-                </Box>
-                <Box>{country.name}</Box>
-                <Box>
-                  {country.population}
-                  {/* <Button colorScheme="gray">Click me</Button> */}
-                </Box>
-                <Box>{country.area}</Box>
-              </Grid>
-            </LinkBox>
-          ))}
-
-          {/* <Table variant="simple">
-            <TableCaption>Imperial to metric conversion factors</TableCaption>
+          <Table variant="simple">
+            <TableCaption>
+              Showing {filteredCountries.length} countries
+            </TableCaption>
             <Thead>
               <Tr>
+                <Th></Th>
                 <Th>Name</Th>
                 <Th>Region</Th>
-                <Th isNumeric>multiply by</Th>
+                <Th isNumeric>Population</Th>
+                <Th isNumeric>
+                  Area (km <sup>2</sup>)
+                </Th>
               </Tr>
             </Thead>
             <Tbody>
               {filteredCountries.map((country) => (
                 <Tr key={country.alpha3Code}>
-                  <Td>{country.name}</Td>
+                  <Td>
+                    <Avatar
+                      size="sm"
+                      name={country.alpha2Code}
+                      src={country.flag}
+                    />
+                  </Td>
+                  <Td>
+                    <Link
+                      href={`/country/${country.alpha3Code}`}
+                      key={country.name}
+                    >
+                      {country.name}
+                    </Link>
+                  </Td>
                   <Td>{country.region}</Td>
-                  <Td isNumeric>25.4</Td>
+                  <Td isNumeric>{NumberFormat(country.population)}</Td>
+                  <Td isNumeric>{NumberFormat(country.area)} </Td>
                 </Tr>
               ))}
             </Tbody>
-          </Table> */}
+          </Table>
 
           {/* <ul className="thlist">
             {filteredCountries.map((country) => (
