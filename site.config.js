@@ -1,11 +1,11 @@
 module.exports = {
-  title: 'Rick and Morty',
-  description: 'My Website description...',
-  siteUrl: 'https://egriboz.com',
-  googleAnalytic: 'X-XXXXXXXXXX',
+  title: "Rest Countries",
+  description: "Get information about countries via a RESTful API",
+  siteUrl: "https://egriboz.com",
+  googleAnalytic: "X-XXXXXXXXXX",
   author: {
-    email: 'egriboz@gmail.com',
-    name: 'Fatih Eğriboz'
+    email: "egriboz@gmail.com",
+    name: "Fatih Eğriboz",
   },
-  lang: 'tr'
-}
+  lang: "en",
+};
