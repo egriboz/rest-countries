@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Rest Countries",
-  description: "Get information about countries via a RESTful API",
+  title: "Country Information",
+  description: "Get information about countries",
   siteUrl: "https://egriboz.com",
   googleAnalytic: "X-XXXXXXXXXX",
   author: {
