@@ -1,17 +1,18 @@
-import unfetch from 'isomorphic-unfetch'
+import unfetch from "isomorphic-unfetch";
 // import slug from 'slug'
-import React, { useState, useEffect } from 'react'
-import Link from 'next/link'
-import Head from 'next/head'
-import Layout from '../components/layout'
-import SearchInput from '../components/searchInput'
-import SiteConfig from '../site.config'
-import styles from '../styles/Home.module.css'
-import { REGION } from '../constants'
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Head from "next/head";
+import Layout from "../components/layout";
+import SearchInput from "../components/searchInput";
+import SiteConfig from "../site.config";
+import styles from "../styles/Home.module.css";
+import { REGION } from "../constants";
 import {
   Img,
   Flex,
   Button,
+  Icon,
   Avatar,
   Stack,
   Spacer,
@@ -33,37 +34,35 @@ import {
   Th,
   Td,
   TableCaption,
-  useColorMode
-} from '@chakra-ui/react'
+  useColorMode,
+} from "@chakra-ui/react";
 
 function Home({ countries }) {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode();
 
   function NumberFormat(amount) {
-    return new Intl.NumberFormat('en-GB', {
-      maximumSignificantDigits: 3
-    }).format(amount)
+    return new Intl.NumberFormat("en-GB", {
+      maximumSignificantDigits: 3,
+    }).format(amount);
   }
 
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = useState("");
 
   const filteredCountries = countries.filter(
     (country) =>
-      country.name.toLowerCase().includes(keyword) ||
-      country.region.toLowerCase().includes(keyword) ||
-      country.subregion.toLowerCase().includes(keyword)
-  )
+      country.name.toLowerCase().includes(keyword)
+  );
 
   const onInputChange = (e) => {
-    e.preventDefault()
-    setKeyword(e.target.value.toLowerCase())
-  }
+    e.preventDefault();
+    setKeyword(e.target.value.toLowerCase());
+  };
 
   function getRegion(e) {
-    e.preventDefault()
-    let dataRegion = e.target.getAttribute('data-region')
-    console.log(dataRegion)
-    setKeyword(dataRegion)
+    e.preventDefault();
+    let dataRegion = e.target.getAttribute("data-region");
+    console.log(dataRegion);
+    setKeyword(dataRegion);
   }
 
   return (
@@ -79,8 +78,17 @@ function Home({ countries }) {
             </Button>
           </Box> */}
           <Flex mt="30px">
-            <Box flex="1">
+            <Box flex="1" position="relative">
+              <Box w="14px" position="absolute" zIndex="1" top="13px" left="15px" color="gray.200" opacity=".5">
+                <svg viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M23.384,21.619,16.855,15.09a9.284,9.284,0,1,0-1.768,1.768l6.529,6.529a1.266,1.266,0,0,0,1.768,0A1.251,1.251,0,0,0,23.384,21.619ZM2.75,9.5a6.75,6.75,0,1,1,6.75,6.75A6.758,6.758,0,0,1,2.75,9.5Z"
+                  ></path>
+                </svg>
+              </Box>
               <Input
+                paddingLeft="40px"
                 borderWidth="2px"
                 placeholder="Filter by Country Name"
                 onChange={onInputChange}
@@ -111,7 +119,7 @@ function Home({ countries }) {
                 >
                   {item.title}
                 </Button>
-              )
+              );
             })}
           </ButtonGroup>
 
@@ -159,16 +167,16 @@ function Home({ countries }) {
         </Container>
       </Layout>
     </>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
-  const res = await unfetch('https://restcountries.eu/rest/v2/all/')
-  const countries = await res.json()
+  const res = await unfetch("https://restcountries.eu/rest/v2/all/");
+  const countries = await res.json();
   return {
     props: {
-      countries
-    }
-  }
-}
-export default Home
+      countries,
+    },
+  };
+};
+export default Home;
