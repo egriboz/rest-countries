@@ -1,18 +1,20 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Head from "next/head";
-import Layout from "../components/layout";
-import SearchInput from "../components/searchInput";
-import SiteConfig from "../site.config";
-import styles from "../styles/Home.module.css";
-import { REGION } from "../constants";
+import unfetch from 'isomorphic-unfetch'
+// import slug from 'slug'
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import Head from 'next/head'
+import Layout from '../components/layout'
+import SearchInput from '../components/searchInput'
+import SiteConfig from '../site.config'
+import styles from '../styles/Home.module.css'
+import { REGION } from '../constants'
 import {
   Img,
   Flex,
+  Button,
   Avatar,
   Stack,
   Spacer,
-  Button,
   ButtonGroup,
   Badge,
   Text,
@@ -31,39 +33,37 @@ import {
   Th,
   Td,
   TableCaption,
-} from "@chakra-ui/react";
+  useColorMode
+} from '@chakra-ui/react'
 
 function Home({ countries }) {
-  // const numberFormat = (value) =>
-  //   new Intl.NumberFormat("en-IN", {
-  //     style: "currency",
-  //     currency: "INR",
-  //   }).format(value);
+  const { colorMode, toggleColorMode } = useColorMode()
+
   function NumberFormat(amount) {
-    return new Intl.NumberFormat("en-GB", {
-      maximumSignificantDigits: 3,
-    }).format(amount);
+    return new Intl.NumberFormat('en-GB', {
+      maximumSignificantDigits: 3
+    }).format(amount)
   }
 
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState('')
 
   const filteredCountries = countries.filter(
     (country) =>
       country.name.toLowerCase().includes(keyword) ||
       country.region.toLowerCase().includes(keyword) ||
       country.subregion.toLowerCase().includes(keyword)
-  );
+  )
 
   const onInputChange = (e) => {
-    e.preventDefault();
-    setKeyword(e.target.value.toLowerCase());
-  };
+    e.preventDefault()
+    setKeyword(e.target.value.toLowerCase())
+  }
 
   function getRegion(e) {
-    e.preventDefault();
-    let dataRegion = e.target.getAttribute("data-region");
-    console.log(dataRegion);
-    setKeyword(dataRegion);
+    e.preventDefault()
+    let dataRegion = e.target.getAttribute('data-region')
+    console.log(dataRegion)
+    setKeyword(dataRegion)
   }
 
   return (
@@ -73,6 +73,11 @@ function Home({ countries }) {
           <title>{SiteConfig.title}</title>
         </Head>
         <Container maxW="container.lg">
+          {/* <Box>
+            <Button onClick={toggleColorMode}>
+              Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
+            </Button>
+          </Box> */}
           <Flex mt="30px">
             <Box flex="1">
               <Input
@@ -106,7 +111,7 @@ function Home({ countries }) {
                 >
                   {item.title}
                 </Button>
-              );
+              )
             })}
           </ButtonGroup>
 
@@ -137,7 +142,8 @@ function Home({ countries }) {
                   </Td>
                   <Td>
                     <Link
-                      href={`/country/${country.alpha3Code}`}
+                      href="/country/[id]"
+                      as={`/country/${country.alpha3Code}`}
                       key={country.name}
                     >
                       {country.name}
@@ -150,25 +156,19 @@ function Home({ countries }) {
               ))}
             </Tbody>
           </Table>
-
-          {/* <ul className="thlist">
-            {filteredCountries.map((country) => (
-              <li key={country.alpha3Code}>{country.name}</li>
-            ))}
-          </ul> */}
         </Container>
       </Layout>
     </>
-  );
+  )
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://restcountries.eu/rest/v2/all");
-  const countries = await res.json();
+  const res = await unfetch('https://restcountries.eu/rest/v2/all/')
+  const countries = await res.json()
   return {
     props: {
-      countries,
-    },
-  };
-};
-export default Home;
+      countries
+    }
+  }
+}
+export default Home
