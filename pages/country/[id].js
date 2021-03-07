@@ -1,7 +1,7 @@
-import Layout from "../../components/layout";
+import { useState, useEffect } from "react";
 import Head from "next/head";
+import Layout from "../../components/layout";
 import unfetch from "isomorphic-unfetch";
-// import slug from 'slug'
 import {
   Box,
   Container,
@@ -12,23 +12,38 @@ import {
   Image,
   Badge,
   Square,
+  Link,
   Text,
 } from "@chakra-ui/react";
 
-function CharacterDetail({ country }) {
-  // const property = {
-  //   imageUrl: "https://bit.ly/2Z4KKcF",
-  //   imageAlt: "Rear view of modern home with pool",
-  //   beds: 3,
-  //   baths: 2,
-  //   title: "Modern home in city center in the heart of historic Los Angeles",
-  //   formattedPrice: "$1,900.00",
-  //   reviewCount: 34,
-  //   rating: 4,
-  // }
-  function LowerCaseText(amount) {
-    return amount.toLowerCase();
-  }
+// lowercase text
+const lowerCaseText = (amount) => {
+  return amount.toLowerCase();
+};
+
+// get country
+const getCountry = async (id) => {
+  const data = await unfetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const country = await data.json();
+  return country;
+};
+
+// get detail
+const CountryDetail = ({ country }) => {
+  const [borders, setBorders] = useState([]);
+
+  const getBorders = async () => {
+    const borders = await Promise.all(
+      country.borders.map((border) => getCountry(border))
+    );
+    setBorders(borders);
+  };
+
+  useEffect(() => {
+    getBorders();
+  }, []);
+
+  console.log(borders);
   return (
     <Layout>
       <Head>
@@ -43,7 +58,7 @@ function CharacterDetail({ country }) {
         padding="30px"
       >
         <Flex>
-          <Box w="400px">
+          <Box w="200px">
             <Image src={country.flag} alt={country.name} borderRadius="4px" />
           </Box>
           <Box ml="3">
@@ -61,52 +76,38 @@ function CharacterDetail({ country }) {
                 {country.alpha3Code}
               </Badge>
             </Box>
-            <Text fontSize="sm">{country.capital}</Text>
-            <Text fontSize="sm">{country.region}</Text>
-            <Text fontSize="sm">{country.subregion}</Text>
-          </Box>
-        </Flex>
-        <Flex>
-          <Box flex="1">
-            <ul>
-              <li>{country.nativeName}</li>
-              <li>{country.capital}</li>
-              <li>{country.alpha2Code}</li>
-              <li>{country.callingCodes}</li>
-              <Heading as="h4" size="sm">
-                Borders
-              </Heading>
-              {country.borders.map((name) => (
-                <Box>
-                  <Image
-                    width="40px"
-                    src={LowerCaseText(
-                      `https://restcountries.eu/data/${name}.svg`
-                    )}
-                    alt={name}
-                  ></Image>
+            <Box>
+              <Text fontSize="sm">{country.capital}</Text>
+              <Text fontSize="sm">{country.region}</Text>
+              <Text fontSize="sm">{country.subregion}</Text>
+              <Text>{country.nativeName}</Text>
+              <Text>{country.capital}</Text>
+              <Text>{country.alpha2Code}</Text>
+              <Text>{country.callingCodes}</Text>
+              <Text>{country.population}</Text>
+              <Text>{country.area}</Text>
+              <Text>{country.gini}%</Text>
+            </Box>
 
-                  <div>{name}</div>
-                </Box>
+            <Box flex="1">
+              <Heading as="h4" size="sm">
+                Neighbors
+              </Heading>
+              {borders.map(({ flag, name, alpha3Code }) => (
+                <Link key={flag} href={`/country/${alpha3Code}`}>
+                  <Flex>
+                    <Avatar src={flag} alt={name}></Avatar>
+                    <Text>{name}</Text>
+                  </Flex>
+                </Link>
               ))}
-              {/* 
-              <li>{country.altSpellings[2]}</li>
-              <li>{country.population}</li>
-              <li>{country.area}</li>
-              <li>{country.gini}</li>
-              <li>{country.borders}</li>
-              <li>{country.currencies.code}</li>
-              <li>{country.currencies.name}</li>
-              <li>{country.languages.name}</li>
-              <li>{country.languages.nativeName}</li> 
-              */}
-            </ul>
+            </Box>
           </Box>
         </Flex>
       </Container>
     </Layout>
   );
-}
+};
 
 export async function getStaticPaths() {
   const data = await unfetch("https://restcountries.eu/rest/v2/all/");
@@ -122,17 +123,27 @@ export async function getStaticPaths() {
   };
 }
 
-export async function getStaticProps({ params }) {
-  const data = await unfetch(
-    "https://restcountries.eu/rest/v2/alpha/" + params.id
-  );
-  const country = await data.json();
+export const getStaticProps = async ({ params }) => {
+  const country = await getCountry(params.id);
 
   return {
     props: {
       country,
     },
   };
-}
+};
 
-export default CharacterDetail;
+// export async function getStaticProps({ params }) {
+//   const data = await unfetch(
+//     "https://restcountries.eu/rest/v2/alpha/" + params.id
+//   );
+//   const country = await data.json();
+
+//   return {
+//     props: {
+//       country,
+//     },
+//   };
+// }
+
+export default CountryDetail;
