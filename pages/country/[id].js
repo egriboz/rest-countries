@@ -58,6 +58,9 @@ const CountryDetail = ({ country }) => {
         padding="30px"
       >
         <Flex>
+          <Box>
+            <Link href="/">Back</Link>
+          </Box>
           <Box w="200px">
             <Image src={country.flag} alt={country.name} borderRadius="4px" />
           </Box>
