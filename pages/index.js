@@ -7,8 +7,6 @@ import SearchInput from "../components/searchInput";
 import unfetch from "isomorphic-unfetch";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
-import "@formatjs/intl-numberformat/polyfill";
-import "@formatjs/intl-numberformat/locale-data/en"; // locale-data for en
 import { REGION } from "../constants";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import {
