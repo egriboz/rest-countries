@@ -8,6 +8,7 @@ import SearchInput from "../components/searchInput";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
 import { REGION } from "../constants";
+import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import {
   Img,
   Flex,
@@ -34,11 +35,14 @@ import {
   Th,
   Td,
   TableCaption,
-  useColorMode,
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
   const { colorMode, toggleColorMode } = useColorMode();
+  // const { colorMode } = useColorMode();
+  // const { toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("orange", "blue");
+  const color = useColorModeValue("white", "gray.800");
 
   function NumberFormat(amount) {
     return new Intl.NumberFormat("en-GB", {
@@ -73,15 +77,29 @@ function Home({ countries }) {
         <Head>
           <title>{SiteConfig.title}</title>
         </Head>
+        <div w="100%" bg={bg} color={color}>
+          {/* <Button onClick={toggleColorMode}>
+            Toggle {colorMode === "light" ? "Dark" : "Light"}
+          </Button> */}
+          {/* <Container bg={bg} color={color}>
+            This box's style will change based on the color mode.
+          </Container> */}
+          {/* <Button size="sm" onClick={toggleColorMode}>
+            Toggle Mode
+          </Button> */}
+        </div>
         <Container maxW="container.lg">
-          {/* <Box>
-            <Button onClick={toggleColorMode}>
-              Toggle {colorMode === 'light' ? 'Dark' : 'Light'}
-            </Button>
-          </Box> */}
           <Flex mt="30px">
             <Box flex="1" position="relative">
-              <Box w="14px" position="absolute" zIndex="1" top="13px" left="15px" color="gray.200" opacity=".5">
+              <Box
+                w="14px"
+                position="absolute"
+                zIndex="1"
+                top="13px"
+                left="15px"
+                color="gray.200"
+                opacity=".5"
+              >
                 <svg viewBox="0 0 24 24">
                   <path
                     fill="currentColor"

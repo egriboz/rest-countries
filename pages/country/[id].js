@@ -2,7 +2,18 @@ import Layout from "../../components/layout";
 import Head from "next/head";
 import unfetch from "isomorphic-unfetch";
 // import slug from 'slug'
-import { Box, Container, Flex, Avatar, StarIcon, Badge, Square, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Avatar,
+  StarIcon,
+  Heading,
+  Image,
+  Badge,
+  Square,
+  Text,
+} from "@chakra-ui/react";
 
 function CharacterDetail({ country }) {
   // const property = {
@@ -15,31 +26,44 @@ function CharacterDetail({ country }) {
   //   reviewCount: 34,
   //   rating: 4,
   // }
+  function LowerCaseText(amount) {
+    return amount.toLowerCase();
+  }
   return (
     <Layout>
       <Head>
         <title>{country.name}</title>
       </Head>
-      <Container mt="30px" maxW="container.lg">
+      <Container
+        mt="30px"
+        maxW="container.lg"
+        border="2px"
+        borderColor="gray.100"
+        borderRadius="10px"
+        padding="30px"
+      >
         <Flex>
           <Box w="400px">
-            <img src={country.flag} alt={country.name} />
+            <Image src={country.flag} alt={country.name} borderRadius="4px" />
           </Box>
           <Box ml="3">
-            <Text as="h1" fontWeight="bold">
+            <Heading as="h1" size="md">
               {country.name}
+            </Heading>
+            <Heading as="h2" size="sm">
+              {country.altSpellings[2]}
+            </Heading>
+            <Box>
               <Badge ml="1" colorScheme="purple">
-              {country.alpha2Code}
+                {country.alpha2Code}
               </Badge>
               <Badge ml="1" colorScheme="purple">
-              {country.alpha3Code}
+                {country.alpha3Code}
               </Badge>
-            </Text>
-            <Text fontSize="sm">{country.altSpellings[2]}</Text>
+            </Box>
             <Text fontSize="sm">{country.capital}</Text>
             <Text fontSize="sm">{country.region}</Text>
             <Text fontSize="sm">{country.subregion}</Text>
-            
           </Box>
         </Flex>
         <Flex>
@@ -49,6 +73,22 @@ function CharacterDetail({ country }) {
               <li>{country.capital}</li>
               <li>{country.alpha2Code}</li>
               <li>{country.callingCodes}</li>
+              <Heading as="h4" size="sm">
+                Borders
+              </Heading>
+              {country.borders.map((name) => (
+                <Box>
+                  <Image
+                    width="40px"
+                    src={LowerCaseText(
+                      `https://restcountries.eu/data/${name}.svg`
+                    )}
+                    alt={name}
+                  ></Image>
+
+                  <div>{name}</div>
+                </Box>
+              ))}
               {/* 
               <li>{country.altSpellings[2]}</li>
               <li>{country.population}</li>
@@ -60,7 +100,6 @@ function CharacterDetail({ country }) {
               <li>{country.languages.name}</li>
               <li>{country.languages.nativeName}</li> 
               */}
-              
             </ul>
           </Box>
         </Flex>
