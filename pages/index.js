@@ -4,7 +4,6 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import SearchInput from "../components/searchInput";
 // import slug from 'slug'
-import unfetch from "isomorphic-unfetch";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
 import { REGION } from "../constants";
@@ -67,17 +66,17 @@ function Home({ countries }) {
         <Head>
           <title>{SiteConfig.title}</title>
         </Head>
-        <div w="100%" bg={bg} color={color}>
-          {/* <Button onClick={toggleColorMode}>
+        {/* bg={bg} color={color} */}
+        {/* <Button onClick={toggleColorMode}>
             Toggle {colorMode === "light" ? "Dark" : "Light"}
           </Button> */}
-          {/* <Container bg={bg} color={color}>
+        {/* <Container bg={bg} color={color}>
             This box's style will change based on the color mode.
           </Container> */}
-          {/* <Button size="sm" onClick={toggleColorMode}>
+        {/* <Button size="sm" onClick={toggleColorMode}>
             Toggle Mode
           </Button> */}
-        </div>
+
         <Container maxW="container.lg">
           <Flex mt="30px">
             <Box flex="1" position="relative">
@@ -85,7 +84,7 @@ function Home({ countries }) {
                 w="14px"
                 position="absolute"
                 zIndex="1"
-                top="13px"
+                top="17px"
                 left="15px"
                 color="gray.200"
                 opacity=".5"
@@ -98,6 +97,8 @@ function Home({ countries }) {
                 </svg>
               </Box>
               <Input
+                placeholder="large size"
+                size="lg"
                 paddingLeft="40px"
                 borderWidth="2px"
                 placeholder="Filter by Country Name"
@@ -181,7 +182,7 @@ function Home({ countries }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await unfetch("https://restcountries.eu/rest/v2/all/");
+  const res = await fetch("https://restcountries.eu/rest/v2/all/");
   const countries = await res.json();
   return {
     props: {

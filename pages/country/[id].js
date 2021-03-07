@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Layout from "../../components/layout";
-import unfetch from "isomorphic-unfetch";
+
 import {
   Box,
   Container,
@@ -23,7 +23,7 @@ const lowerCaseText = (amount) => {
 
 // get country
 const getCountry = async (id) => {
-  const data = await unfetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
   const country = await data.json();
   return country;
 };
@@ -57,10 +57,11 @@ const CountryDetail = ({ country }) => {
         borderRadius="10px"
         padding="30px"
       >
+        <Box>
+          <Link href="/">Back</Link>
+        </Box>
+
         <Flex>
-          <Box>
-            <Link href="/">Back</Link>
-          </Box>
           <Box w="200px">
             <Image src={country.flag} alt={country.name} borderRadius="4px" />
           </Box>
@@ -113,7 +114,7 @@ const CountryDetail = ({ country }) => {
 };
 
 export async function getStaticPaths() {
-  const data = await unfetch("https://restcountries.eu/rest/v2/all/");
+  const data = await fetch("https://restcountries.eu/rest/v2/all/");
   const countries = await data.json();
 
   const paths = countries.map((country) => {
@@ -137,7 +138,7 @@ export const getStaticProps = async ({ params }) => {
 };
 
 // export async function getStaticProps({ params }) {
-//   const data = await unfetch(
+//   const data = await fetch(
 //     "https://restcountries.eu/rest/v2/alpha/" + params.id
 //   );
 //   const country = await data.json();

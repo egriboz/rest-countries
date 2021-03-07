@@ -19,7 +19,7 @@ function Layout({ children }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <Container as="header" maxW="container.lg">
+      <Container as="header" maxW="100%">
         <Flex pt="20px">
           <Flex>
             <Box>
