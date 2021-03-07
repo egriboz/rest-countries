@@ -1,12 +1,14 @@
-import unfetch from "isomorphic-unfetch";
-// import slug from 'slug'
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
 import SearchInput from "../components/searchInput";
+// import slug from 'slug'
+import unfetch from "isomorphic-unfetch";
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
+import "@formatjs/intl-numberformat/polyfill";
+import "@formatjs/intl-numberformat/locale-data/en"; // locale-data for en
 import { REGION } from "../constants";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import {
@@ -33,8 +35,8 @@ function Home({ countries }) {
   // const { toggleColorMode } = useColorMode();
   const bg = useColorModeValue("orange", "blue");
   const color = useColorModeValue("white", "gray.800");
-
-  const NumberFormat = (amount) => {
+  // number format
+  const numberFormat = (amount) => {
     return new Intl.NumberFormat("en-GB", {
       maximumSignificantDigits: 3,
     }).format(amount);
@@ -168,8 +170,8 @@ function Home({ countries }) {
                     </Link>
                   </Td>
                   <Td>{country.region}</Td>
-                  <Td isNumeric>{NumberFormat(country.population)}</Td>
-                  <Td isNumeric>{NumberFormat(country.area)} </Td>
+                  <Td isNumeric>{numberFormat(country.population)}</Td>
+                  <Td isNumeric>{numberFormat(country.area)} </Td>
                 </Tr>
               ))}
             </Tbody>
