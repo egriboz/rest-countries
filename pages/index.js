@@ -34,11 +34,11 @@ function Home({ countries }) {
   const bg = useColorModeValue("orange", "blue");
   const color = useColorModeValue("white", "gray.800");
 
-  function NumberFormat(amount) {
+  const NumberFormat = (amount) => {
     return new Intl.NumberFormat("en-GB", {
       maximumSignificantDigits: 3,
     }).format(amount);
-  }
+  };
 
   const [keyword, setKeyword] = useState("");
 
