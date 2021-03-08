@@ -2,8 +2,10 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import SiteConfig from "../site.config";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
+import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+import Icon from "supercons";
 import {
-  Badge,
+  Button,
   Text,
   Box,
   Flex,
@@ -11,7 +13,9 @@ import {
   Spacer,
   Center,
 } from "@chakra-ui/react";
+
 function Layout({ children }) {
+  // const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Head>
@@ -19,11 +23,17 @@ function Layout({ children }) {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
-      <Container as="header" maxW="100%">
+      <Container
+        as="header"
+        maxW="100%"
+        borderBottomWidth="1px"
+        borderColor="gray.100"
+        pb="20px"
+      >
         <Flex pt="20px">
           <Flex>
-            <Box>
-              <ColorModeSwitcher />
+            <Box color="red.500">
+              <Icon glyph="filter-fill" size={48} />
             </Box>
             <Box>
               <Text fontWeight="bold">{SiteConfig.title}</Text>
@@ -31,7 +41,12 @@ function Layout({ children }) {
             </Box>
           </Flex>
           <Spacer />
-          <Box>Info</Box>
+          <Box>
+            <ColorModeSwitcher />
+            {/* <Button onClick={toggleColorMode}>
+              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            </Button> */}
+          </Box>
         </Flex>
         {/* <Flex pt="30px">
           <Box>
@@ -45,7 +60,15 @@ function Layout({ children }) {
       </Container>
 
       <main>{children}</main>
-      <Container as="footer" maxW="100%" pt="30px" pb="30px">
+      <Container
+        as="footer"
+        maxW="100%"
+        borderTopWidth="1px"
+        borderColor="gray.100"
+        mt="45px"
+        pt="30px"
+        pb="30px"
+      >
         <Container maxW="container.lg">
           <Center>footer</Center>
         </Container>

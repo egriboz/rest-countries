@@ -6,12 +6,13 @@ import SearchInput from "../components/searchInput";
 // import slug from 'slug'
 import SiteConfig from "../site.config";
 import styles from "../styles/Home.module.css";
+
 import { REGION } from "../constants";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import {
   Flex,
   Button,
-  Avatar,
+  Image,
   ButtonGroup,
   Text,
   Container,
@@ -24,6 +25,13 @@ import {
   Th,
   Td,
   TableCaption,
+  Grid,
+  GridItem,
+  Stat,
+  StatLabel,
+  SimpleGrid,
+  StatNumber,
+  useColorModeValue as mode,
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
@@ -78,7 +86,7 @@ function Home({ countries }) {
           </Button> */}
 
         <Container maxW="container.lg">
-          <Flex mt="30px">
+          <Flex mt="45px" mb="45px">
             <Box flex="1" position="relative">
               <Box
                 w="14px"
@@ -110,7 +118,6 @@ function Home({ countries }) {
             Found {filteredCountries.length} countries
           </Text>
           <ButtonGroup
-            mt="30px"
             mb="30px"
             ml="20px"
             size="xs"
@@ -134,6 +141,72 @@ function Home({ countries }) {
             })}
           </ButtonGroup>
 
+          {filteredCountries.map((country) => (
+            <Grid
+              key={country.alpha3Code}
+              h="100px"
+              templateRows="30px 100px"
+              templateColumns="repeat(5, 1fr)"
+              gap={4}
+              mb="15px"
+              bg={mode("white", "gray.700")}
+              shadow="base"
+              rounded="lg"
+            >
+              <GridItem rowSpan={2} colSpan={1}>
+                <Image
+                  w="40px"
+                  borderRadius="4px"
+                  name={country.alpha2Code}
+                  src={country.flag}
+                />
+              </GridItem>
+              <GridItem colSpan={4}>
+                <Link
+                  href="/country/[id]"
+                  as={`/country/${country.alpha3Code}`}
+                  key={country.name}
+                >
+                  <Text fontWeight="bold">{country.name}</Text>
+                </Link>
+              </GridItem>
+              <GridItem colSpan={4}>sd</GridItem>
+            </Grid>
+
+            // <Grid
+            //   key={country.alpha3Code}
+            //   templateColumns="min-content 2fr 1fr 1fr 1fr"
+            //   gap={5}
+            //   // as="section"
+            //   bg={mode("white", "gray.700")}
+            //   shadow="base"
+            //   rounded="lg"
+            //   p="10"
+            //   mb="15px"
+            // >
+            //   <Box w="60px">
+            //     <Image
+            //       w="40px"
+            //       borderRadius="4px"
+            //       name={country.alpha2Code}
+            //       src={country.flag}
+            //     />
+            //   </Box>
+            //   <Box>
+            //     <Link
+            //       href="/country/[id]"
+            //       as={`/country/${country.alpha3Code}`}
+            //       key={country.name}
+            //     >
+            //       <Text fontWeight="bold">{country.name}</Text>
+            //     </Link>
+            //   </Box>
+            //   <Box>{country.region}</Box>
+            //   <Box>{numberFormat(country.population)}</Box>
+            //   <Box>{numberFormat(country.area)}</Box>
+            // </Grid>
+          ))}
+
           <Table variant="simple">
             <TableCaption>
               Showing {filteredCountries.length} countries
@@ -153,8 +226,9 @@ function Home({ countries }) {
               {filteredCountries.map((country) => (
                 <Tr key={country.alpha3Code}>
                   <Td>
-                    <Avatar
-                      size="sm"
+                    <Image
+                      w="40px"
+                      borderRadius="4px"
                       name={country.alpha2Code}
                       src={country.flag}
                     />
