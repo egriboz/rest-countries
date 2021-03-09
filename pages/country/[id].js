@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
+import NextLink from "next/link";
 import Layout from "../../components/layout";
 
 import {
@@ -59,15 +60,15 @@ const CountryDetail = ({ country }) => {
           separator={<ChevronRightIcon color="gray.500" />}
         >
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            <NextLink href="/">Home</NextLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href="/">Country</BreadcrumbLink>
+            <NextLink href="/">Country</NextLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href="#">{country.name}</BreadcrumbLink>
+            <span>{country.name}</span>
           </BreadcrumbItem>
         </Breadcrumb>
       </Container>

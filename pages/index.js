@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import NextLink from "next/link";
 import Head from "next/head";
 import Layout from "../components/layout";
-import SearchInput from "../components/searchInput";
+// import SearchInput from "../components/searchInput";
 // import slug from 'slug'
 import SiteConfig from "../site.config";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
 
 import { REGION } from "../constants";
-import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+// import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import {
   Flex,
   Button,
@@ -18,37 +18,18 @@ import {
   Container,
   Input,
   Box,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
   Grid,
-  GridItem,
-  Stat,
-  StatLabel,
-  SimpleGrid,
   LinkOverlay,
   LinkBox,
-  StatNumber,
   useColorModeValue as mode,
-  Heading,
 } from "@chakra-ui/react";
-
-function Home({ countries }) {
-  const { colorMode, toggleColorMode } = useColorMode();
-  // const { colorMode } = useColorMode();
-  // const { toggleColorMode } = useColorMode();
-  // const bg = useColorModeValue("orange", "blue");
-  // const color = useColorModeValue("white", "gray.800");
+const numberFormat = (amount) => {
+  return new Intl.NumberFormat("en-GB", {
+    maximumSignificantDigits: 3,
+  }).format(amount);
+};
+const Home = ({ countries }) => {
   // number format
-  const numberFormat = (amount) => {
-    return new Intl.NumberFormat("en-GB", {
-      maximumSignificantDigits: 3,
-    }).format(amount);
-  };
 
   const [keyword, setKeyword] = useState("");
 
@@ -77,16 +58,6 @@ function Home({ countries }) {
         <Head>
           <title>{SiteConfig.title}</title>
         </Head>
-        {/* bg={bg} color={color} */}
-        {/* <Button onClick={toggleColorMode}>
-            Toggle {colorMode === "light" ? "Dark" : "Light"}
-          </Button> */}
-        {/* <Container bg={bg} color={color}>
-            This box's style will change based on the color mode.
-          </Container> */}
-        {/* <Button size="sm" onClick={toggleColorMode}>
-            Toggle Mode
-          </Button> */}
 
         <Container maxW="container.lg">
           <Flex mt="45px" mb="45px">
@@ -146,11 +117,7 @@ function Home({ countries }) {
             </ButtonGroup>
           </Box>
           {filteredCountries.map((country) => (
-            <Link
-              href="/country/[id]"
-              as={`/country/${country.alpha3Code}`}
-              key={country.name}
-            >
+            <Box as="div" maxW="100%" key={country.name}>
               <LinkBox as="article">
                 <Grid
                   key={country.alpha3Code}
@@ -175,9 +142,12 @@ function Home({ countries }) {
                     />
                   </Box>
                   <Box display="flex" alignItems="center">
-                    <LinkOverlay href="" fontWeight="bold">
+                    <NextLink //href="/country/[id]"
+                      href={`/country/${country.alpha3Code}`}
+                      fontWeight="bold"
+                    >
                       {country.name}
-                    </LinkOverlay>
+                    </NextLink>
                   </Box>
                   <Box>
                     <Text color="gray.400" fontSize="xs">
@@ -199,13 +169,13 @@ function Home({ countries }) {
                   </Box>
                 </Grid>
               </LinkBox>
-            </Link>
+            </Box>
           ))}
         </Container>
       </Layout>
     </>
   );
-}
+};
 
 export const getStaticProps = async () => {
   const res = await fetch("https://restcountries.eu/rest/v2/all/");

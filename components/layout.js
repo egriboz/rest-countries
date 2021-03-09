@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Link from "next/link";
+import NextLink from "next/link";
 import styles from "../styles/Home.module.css";
 import SiteConfig from "../site.config";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
@@ -16,8 +16,9 @@ import {
   useColorModeValue as mode,
 } from "@chakra-ui/react";
 
+import { useRouter } from "next/router";
+
 function Layout({ children }) {
-  // const { colorMode, toggleColorMode } = useColorMode();
   return (
     <>
       <Head>
@@ -45,28 +46,19 @@ function Layout({ children }) {
           </Flex>
           <Spacer />
           <Box>
-            <Link href="/">
+            <NextLink href="/">
               <a>Home</a>
-            </Link>
+            </NextLink>
             <span> | </span>
-            <Link href="/about">
+            <NextLink href="/about">
               <a>About</a>
-            </Link>
+            </NextLink>
             <ColorModeSwitcher />
             {/* <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             </Button> */}
           </Box>
         </Flex>
-        {/* <Flex pt="30px">
-          <Box>
-            <ColorModeSwitcher />
-          </Box>
-          <Box>
-            <Text fontWeight="bold">{SiteConfig.title}</Text>
-            <Text fontSize="sm">{SiteConfig.description}</Text>
-          </Box>
-        </Flex> */}
       </Container>
 
       <main>{children}</main>
@@ -83,7 +75,6 @@ function Layout({ children }) {
           <Center>footer</Center>
         </Container>
       </Container>
-      {/* <footer className={styles.footer}>footer</footer> */}
     </>
   );
 }
