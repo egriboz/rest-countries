@@ -6,7 +6,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import Icon from "supercons";
 import {
-  Button,
+  Heading,
   Text,
   Box,
   Flex,
@@ -15,8 +15,6 @@ import {
   Center,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
-
-import { useRouter } from "next/router";
 
 function Layout({ children }) {
   return (
@@ -32,27 +30,39 @@ function Layout({ children }) {
         borderBottomWidth="1px"
         borderBottomStyle="solid"
         borderColor={mode("gray.200", "gray.700")}
-        pb="20px"
       >
-        <Flex pt="20px">
-          <Flex>
-            <Box color="red.500">
-              <Icon glyph="filter-fill" size={48} />
-            </Box>
+        <Flex pt="10px" pb="10px">
+          <Flex alignItems="center">
             <Box>
-              <Text fontWeight="bold">{SiteConfig.title}</Text>
-              <Text fontSize="sm">{SiteConfig.description}</Text>
+              <NextLink href="/">
+                <a>
+                  <Icon glyph="filter-fill" size={48} />
+                </a>
+              </NextLink>
+            </Box>
+            <Box pl="10px">
+              <Heading
+                as="h1"
+                fontSize="1.2em"
+                fontWeight="bold"
+                lineHeight="normal"
+              >
+                {SiteConfig.title}
+              </Heading>
+              <Text fontSize=".7em" lineHeight="normal">
+                {SiteConfig.description}
+              </Text>
             </Box>
           </Flex>
           <Spacer />
           <Box>
-            <NextLink href="/">
+            {/* <NextLink href="/">
               <a>Home</a>
             </NextLink>
             <span> | </span>
             <NextLink href="/about">
               <a>About</a>
-            </NextLink>
+            </NextLink> */}
             <ColorModeSwitcher />
             {/* <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}

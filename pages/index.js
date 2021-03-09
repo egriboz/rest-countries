@@ -19,18 +19,19 @@ import {
   Input,
   Box,
   Grid,
-  LinkOverlay,
-  LinkBox,
   useColorModeValue as mode,
+  Center,
+  Heading,
+  Spacer,
 } from "@chakra-ui/react";
-const numberFormat = (amount) => {
-  return new Intl.NumberFormat("en-GB", {
-    maximumSignificantDigits: 3,
-  }).format(amount);
-};
-const Home = ({ countries }) => {
-  // number format
 
+function Home({ countries }) {
+  // number format
+  const numberFormat = (amount) => {
+    return new Intl.NumberFormat("en-GB", {
+      maximumSignificantDigits: 3,
+    }).format(amount);
+  };
   const [keyword, setKeyword] = useState("");
 
   const filteredCountries = countries.filter(
@@ -60,7 +61,12 @@ const Home = ({ countries }) => {
         </Head>
 
         <Container maxW="container.lg">
-          <Flex mt="45px" mb="45px">
+          {/* <Flex mt="35">
+            <Heading as="h1" fontSize="lg">
+              {SiteConfig.description}
+            </Heading>
+          </Flex> */}
+          <Flex mt="90px" mb="30px">
             <Box flex="1" position="relative">
               <Box
                 w="14px"
@@ -80,102 +86,120 @@ const Home = ({ countries }) => {
               </Box>
 
               <Input
-                placeholder="large size"
                 size="lg"
+                fontSize="md"
                 paddingLeft="40px"
-                borderWidth="2px"
-                placeholder="Filter by Country Name"
+                placeholder="Search by Country Name or Region"
                 bg={mode("white", "gray.700")}
                 color="brand"
                 onChange={onInputChange}
               />
             </Box>
           </Flex>
-          <Box mb="50px">
-            <Text as="small" color="gray">
-              Found {filteredCountries.length} countries
-            </Text>
-            <ButtonGroup
-              mb="30px"
-              ml="20px"
-              size="xs"
-              variant="solid"
-              spacing="2"
-            >
-              {REGION.map((item) => {
-                return (
-                  <Button
-                    key={item.region}
-                    data-region={item.region}
-                    onClick={getRegion}
-                    colorScheme={item.colorscheme}
-                  >
-                    {item.title}
-                  </Button>
-                );
-              })}
-            </ButtonGroup>
-          </Box>
-          {filteredCountries.map((country) => (
-            <Box as="div" maxW="100%" key={country.name}>
-              <LinkBox as="article">
-                <Grid
-                  key={country.alpha3Code}
-                  templateColumns="min-content 2fr 1fr 1fr 1fr"
-                  gap={5}
-                  // as="section"
-                  bg={mode("white", "gray.700")}
-                  shadow="base"
-                  rounded="lg"
-                  p="10"
-                  mb="15px"
-                  style={{ transition: "all .3s" }}
-                  // _hover={{ bg: "gray.100" }}
-                  _hover={{ bg: mode("#f7fafc", "#282e3c") }}
-                >
-                  <Box w="60px" display="flex" alignItems="center">
-                    <Image
-                      w="40px"
-                      borderRadius="4px"
-                      name={country.alpha2Code}
-                      src={country.flag}
-                    />
-                  </Box>
-                  <Box display="flex" alignItems="center">
-                    <NextLink //href="/country/[id]"
-                      href={`/country/${country.alpha3Code}`}
-                      fontWeight="bold"
+          <Flex pl="20px" pr="20px">
+            <Box>
+              <Text as="small" color="gray.500">
+                Filter by Region
+              </Text>
+              <ButtonGroup
+                mb="30px"
+                ml="20px"
+                size="xs"
+                variant="solid"
+                spacing="2"
+              >
+                {REGION.map((item) => {
+                  return (
+                    <Button
+                      key={item.region}
+                      data-region={item.region}
+                      onClick={getRegion}
+                      colorScheme={item.colorscheme}
                     >
+                      {item.title}
+                    </Button>
+                  );
+                })}
+              </ButtonGroup>
+            </Box>
+            <Spacer />
+            <Box>
+              <Text as="small" color="gray.500">
+                Found {filteredCountries.length} countries
+              </Text>
+            </Box>
+          </Flex>
+          <Box mb="50px"></Box>
+          {filteredCountries.map((country) => (
+            <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
+              <Grid
+                templateColumns="min-content 2fr 1fr 1fr 1fr"
+                gap={5}
+                // as="section"
+                bg={mode("white", "gray.700")}
+                shadow="base"
+                rounded="lg"
+                p="10"
+                mb="15px"
+                style={{ transition: "all .3s" }}
+                // _hover={{ bg: "gray.100" }}
+                _hover={{ bg: mode("#f7fafc", "#282e3c") }}
+              >
+                <Box w="60px" display="flex" alignItems="center">
+                  <Image
+                    w="40px"
+                    borderRadius="4px"
+                    name={country.alpha2Code}
+                    src={country.flag}
+                  />
+                </Box>
+                <Box display="flex" alignItems="center">
+                  <NextLink href={`/country/${country.alpha3Code}`}>
+                    <a className="overlayLink" fontWeight="bold">
                       {country.name}
-                    </NextLink>
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      REGION
-                    </Text>
-                    {country.region}
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      POPULATION
-                    </Text>
-                    {numberFormat(country.population)}
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      AREA km<sup>2</sup>
-                    </Text>
-                    {numberFormat(country.area)}
-                  </Box>
-                </Grid>
-              </LinkBox>
+                    </a>
+                  </NextLink>
+                </Box>
+                <Box>
+                  <Text color="gray.400" fontSize="xs">
+                    REGION
+                  </Text>
+                  {country.region}
+                </Box>
+                <Box>
+                  <Text color="gray.400" fontSize="xs">
+                    POPULATION
+                  </Text>
+                  {numberFormat(country.population)}
+                </Box>
+                <Box>
+                  <Text color="gray.400" fontSize="xs">
+                    AREA km<sup>2</sup>
+                  </Text>
+                  {numberFormat(country.area)}
+                </Box>
+              </Grid>
             </Box>
           ))}
+          <style jsx global>{`
+            a.overlayLink {
+              margin: 4px;
+            }
+            a.overlayLink::after {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+          `}</style>
         </Container>
       </Layout>
     </>
   );
-};
+}
 
 export const getStaticProps = async () => {
   const res = await fetch("https://restcountries.eu/rest/v2/all/");

@@ -11,11 +11,10 @@ import {
   GridItem,
   Image,
   Badge,
-  Link,
+  Box,
   Text,
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   useColorModeValue as mode,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
@@ -100,7 +99,7 @@ const CountryDetail = ({ country }) => {
             <Badge ml="1">{country.alpha3Code}</Badge>
           </GridItem>
           <GridItem colSpan={2}>
-            <Link href="/">Back</Link>
+            <NextLink href="/">Back</NextLink>
           </GridItem>
           <GridItem colSpan={4}>
             <Text fontSize="sm">capital:{country.capital}</Text>
@@ -111,26 +110,30 @@ const CountryDetail = ({ country }) => {
             <Text>population:{country.population}</Text>
             <Text>area:{country.area}</Text>
             <Text>gini:{country.gini}%</Text>
-
             <Heading as="h4" size="sm" mt="30px" mb="30px">
               Neighbors
             </Heading>
             {borders.map(({ flag, name, alpha3Code }) => (
-              <Link key={flag} href={`/country/${alpha3Code}`}>
-                <Flex spacing={3}>
-                  <Image
-                    src={flag}
-                    alt={name}
-                    w="60px"
-                    borderRadius="4px"
-                    border="1px"
-                    borderColor="gray.100"
-                  />
-                  <Heading as="h4" size="xs" pl="15px" fontWeight="bold">
-                    {name}
-                  </Heading>
-                </Flex>
-              </Link>
+              <Flex position="relative" as="div" key={flag}>
+                <NextLink
+                  href={`/country/${alpha3Code}`}
+                  size="xs"
+                  pl="15px"
+                  fontWeight="bold"
+                >
+                  <a>
+                    <Image
+                      src={flag}
+                      alt={name}
+                      w="60px"
+                      borderRadius="4px"
+                      border="1px"
+                      borderColor="gray.100"
+                    />
+                    <Text>{name}</Text>
+                  </a>
+                </NextLink>
+              </Flex>
             ))}
           </GridItem>
         </Grid>
