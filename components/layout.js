@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import SiteConfig from "../site.config";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
@@ -44,6 +45,13 @@ function Layout({ children }) {
           </Flex>
           <Spacer />
           <Box>
+            <Link href="/">
+              <a>Home</a>
+            </Link>
+            <span> | </span>
+            <Link href="/about">
+              <a>About</a>
+            </Link>
             <ColorModeSwitcher />
             {/* <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
