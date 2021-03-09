@@ -28,7 +28,6 @@ function Layout({ children }) {
         as="header"
         maxW="100%"
         borderBottomWidth="1px"
-        borderBottomStyle="solid"
         borderColor={mode("gray.200", "gray.700")}
       >
         <Flex pt="10px" pb="10px">
@@ -76,10 +75,10 @@ function Layout({ children }) {
         as="footer"
         maxW="100%"
         borderTopWidth="1px"
-        borderColor="gray.100"
         mt="45px"
         pt="30px"
         pb="30px"
+        borderColor={mode("gray.200", "gray.700")}
       >
         <Container maxW="container.lg">
           <Center>footer</Center>

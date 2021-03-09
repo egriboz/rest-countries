@@ -147,9 +147,11 @@ function Home({ countries }) {
               >
                 <Box w="60px" display="flex" alignItems="center">
                   <Image
-                    w="40px"
+                    w="45px"
+                    h="30px"
+                    objectFit="cover"
                     borderRadius="4px"
-                    name={country.alpha2Code}
+                    alt={country.name}
                     src={country.flag}
                   />
                 </Box>
