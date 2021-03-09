@@ -12,6 +12,7 @@ import {
   Container,
   Spacer,
   Center,
+  useColorModeValue as mode,
 } from "@chakra-ui/react";
 
 function Layout({ children }) {
@@ -27,7 +28,8 @@ function Layout({ children }) {
         as="header"
         maxW="100%"
         borderBottomWidth="1px"
-        borderColor="gray.100"
+        borderBottomStyle="solid"
+        borderColor={mode("gray.200", "gray.700")}
         pb="20px"
       >
         <Flex pt="20px">

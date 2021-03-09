@@ -15,6 +15,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  useColorModeValue as mode,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -73,10 +74,10 @@ const CountryDetail = ({ country }) => {
       <Container
         mt="30px"
         maxW="container.lg"
-        border="2px"
-        borderColor="gray.100"
-        borderRadius="10px"
         padding="30px"
+        bg={mode("white", "gray.700")}
+        shadow="base"
+        rounded="lg"
       >
         <Grid
           h="100%"
