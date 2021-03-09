@@ -52,6 +52,9 @@ function Layout({ children }) {
             <Link href="/about">
               <a>About</a>
             </Link>
+            <Link href="/help">
+              <a>Help</a>
+            </Link>
             <ColorModeSwitcher />
             {/* <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
