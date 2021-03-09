@@ -94,7 +94,7 @@ function Home({ countries }) {
               <Box
                 w="14px"
                 position="absolute"
-                zIndex="1"
+                zIndex="2"
                 top="17px"
                 left="15px"
                 color="gray.500"
