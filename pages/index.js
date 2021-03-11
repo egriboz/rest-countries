@@ -144,8 +144,8 @@ function Home({ countries }) {
             <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
               <Grid
                 templateColumns={{
-                  base: "min-content 1fr",
-                  sm: "min-content 2fr 1fr 1fr 1fr",
+                  base: "min-content 2fr 1fr 1fr 1fr",
+                  sm: "min-content 1fr 1fr",
                 }}
                 gap={5}
                 bg={mode("white", "gray.700")}
@@ -182,18 +182,22 @@ function Home({ countries }) {
                   </Text>
                   {country.region}
                 </Box>
-                <Box>
-                  <Text color="gray.400" fontSize="xs">
-                    POPULATION
-                  </Text>
-                  {numberFormat(country.population)}
-                </Box>
-                <Box>
-                  <Text color="gray.400" fontSize="xs">
-                    AREA km<sup>2</sup>
-                  </Text>
-                  {numberFormat(country.area)}
-                </Box>
+                {isLargerThanMD && (
+                  <>
+                    <Box>
+                      <Text color="gray.400" fontSize="xs">
+                        POPULATION
+                      </Text>
+                      {numberFormat(country.population)}
+                    </Box>
+                    <Box>
+                      <Text color="gray.400" fontSize="xs">
+                        AREA km<sup>2</sup>
+                      </Text>
+                      {numberFormat(country.area)}
+                    </Box>
+                  </>
+                )}
               </Grid>
             </Box>
           ))}
