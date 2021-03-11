@@ -35,6 +35,7 @@ function Home({ countries }) {
       maximumSignificantDigits: 3,
     }).format(amount);
   };
+
   const [keyword, setKeyword] = useState("");
 
   const filteredCountries = countries.filter(
@@ -72,11 +73,11 @@ function Home({ countries }) {
           <Flex mt="90px" mb="30px">
             <Box flex="1" position="relative">
               <Box
-                w="14px"
+                w="20px"
                 position="absolute"
                 zIndex="2"
-                top="17px"
-                left="15px"
+                top="22px"
+                left="24px"
                 color="gray.500"
                 opacity=".5"
               >
@@ -89,9 +90,14 @@ function Home({ countries }) {
               </Box>
 
               <Input
+                textTransform="capitalize"
                 size="lg"
+                pt="30px"
+                pb="30px"
                 fontSize="md"
-                paddingLeft="40px"
+                fontWeight="medium"
+                rounded="full"
+                paddingLeft="60px"
                 placeholder="Search by Country Name or Region"
                 bg={mode("white", "gray.700")}
                 color="brand"
@@ -116,6 +122,9 @@ function Home({ countries }) {
                     {REGION.map((item) => {
                       return (
                         <Button
+                          // color={item.color}
+                          // color={mode(`${item.color}`, "gray.700")}
+                          //bg={item.background}
                           key={item.region}
                           data-region={item.region}
                           onClick={getRegion}
@@ -148,33 +157,36 @@ function Home({ countries }) {
                 }}
                 gap={5}
                 bg={mode("white", "gray.700")}
-                shadow="base"
-                rounded="lg"
+                shadow="xs"
+                rounded="sm"
                 p={{
-                  base: "10px",
+                  base: "25px",
                   md: "50px",
                 }}
                 mb="15px"
                 style={{ transition: "all .3s" }}
                 // _hover={{ bg: "gray.100" }}
-                _hover={{ bg: mode("#f7fafc", "#282e3c") }}
+                _hover={{
+                  bg: mode("white", "#282e3c"),
+                  transform: "scale(1.008)",
+                  shadow: "lg",
+                }}
               >
                 <Box w="60px" display="flex" alignItems="center">
                   <Image
                     w="45px"
                     h="30px"
                     objectFit="cover"
-                    borderRadius="4px"
+                    borderRadius="2px"
+                    shadow="xs"
                     alt={country.name}
                     src={country.flag}
                   />
                 </Box>
 
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" fontWeight="bold">
                   <NextLink href={`/country/${country.alpha3Code}`}>
-                    <a className="overlayLink" fontWeight="bold">
-                      {country.name}
-                    </a>
+                    <a className="overlayLink">{country.name}</a>
                   </NextLink>
                 </Box>
                 {isLargerThanMD && (
@@ -203,6 +215,11 @@ function Home({ countries }) {
               </Grid>
             </Box>
           ))}
+          <Box>
+            <Center as="small" mt="30px" color="gray.500">
+              Found {filteredCountries.length} countries
+            </Center>
+          </Box>
           <style jsx global>{`
             a.overlayLink {
               margin: 4px;
