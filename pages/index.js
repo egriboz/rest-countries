@@ -143,14 +143,17 @@ function Home({ countries }) {
             <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
               <Grid
                 templateColumns={{
-                  sm: "min-content 1fr",
+                  base: "35px 1fr",
                   md: "min-content 2fr 1fr 1fr 1fr",
                 }}
                 gap={5}
                 bg={mode("white", "gray.700")}
                 shadow="base"
                 rounded="lg"
-                p="10"
+                p={{
+                  base: "10px",
+                  md: "50px",
+                }}
                 mb="15px"
                 style={{ transition: "all .3s" }}
                 // _hover={{ bg: "gray.100" }}
