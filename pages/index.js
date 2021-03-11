@@ -19,13 +19,16 @@ import {
   Input,
   Box,
   Grid,
-  useColorModeValue as mode,
   Center,
   Heading,
   Spacer,
+  useColorModeValue as mode,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
+  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
+
   // number format
   const numberFormat = (amount) => {
     return new Intl.NumberFormat("en-GB", {
@@ -123,6 +126,12 @@ function Home({ countries }) {
               </ButtonGroup>
             </Box>
             <Spacer />
+
+            {isLargerThanMD && (
+              <Text as="small" color="gray.500">
+                1
+              </Text>
+            )}
             <Box>
               <Text as="small" color="gray.500">
                 Found {filteredCountries.length} countries
@@ -130,12 +139,15 @@ function Home({ countries }) {
             </Box>
           </Flex>
           <Box mb="50px"></Box>
+
           {filteredCountries.map((country) => (
             <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
               <Grid
-                templateColumns="min-content 2fr 1fr 1fr 1fr"
+                templateColumns={{
+                  base: "min-content 1fr",
+                  sm: "min-content 2fr 1fr 1fr 1fr",
+                }}
                 gap={5}
-                // as="section"
                 bg={mode("white", "gray.700")}
                 shadow="base"
                 rounded="lg"
@@ -155,6 +167,7 @@ function Home({ countries }) {
                     src={country.flag}
                   />
                 </Box>
+
                 <Box display="flex" alignItems="center">
                   <NextLink href={`/country/${country.alpha3Code}`}>
                     <a className="overlayLink" fontWeight="bold">
@@ -162,6 +175,7 @@ function Home({ countries }) {
                     </a>
                   </NextLink>
                 </Box>
+
                 <Box>
                   <Text color="gray.400" fontSize="xs">
                     REGION

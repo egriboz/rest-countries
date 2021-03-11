@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import NextLink from "next/link";
 import Layout from "../../components/layout";
@@ -18,28 +19,29 @@ import {
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
-// get country
-const getCountry = async (id) => {
-  const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
-  const country = await data.json();
-  return country;
-};
-
-// number format
 const numberFormat = (amount) => {
   return new Intl.NumberFormat("en-GB", {
     maximumSignificantDigits: 3,
   }).format(amount);
 };
-// lowercase text
-const lowerCaseText = (amount) => {
-  return amount.toLowerCase();
-};
 
+// const lowerCaseText = (amount) => {
+//   return amount.toLowerCase();
+// };
+
+const getCountry = async (id) => {
+  const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const country = await data.json();
+  return country;
+};
 // get detail
-const CountryDetail = ({ country }) => {
+function CountryDetail({ country }) {
+  const router = useRouter();
+  const ID = router.query.id;
+  const { asPath } = useRouter();
+
   const bg = mode("white", "gray.700");
-  const bgHover = mode("#f7fafc", "#282e3c");
+  // const bgHover = mode("#f7fafc", "#282e3c");
   const [borders, setBorders] = useState([]);
 
   const getBorders = async () => {
@@ -48,12 +50,9 @@ const CountryDetail = ({ country }) => {
     );
     setBorders(borders);
   };
-
   useEffect(() => {
     getBorders();
   }, []);
-
-  console.log(borders);
 
   return (
     <Layout>
@@ -79,14 +78,15 @@ const CountryDetail = ({ country }) => {
           </BreadcrumbItem>
         </Breadcrumb>
       </Container>
-      {/* <Container
+      <Container
         mt="30px"
+        pt="15px"
+        pb="15px"
         maxW="container.lg"
         bg={mode("white", "gray.700")}
         shadow="base"
         rounded="lg"
-      > */}
-      <Container maxW="container.lg">
+      >
         <Grid
           h="100%"
           templateRows="repeat(1, 1fr)"
@@ -106,9 +106,7 @@ const CountryDetail = ({ country }) => {
             <Badge ml="1">{country.alpha2Code}</Badge>
             <Badge ml="1">{country.alpha3Code}</Badge>
           </GridItem>
-          <GridItem colSpan={2}>
-            <NextLink href="/">Back</NextLink>
-          </GridItem>
+          <GridItem colSpan={2}>col</GridItem>
           <GridItem colSpan={4}>
             <Text fontSize="sm">capital:{country.capital}</Text>
             <Text fontSize="sm">region:{country.region}</Text>
@@ -118,124 +116,29 @@ const CountryDetail = ({ country }) => {
             <Text>population:{country.population}</Text>
             <Text>area:{country.area}</Text>
             <Text>gini:{country.gini}%</Text>
-            {/* <Heading as="h4" size="sm" mt="30px" mb="30px">
-              Neighbors
+            <Heading as="h4" size="sm" mt="30px" mb="30px">
+              Neighbors Countries ({borders.length})
             </Heading>
 
-            {borders.map(({ flag, name, alpha3Code }) => (
-              <Flex position="relative" as="div" key={flag}>
-                <NextLink
-                  href={`/country/${alpha3Code}`}
-                  size="xs"
-                  pl="15px"
-                  fontWeight="bold"
-                >
-                  <a>
-                    <Image
-                      src={flag}
-                      alt={name}
-                      w="60px"
-                      borderRadius="4px"
-                      border="1px"
-                      borderColor="gray.100"
-                    />
-                    <Text>{name}</Text>
-                  </a>
-                </NextLink>
+            {borders.map(({ flag, name }) => (
+              <Flex position="relative" as="div" key={name}>
+                <Image
+                  src={flag}
+                  alt={name}
+                  w="60px"
+                  borderRadius="4px"
+                  border="1px"
+                  borderColor="gray.100"
+                />
+                <Text>{name}</Text>
               </Flex>
-            ))} */}
+            ))}
           </GridItem>
         </Grid>
       </Container>
-      <Container maxW="container.lg">
-        <Box>
-          <Heading as="h4" size="sm" mt="30px" mb="30px">
-            Neighbors Countries ({borders.length})
-          </Heading>
-        </Box>
-        <Box>
-          {borders.map(
-            ({
-              flag,
-              name,
-              alpha2Code,
-              alpha3Code,
-              region,
-              population,
-              area,
-            }) => (
-              <Box pos="relative" as="div" maxW="100%" key={alpha3Code}>
-                <Grid
-                  templateColumns="min-content 2fr 1fr 1fr 1fr"
-                  gap={5}
-                  // bg={mode("white", "gray.700")}
-                  bg={bg} // bu şekilde çözüm _hoverde hala problemli
-                  shadow="base"
-                  rounded="lg"
-                  p="10"
-                  mb="15px"
-                  style={{ transition: "all .3s" }}
-                  // hover mode hooks hatası veriyor!
-                  _hover={{ bg: mode("#f7fafc", "#282e3c") }}
-                >
-                  <Box w="60px" display="flex" alignItems="center">
-                    <Image
-                      w="45px"
-                      h="30px"
-                      objectFit="cover"
-                      borderRadius="4px"
-                      alt={name}
-                      src={flag}
-                    />
-                  </Box>
-                  <Box display="flex" alignItems="center">
-                    <NextLink href={`/country/${alpha3Code}`}>
-                      <a className="overlayLink" fontWeight="bold">
-                        {name}
-                      </a>
-                    </NextLink>
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      REGION
-                    </Text>
-                    {region}
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      POPULATION
-                    </Text>
-                    {numberFormat(population)}
-                  </Box>
-                  <Box>
-                    <Text color="gray.400" fontSize="xs">
-                      AREA km<sup>2</sup>
-                    </Text>
-                    {numberFormat(area)}
-                  </Box>
-                </Grid>
-              </Box>
-            )
-          )}
-        </Box>
-        <style jsx global>{`
-          a.overlayLink {
-            margin: 4px;
-          }
-          a.overlayLink::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-          }
-        `}</style>
-      </Container>
     </Layout>
   );
-};
+}
 
 export async function getStaticPaths() {
   const data = await fetch("https://restcountries.eu/rest/v2/all/");
