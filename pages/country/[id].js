@@ -120,7 +120,7 @@ function CountryDetail({ country }) {
               Neighbors Countries ({borders.length})
             </Heading>
 
-            {borders.map(({ flag, name, alpha3Code }) => (
+            {borders.map(({ flag, name }) => (
               <Flex position="relative" as="div" key={name}>
                 <Image
                   src={flag}
@@ -130,9 +130,8 @@ function CountryDetail({ country }) {
                   border="1px"
                   borderColor="gray.100"
                 />
-                <NextLink href={`/country/${alpha3Code}`}>
-                  <a>{name}</a>
-                </NextLink>
+
+                <Text>{name}</Text>
               </Flex>
             ))}
           </GridItem>
