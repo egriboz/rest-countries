@@ -100,43 +100,42 @@ function Home({ countries }) {
             </Box>
           </Flex>
           <Flex pl="20px" pr="20px">
-            <Box>
-              <Text as="small" color="gray.500">
-                Filter by Region
-              </Text>
-              <ButtonGroup
-                mb="30px"
-                ml="20px"
-                size="xs"
-                variant="solid"
-                spacing="2"
-              >
-                {REGION.map((item) => {
-                  return (
-                    <Button
-                      key={item.region}
-                      data-region={item.region}
-                      onClick={getRegion}
-                      colorScheme={item.colorscheme}
-                    >
-                      {item.title}
-                    </Button>
-                  );
-                })}
-              </ButtonGroup>
-            </Box>
-            <Spacer />
-
             {isLargerThanMD && (
-              <Text as="small" color="gray.500">
-                1
-              </Text>
+              <>
+                <Box>
+                  <Text as="small" color="gray.500">
+                    Filter by Region
+                  </Text>
+                  <ButtonGroup
+                    mb="30px"
+                    ml="20px"
+                    size="xs"
+                    variant="solid"
+                    spacing="2"
+                  >
+                    {REGION.map((item) => {
+                      return (
+                        <Button
+                          key={item.region}
+                          data-region={item.region}
+                          onClick={getRegion}
+                          colorScheme={item.colorscheme}
+                        >
+                          {item.title}
+                        </Button>
+                      );
+                    })}
+                  </ButtonGroup>
+                </Box>
+                <Spacer />
+
+                <Box>
+                  <Text as="small" color="gray.500">
+                    Found {filteredCountries.length} countries
+                  </Text>
+                </Box>
+              </>
             )}
-            <Box>
-              <Text as="small" color="gray.500">
-                Found {filteredCountries.length} countries
-              </Text>
-            </Box>
           </Flex>
           <Box mb="50px"></Box>
 
@@ -144,8 +143,8 @@ function Home({ countries }) {
             <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
               <Grid
                 templateColumns={{
-                  base: "min-content 2fr 1fr 1fr 1fr",
-                  sm: "min-content 1fr 1fr",
+                  sm: "min-content 1fr",
+                  md: "min-content 2fr 1fr 1fr 1fr",
                 }}
                 gap={5}
                 bg={mode("white", "gray.700")}
@@ -175,15 +174,15 @@ function Home({ countries }) {
                     </a>
                   </NextLink>
                 </Box>
-
-                <Box>
-                  <Text color="gray.400" fontSize="xs">
-                    REGION
-                  </Text>
-                  {country.region}
-                </Box>
                 {isLargerThanMD && (
                   <>
+                    <Box>
+                      <Text color="gray.400" fontSize="xs">
+                        REGION
+                      </Text>
+                      {country.region}
+                    </Box>
+
                     <Box>
                       <Text color="gray.400" fontSize="xs">
                         POPULATION
