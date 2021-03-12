@@ -10,7 +10,7 @@ Get information about countries via a RESTful API
 ## Development
 
 ```
-$ git clone ....
+$ git clone https://github.com/egriboz/rest-countries.git
 $ yarn
 $ yarn dev
 ```
@@ -19,8 +19,7 @@ This will serve the files at `http://localhost:3000/`
 
 ### Todo
 
-- [x] Select 1
-- [ ] Select 2
-- [ ] Select 3
-- [ ] Select 4
-- [ ] Select 5
+- [x] Dark mode
+- [x] Region filter
+- [ ] Borders country 
+- [ ] Detail page style fix
