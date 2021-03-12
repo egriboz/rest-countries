@@ -5,7 +5,6 @@
 
 Get information about countries via a RESTful API
 
-<img src="./preview.png" alt="Country Information">
 
 ## Development
 
@@ -23,3 +22,6 @@ This will serve the files at `http://localhost:3000/`
 - [x] Region filter
 - [ ] Borders country 
 - [ ] Detail page style fix
+
+### Preview
+<img src="./public/preview.png" alt="Country Information">
