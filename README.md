@@ -19,12 +19,8 @@ This will serve the files at `http://localhost:3000/`
 
 ### Todo
 
-[x] Select 1
-
-[] Select 2
-
-[] Select 3
-
-[] Select 4
-
-[] Select 5
+- [x] Select 1
+- [ ] Select 2
+- [ ] Select 3
+- [ ] Select 4
+- [ ] Select 5
