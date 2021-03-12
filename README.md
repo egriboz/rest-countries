@@ -1,2 +1,2 @@
-# Country Information
-## Get information about countries via a RESTful API
+### Country Information
+#### Get information about countries via a RESTful API
