@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useRouter } from "next/router";
+import fetch from "isomorphic-unfetch";
+
 import Head from "next/head";
 import NextLink from "next/link";
 import Layout from "../../components/layout";
@@ -16,6 +18,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   useColorModeValue as mode,
+  useModal,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -32,15 +35,16 @@ const numberFormat = (amount) => {
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
   const country = await data.json();
+
   return country;
 };
 // get detail
+// const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
   const router = useRouter();
-  const ID = router.query.id;
+  const rQuery = router.query.id;
   const { asPath } = useRouter();
 
-  const bg = mode("white", "gray.700");
   // const bgHover = mode("#f7fafc", "#282e3c");
   const [borders, setBorders] = useState([]);
 
@@ -50,6 +54,7 @@ function CountryDetail({ country }) {
     );
     setBorders(borders);
   };
+
   useEffect(() => {
     getBorders();
   }, []);
@@ -74,7 +79,9 @@ function CountryDetail({ country }) {
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <span>{country.name}</span>
+            <span>
+              {country.name}-{rQuery}-
+            </span>
           </BreadcrumbItem>
         </Breadcrumb>
       </Container>
@@ -120,7 +127,7 @@ function CountryDetail({ country }) {
               Neighbors Countries ({borders.length})
             </Heading>
 
-            {borders.map(({ flag, name }) => (
+            {borders.map(({ flag, name, alpha3Code }) => (
               <Flex position="relative" as="div" key={name}>
                 <Image
                   src={flag}
@@ -130,7 +137,9 @@ function CountryDetail({ country }) {
                   border="1px"
                   borderColor="gray.100"
                 />
-
+                <NextLink href="/country/[id]" as={`/country/${alpha3Code}`}>
+                  <a>LINK</a>
+                </NextLink>
                 <Text>{name}</Text>
               </Flex>
             ))}

@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 // import slug from 'slug'
 import SiteConfig from "../site.config";
 // import styles from "../styles/Home.module.css";
+import fetch from "isomorphic-unfetch";
 
 import { REGION } from "../constants";
 // import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
@@ -185,7 +186,10 @@ function Home({ countries }) {
                 </Box>
 
                 <Box display="flex" alignItems="center" fontWeight="bold">
-                  <NextLink href={`/country/${country.alpha3Code}`}>
+                  <NextLink
+                    href="/country/[id]"
+                    as={`/country/${country.alpha3Code}`}
+                  >
                     <a className="overlayLink">{country.name}</a>
                   </NextLink>
                 </Box>
