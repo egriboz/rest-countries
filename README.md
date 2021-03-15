@@ -1,10 +1,10 @@
-### 
-#### 
+###
+
+####
 
 # Country Information
 
 Get information about countries via a RESTful API
-
 
 ## Development
 
@@ -26,10 +26,11 @@ This will serve the files at `http://localhost:3000/`
 - [x] Search filter
 - [x] Region filter
 - [x] Dark mode
-- [ ] Borders country 
+- [ ] Borders country [Re-fetch When Data Changes]
 - [ ] Homepage responsive control
 - [ ] Detail page responsive control
 - [ ] Detail page style fix
 
 ### Preview
+
 <img src="./public/preview.png" alt="Country Information">
