@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NextLink from "next/link";
+import NextImage from "next/image";
 import Head from "next/head";
 import Layout from "../components/layout";
 // import SearchInput from "../components/searchInput";
@@ -13,7 +14,6 @@ import { REGION } from "../constants";
 import {
   Flex,
   Button,
-  Image,
   ButtonGroup,
   Text,
   Container,
@@ -173,13 +173,19 @@ function Home({ countries }) {
                   shadow: "lg",
                 }}
               >
-                <Box w="60px" display="flex" alignItems="center">
-                  <Image
-                    w="45px"
-                    h="30px"
-                    objectFit="cover"
+                <Box
+                  w="60px"
+                  display="flex"
+                  alignItems="center"
+                  overflow="hidden"
+                >
+                  <NextImage
+                    width={45}
+                    height={30}
+                    // objectFit="cover"
                     borderRadius="2px"
                     shadow="xs"
+                    overflow="hidden"
                     alt={country.name}
                     src={country.flag}
                   />
