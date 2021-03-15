@@ -71,7 +71,13 @@ function Home({ countries }) {
               {SiteConfig.description}
             </Heading>
           </Flex> */}
-          <Flex mt="90px" mb="30px">
+          <Flex
+            mt={{
+              base: "50px",
+              sm: "70px",
+            }}
+            mb="30px"
+          >
             <Box flex="1" position="relative">
               <Box
                 w="20px"
@@ -95,7 +101,10 @@ function Home({ countries }) {
                 size="lg"
                 pt="30px"
                 pb="30px"
-                fontSize="md"
+                fontSize={{
+                  base: "sm",
+                  sm: "md",
+                }}
                 fontWeight="medium"
                 rounded="full"
                 paddingLeft="60px"
@@ -106,7 +115,7 @@ function Home({ countries }) {
               />
             </Box>
           </Flex>
-          <Flex pl="20px" pr="20px">
+          <Flex pl="20px" pr="20px" mb="30px">
             {isLargerThanMD && (
               <>
                 <Box>
@@ -138,16 +147,20 @@ function Home({ countries }) {
                   </ButtonGroup>
                 </Box>
                 <Spacer />
-
-                <Box>
-                  <Text as="small" color="gray.500">
-                    Found {filteredCountries.length} countries
-                  </Text>
-                </Box>
               </>
             )}
+            <Box
+              alignSelf="stretch"
+              textAlign={{
+                base: "center",
+                sm: "left",
+              }}
+            >
+              <Text as="small" color="gray.500">
+                Found {filteredCountries.length} countries
+              </Text>
+            </Box>
           </Flex>
-          <Box mb="50px"></Box>
 
           {filteredCountries.map((country) => (
             <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
@@ -192,7 +205,7 @@ function Home({ countries }) {
                   />
                 </Box>
 
-                <Box display="flex" alignItems="center" fontWeight="bold">
+                <Box display="flex" alignItems="center" fontWeight="semibold">
                   <NextLink
                     href="/country/[id]"
                     as={`/country/${country.alpha3Code}`}
