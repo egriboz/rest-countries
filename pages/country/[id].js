@@ -114,13 +114,15 @@ function CountryDetail({ country }) {
             rounded="sm"
             borderRadius="4px"
           >
-            <NextImage
-              width={300}
-              height={200}
-              objectFit="cover"
-              src={country.flag}
-              alt={country.name}
-            />
+            <Box shadow="xs" lineHeight="0">
+              <NextImage
+                width={1200}
+                height={800}
+                layout="responsive"
+                src={country.flag}
+                alt={country.name}
+              />
+            </Box>
             <Box mt="10px" mb="15px">
               <Heading as="h1" size="md">
                 {country.name}
