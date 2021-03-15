@@ -169,7 +169,7 @@ function Home({ countries }) {
                 // _hover={{ bg: "gray.100" }}
                 _hover={{
                   bg: mode("white", "#282e3c"),
-                  transform: "scale(1.008)",
+                  //transform: "scale(1.008)",
                   shadow: "lg",
                 }}
               >

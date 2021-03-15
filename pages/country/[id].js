@@ -159,7 +159,7 @@ function CountryDetail({ country }) {
                   // hover mode hooks hatası veriyor!
                   _hover={{
                     bg: mode("white", "#282e3c"),
-                    transform: "scale(1.008)",
+                    //transform: "scale(1.008)",
                     shadow: "lg",
                   }}
                 >
