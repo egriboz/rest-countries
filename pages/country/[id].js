@@ -87,7 +87,7 @@ function CountryDetail({ country }) {
         </Breadcrumb>
       </Container>
 
-      <Container mt="30px" pt="15px" pb="15px" maxW="container.lg">
+      <Container mt="10px" pt="15px" pb="15px" maxW="container.lg">
         <Grid
           h="100%"
           templateRows="repeat(1, 1fr)"
