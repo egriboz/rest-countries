@@ -112,6 +112,7 @@ function CountryDetail({ country }) {
             bg={mode("white", "gray.700")}
             shadow="base"
             rounded="sm"
+            borderRadius="4px"
           >
             <NextImage
               width={300}
@@ -119,11 +120,11 @@ function CountryDetail({ country }) {
               objectFit="cover"
               src={country.flag}
               alt={country.name}
-              borderRadius="4px"
             />
             <Box mt="10px" mb="15px">
               <Heading as="h1" size="md">
                 {country.name}
+                {country.flag}
                 <Badge ml="1">{country.alpha2Code}</Badge>
               </Heading>
               <Heading as="h2" size="sm">
@@ -215,6 +216,7 @@ function CountryDetail({ country }) {
                     alignSelf="center"
                     w="45px"
                     h="30px"
+                    borderRadius="2px"
                     display="flex"
                     alignItems="center"
                     shadow="xs"
@@ -224,7 +226,6 @@ function CountryDetail({ country }) {
                       width={45}
                       height={30}
                       objectFit="cover"
-                      borderRadius="2px"
                       alt={name}
                       src={flag}
                     />

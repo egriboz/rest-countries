@@ -178,12 +178,13 @@ function Home({ countries }) {
                   display="flex"
                   alignItems="center"
                   overflow="hidden"
+                  borderRadius="2px"
                 >
                   <NextImage
                     width={45}
                     height={30}
                     // objectFit="cover"
-                    borderRadius="2px"
+
                     shadow="xs"
                     overflow="hidden"
                     alt={country.name}
