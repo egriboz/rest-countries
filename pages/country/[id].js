@@ -124,7 +124,6 @@ function CountryDetail({ country }) {
             <Box mt="10px" mb="15px">
               <Heading as="h1" size="md">
                 {country.name}
-                {country.flag}
                 <Badge ml="1">{country.alpha2Code}</Badge>
               </Heading>
               <Heading as="h2" size="sm">
