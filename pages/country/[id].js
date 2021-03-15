@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import fetch from "isomorphic-unfetch";
 
@@ -13,12 +13,13 @@ import {
   GridItem,
   Image,
   Badge,
+  Button,
   Box,
   Text,
   Breadcrumb,
   BreadcrumbItem,
   useColorModeValue as mode,
-  useModal,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 
@@ -35,16 +36,15 @@ const numberFormat = (amount) => {
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
   const country = await data.json();
-
   return country;
 };
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
+  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
   const router = useRouter();
-  const rQuery = router.query.id;
+  const ID = router.query.id;
   const { asPath } = useRouter();
-
   // const bgHover = mode("#f7fafc", "#282e3c");
   const [borders, setBorders] = useState([]);
 
@@ -57,8 +57,9 @@ function CountryDetail({ country }) {
 
   useEffect(() => {
     getBorders();
-  }, []);
+  }, [country, setBorders]);
 
+  console.log("main page function: ", borders);
   return (
     <Layout>
       <Head>
@@ -79,9 +80,7 @@ function CountryDetail({ country }) {
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <span>
-              {country.name}-{rQuery}-
-            </span>
+            <span>{country.name}</span>
           </BreadcrumbItem>
         </Breadcrumb>
       </Container>
@@ -123,28 +122,109 @@ function CountryDetail({ country }) {
             <Text>population:{country.population}</Text>
             <Text>area:{country.area}</Text>
             <Text>gini:{country.gini}%</Text>
-            <Heading as="h4" size="sm" mt="30px" mb="30px">
-              Neighbors Countries ({borders.length})
-            </Heading>
-
-            {borders.map(({ flag, name, alpha3Code }) => (
-              <Flex position="relative" as="div" key={name}>
-                <Image
-                  src={flag}
-                  alt={name}
-                  w="60px"
-                  borderRadius="4px"
-                  border="1px"
-                  borderColor="gray.100"
-                />
-                <NextLink href="/country/[id]" as={`/country/${alpha3Code}`}>
-                  <a>LINK</a>
-                </NextLink>
-                <Text>{name}</Text>
-              </Flex>
-            ))}
           </GridItem>
         </Grid>
+      </Container>
+      <Container maxW="container.lg">
+        <Box>
+          <Heading as="h4" size="sm" mt="30px" mb="30px">
+            Neighbors Countries ({borders.length})
+          </Heading>
+        </Box>
+        <Box>
+          {borders.map(
+            ({
+              flag,
+              name,
+              alpha2Code,
+              alpha3Code,
+              region,
+              population,
+              area,
+            }) => (
+              <Box pos="relative" as="div" maxW="100%" key={alpha3Code}>
+                <Grid
+                  templateColumns={{
+                    base: "35px 1fr",
+                    md: "min-content 2fr 1fr 1fr 1fr",
+                  }}
+                  gap={5}
+                  bg={mode("white", "gray.700")}
+                  // bg={bg} // bu şekilde çözüm _hoverde hala problemli
+                  shadow="base"
+                  rounded="lg"
+                  p="10"
+                  mb="15px"
+                  style={{ transition: "all .3s" }}
+                  // hover mode hooks hatası veriyor!
+                  _hover={{
+                    bg: mode("white", "#282e3c"),
+                    transform: "scale(1.008)",
+                    shadow: "lg",
+                  }}
+                >
+                  <Box w="60px" display="flex" alignItems="center">
+                    <Image
+                      w="45px"
+                      h="30px"
+                      objectFit="cover"
+                      borderRadius="2px"
+                      shadow="xs"
+                      alt={name}
+                      src={flag}
+                    />
+                  </Box>
+                  <Box display="flex" alignItems="center">
+                    <NextLink
+                      href="/country/[id]"
+                      as={`/country/${alpha3Code}`}
+                    >
+                      <a className="overlayLink" fontWeight="bold">
+                        {name}
+                      </a>
+                    </NextLink>
+                  </Box>
+                  {isLargerThanMD && (
+                    <>
+                      <Box>
+                        <Text color="gray.400" fontSize="xs">
+                          REGION
+                        </Text>
+                        {region}
+                      </Box>
+                      <Box>
+                        <Text color="gray.400" fontSize="xs">
+                          POPULATION
+                        </Text>
+                        {numberFormat(population)}
+                      </Box>
+                      <Box>
+                        <Text color="gray.400" fontSize="xs">
+                          AREA km<sup>2</sup>
+                        </Text>
+                        {numberFormat(area)}
+                      </Box>
+                    </>
+                  )}
+                </Grid>
+              </Box>
+            )
+          )}
+        </Box>
+        <style jsx global>{`
+          a.overlayLink {
+            margin: 4px;
+          }
+          a.overlayLink::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+          }
+        `}</style>
       </Container>
     </Layout>
   );
