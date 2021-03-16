@@ -66,11 +66,6 @@ function Home({ countries }) {
         </Head>
 
         <Container maxW="container.lg">
-          {/* <Flex mt="35">
-            <Heading as="h1" fontSize="lg">
-              {SiteConfig.description}
-            </Heading>
-          </Flex> */}
           <Flex
             mt={{
               base: "50px",
@@ -102,7 +97,7 @@ function Home({ countries }) {
                 pt="30px"
                 pb="30px"
                 fontSize={{
-                  base: "sm",
+                  base: "16px",
                   sm: "md",
                 }}
                 fontWeight="medium"
