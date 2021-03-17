@@ -31,9 +31,9 @@ const numberFormat = (amount) => {
   }).format(amount);
 };
 
-// const lowerCaseText = (amount) => {
-//   return amount.toLowerCase();
-// };
+const lowerCaseText = (amount) => {
+  return amount.toLowerCase();
+};
 
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -44,9 +44,9 @@ const getCountry = async (id) => {
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
   const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
-  const router = useRouter();
-  const ID = router.query.id;
-  const { asPath } = useRouter();
+  // const router = useRouter();
+  // const ID = router.query.id;
+  // const { asPath } = useRouter();
   // const bgHover = mode("#f7fafc", "#282e3c");
   const [borders, setBorders] = useState([]);
 
@@ -61,7 +61,8 @@ function CountryDetail({ country }) {
     getBorders();
   }, [country, setBorders]);
 
-  console.log("main page function: ", borders);
+  
+
   return (
     <Layout>
       <Head>
