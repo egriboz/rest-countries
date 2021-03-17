@@ -43,25 +43,24 @@ const getCountry = async (id) => {
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
-  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
+  
   // const router = useRouter();
   // const ID = router.query.id;
   // const { asPath } = useRouter();
   // const bgHover = mode("#f7fafc", "#282e3c");
+  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
   const [borders, setBorders] = useState([]);
 
-  const getBorders = async () => {
-    const borders = await Promise.all(
-      country.borders.map((border) => getCountry(border))
-    );
-    setBorders(borders);
-  };
-
-  useEffect(() => {
+  useEffect(() => {  
+    
+    const getBorders = async () => {
+      const borders = await Promise.all(
+        country.borders.map((border) => getCountry(border))
+      );
+      setBorders(borders);
+    };
     getBorders();
   }, [country, setBorders]);
-
-  
 
   return (
     <Layout>
