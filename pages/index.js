@@ -97,7 +97,7 @@ function Home({ countries }) {
                 pt="30px"
                 pb="30px"
                 fontSize={{
-                  base: "16px",
+                  base: "initial",
                   sm: "md",
                 }}
                 fontWeight="medium"
