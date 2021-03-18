@@ -8,6 +8,7 @@ import Head from "next/head";
 
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/Breadcrumb";
+import NeighborsCountries from "../../components/NeighborsCountries";
 
 import numberFormat from "../../functions/numberFormat";
 import lowerCaseText from "../../functions/lowerCaseText";
@@ -165,98 +166,10 @@ function CountryDetail({ country }) {
             Neighbors Countries ({borders.length})
           </Heading>
         </Box>
-        <Box>
-          {borders &&
-            borders.map(
-              ({
-                flag,
-                name,
-                alpha2Code,
-                alpha3Code,
-                region,
-                population,
-                area,
-              }) => (
-                <Box pos="relative" as="div" maxW="100%" key={alpha3Code}>
-                  <Grid
-                    templateColumns={{
-                      base: "35px 1fr",
-                      md: "min-content 2fr 1fr 1fr 1fr",
-                    }}
-                    gap={5}
-                    bg={bg}
-                    shadow="base"
-                    rounded="sm"
-                    p="10"
-                    mb="15px"
-                    style={{ transition: "all .3s" }}
-                    // hover mode hooks hatası veriyor!
-                    _hover={{
-                      bg: bgHover,
-                      //transform: "scale(1.008)",
-                      shadow: "lg",
-                    }}
-                  >
-                    <Box
-                      display="flex"
-                      alignSelf="center"
-                      w="45px"
-                      h="30px"
-                      borderRadius="2px"
-                      display="flex"
-                      alignItems="center"
-                      shadow="xs"
-                    >
-                      <NextImage
-                        className="avatar"
-                        width={45}
-                        height={30}
-                        objectFit="cover"
-                        alt={name}
-                        src={flag}
-                      />
-                    </Box>
-                    <Box
-                      display="flex"
-                      alignItems="center"
-                      fontWeight="semibold"
-                    >
-                      <NextLink
-                        href="/country/[id]"
-                        as={`/country/${alpha3Code}`}
-                      >
-                        <a className="overlayLink" fontWeight="bold">
-                          {name}
-                        </a>
-                      </NextLink>
-                    </Box>
-                    {!isLargerThanMD && (
-                      <>
-                        <Box>
-                          <Text color="gray.400" fontSize="xs">
-                            REGION
-                          </Text>
-                          {region}
-                        </Box>
-                        <Box>
-                          <Text color="gray.400" fontSize="xs">
-                            POPULATION
-                          </Text>
-                          {numberFormat(population)}
-                        </Box>
-                        <Box>
-                          <Text color="gray.400" fontSize="xs">
-                            AREA km<sup>2</sup>
-                          </Text>
-                          {numberFormat(area)}
-                        </Box>
-                      </>
-                    )}
-                  </Grid>
-                </Box>
-              )
-            )}
-        </Box>
+        {borders &&
+          borders.map((country) => (
+            <NeighborsCountries key={country.alpha3Code} data={country} />
+          ))}
         <style jsx global>{`
           a.overlayLink {
             margin: 4px;
@@ -299,18 +212,5 @@ export const getStaticProps = async ({ params }) => {
     },
   };
 };
-
-// export async function getStaticProps({ params }) {
-//   const data = await fetch(
-//     "https://restcountries.eu/rest/v2/alpha/" + params.id
-//   );
-//   const country = await data.json();
-
-//   return {
-//     props: {
-//       country,
-//     },
-//   };
-// }
 
 export default CountryDetail;
