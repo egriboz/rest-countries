@@ -39,7 +39,8 @@ function CountryDetail({ country }) {
   // const router = useRouter();
   // const ID = router.query.id;
   // const { asPath } = useRouter();
-  // const bgHover = mode("#f7fafc", "#282e3c");
+  const bgHover = mode("white", "#282e3c")
+  const bg = mode("white", "gray.700");
   const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
   const [borders, setBorders] = useState([]);
 
@@ -201,8 +202,7 @@ function CountryDetail({ country }) {
                       md: "min-content 2fr 1fr 1fr 1fr",
                     }}
                     gap={5}
-                    bg={mode("white", "gray.700")}
-                    // bg={bg} // bu şekilde çözüm _hoverde hala problemli
+                    bg={bg}
                     shadow="base"
                     rounded="sm"
                     p="10"
@@ -210,7 +210,7 @@ function CountryDetail({ country }) {
                     style={{ transition: "all .3s" }}
                     // hover mode hooks hatası veriyor!
                     _hover={{
-                      bg: mode("white", "#282e3c"),
+                      bg: bgHover,
                       //transform: "scale(1.008)",
                       shadow: "lg",
                     }}

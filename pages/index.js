@@ -10,7 +10,8 @@ import SiteConfig from "../site.config";
 import fetch from "isomorphic-unfetch";
 
 import { REGION } from "../constants";
-// import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+import numberFormat from "../functions/numberFormat"
+
 import {
   Flex,
   Button,
@@ -29,14 +30,9 @@ import {
 
 function Home({ countries }) {
   const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
-
-  // number format
-  const numberFormat = (amount) => {
-    return new Intl.NumberFormat("en-GB", {
-      maximumSignificantDigits: 3,
-    }).format(amount);
-  };
-
+  const bg = mode("white", "gray.700")
+  const bgHover = mode("white", "#282e3c")
+  
   const [keyword, setKeyword] = useState("");
 
   const filteredCountries = countries.filter(
@@ -159,14 +155,14 @@ function Home({ countries }) {
           </Flex>
 
           {filteredCountries.map((country) => (
-            <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
+            <Box pos="relative" maxW="100%" key={country.alpha3Code}>
               <Grid
                 templateColumns={{
                   base: "35px 1fr",
                   md: "min-content 2fr 1fr 1fr 1fr",
                 }}
                 gap={5}
-                bg={mode("white", "gray.700")}
+                bg={bg}
                 shadow="xs"
                 rounded="sm"
                 p={{
@@ -175,9 +171,8 @@ function Home({ countries }) {
                 }}
                 mb="15px"
                 style={{ transition: "all .3s" }}
-                // _hover={{ bg: "gray.100" }}
                 _hover={{
-                  bg: mode("white", "#282e3c"),
+                  bg: bgHover,
                   //transform: "scale(1.008)",
                   shadow: "lg",
                 }}
@@ -257,7 +252,7 @@ function Home({ countries }) {
         </Container>
       </Layout>
     </>
-  );
+  )
 }
 
 export const getStaticProps = async () => {
