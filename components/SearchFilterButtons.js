@@ -9,7 +9,9 @@ function SearchFilterButtons(props) {
     <Flex pl="20px" pr="20px" mb="30px">
       {!isLargerThanMD && (
         <>
-          <Text color="gray.500">Filter by Region</Text>
+          <Text color="gray.500" fontSize="sm">
+            Filter by Region
+          </Text>
           <ButtonGroup
             mb="30px"
             ml="20px"
@@ -41,7 +43,9 @@ function SearchFilterButtons(props) {
           sm: "left",
         }}
       >
-        <Text color="gray.500">Found {props.length} countries</Text>
+        <Text color="gray.500" fontSize="sm">
+          Found {props.length} countries
+        </Text>
       </Box>
     </Flex>
   );
