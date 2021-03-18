@@ -6,8 +6,8 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import NextLink from "next/link";
 import Layout from "../../components/layout";
-import numberFormat from "../../functions/numberFormat"
-import lowerCaseText from "../../functions/lowerCaseText"
+import numberFormat from "../../functions/numberFormat";
+import lowerCaseText from "../../functions/lowerCaseText";
 import {
   Container,
   Flex,
@@ -35,17 +35,15 @@ const getCountry = async (id) => {
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
-  
   // const router = useRouter();
   // const ID = router.query.id;
   // const { asPath } = useRouter();
-  const bgHover = mode("white", "#282e3c")
+  const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
-  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
+  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
   const [borders, setBorders] = useState([]);
 
-  useEffect(() => {  
-    
+  useEffect(() => {
     const getBorders = async () => {
       const borders = await Promise.all(
         country.borders.map((border) => getCountry(border))
@@ -248,7 +246,7 @@ function CountryDetail({ country }) {
                         </a>
                       </NextLink>
                     </Box>
-                    {isLargerThanMD && (
+                    {!isLargerThanMD && (
                       <>
                         <Box>
                           <Text color="gray.400" fontSize="xs">

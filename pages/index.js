@@ -10,7 +10,8 @@ import SiteConfig from "../site.config";
 import fetch from "isomorphic-unfetch";
 
 import { REGION } from "../constants";
-import numberFormat from "../functions/numberFormat"
+import numberFormat from "../functions/numberFormat";
+// import useWindowSize from "../hooks/useWindowSize"
 
 import {
   Flex,
@@ -29,17 +30,18 @@ import {
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
-  const [isLargerThanMD] = useMediaQuery("(min-width: 48em)");
-  const bg = mode("white", "gray.700")
-  const bgHover = mode("white", "#282e3c")
-  
+  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
+  const bg = mode("white", "gray.700");
+  const bgHover = mode("white", "#282e3c");
+
   const [keyword, setKeyword] = useState("");
 
+  // const { width } = useWindowSize()
   const filteredCountries = countries.filter(
     (country) =>
       country.name.toLowerCase().includes(keyword) ||
       country.region.toLowerCase().includes(keyword) ||
-      country.subregion.toLowerCase().includes(keyword) || 
+      country.subregion.toLowerCase().includes(keyword) ||
       country.nativeName.toLowerCase().includes(keyword)
   );
 
@@ -108,36 +110,33 @@ function Home({ countries }) {
             </Box>
           </Flex>
           <Flex pl="20px" pr="20px" mb="30px">
-            {isLargerThanMD && (
+            {!isLargerThanMD && (
               <>
-                <Box>
-                  <Text as="small" color="gray.500">
-                    Filter by Region
-                  </Text>
-                  <ButtonGroup
-                    mb="30px"
-                    ml="20px"
-                    size="xs"
-                    variant="solid"
-                    spacing="2"
-                  >
-                    {REGION.map((item) => {
-                      return (
-                        <Button
-                          // color={item.color}
-                          // color={mode(`${item.color}`, "gray.700")}
-                          //bg={item.background}
-                          key={item.region}
-                          data-region={item.region}
-                          onClick={getRegion}
-                          colorScheme={item.colorscheme}
-                        >
-                          {item.title}
-                        </Button>
-                      );
-                    })}
-                  </ButtonGroup>
-                </Box>
+                <Text color="gray.500">Filter by Region</Text>
+                <ButtonGroup
+                  mb="30px"
+                  ml="20px"
+                  size="xs"
+                  variant="solid"
+                  spacing="2"
+                >
+                  {REGION.map((item) => {
+                    return (
+                      <Button
+                        // color={item.color}
+                        // color={mode(`${item.color}`, "gray.700")}
+                        //bg={item.background}
+                        key={item.region}
+                        data-region={item.region}
+                        onClick={getRegion}
+                        colorScheme={item.colorscheme}
+                      >
+                        {item.title}
+                      </Button>
+                    );
+                  })}
+                </ButtonGroup>
+
                 <Spacer />
               </>
             )}
@@ -148,14 +147,14 @@ function Home({ countries }) {
                 sm: "left",
               }}
             >
-              <Text as="small" color="gray.500">
+              <Text color="gray.500">
                 Found {filteredCountries.length} countries
               </Text>
             </Box>
           </Flex>
 
           {filteredCountries.map((country) => (
-            <Box pos="relative" maxW="100%" key={country.alpha3Code}>
+            <Box as="div" pos="relative" maxW="100%" key={country.alpha3Code}>
               <Grid
                 templateColumns={{
                   base: "35px 1fr",
@@ -204,7 +203,7 @@ function Home({ countries }) {
                     <a className="overlayLink">{country.name}</a>
                   </NextLink>
                 </Box>
-                {isLargerThanMD && (
+                {!isLargerThanMD && (
                   <>
                     <Box>
                       <Text color="gray.400" fontSize="xs">
@@ -252,7 +251,7 @@ function Home({ countries }) {
         </Container>
       </Layout>
     </>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
