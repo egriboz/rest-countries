@@ -55,17 +55,7 @@ function Layout({ children }) {
           </Flex>
           <Spacer />
           <Box>
-            {/* <NextLink href="/">
-              <a>Home</a>
-            </NextLink>
-            <span> | </span>
-            <NextLink href="/about">
-              <a>About</a>
-            </NextLink> */}
             <ColorModeSwitcher />
-            {/* <Button onClick={toggleColorMode}>
-              {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            </Button> */}
           </Box>
         </Flex>
       </Container>
