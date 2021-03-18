@@ -1,22 +1,28 @@
 import Head from "next/head";
 import NextLink from "next/link";
+import NextImage from "next/image";
+import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import SiteConfig from "../site.config";
+import lowerCaseText from "../functions/lowerCaseText";
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
-import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
+import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import Icon from "supercons";
 import {
   Heading,
+  Avatar,
   Text,
   Box,
   Flex,
   Container,
   Spacer,
   Center,
-  useColorModeValue as mode,
 } from "@chakra-ui/react";
 
 function Layout({ children }) {
+  const router = useRouter();
+  const ID = router.query.id;
+
   return (
     <>
       <Head>
@@ -35,7 +41,23 @@ function Layout({ children }) {
             <Box>
               <NextLink href="/">
                 <a>
-                  <Icon glyph="filter-fill" size={48} />
+                  {ID ? (
+                    <Avatar
+                      p="2"
+                      w="48px"
+                      h="48px"
+                      filter="invert(0)"
+                      backgroundColor="transparent"
+                      borderWidth="1px"
+                      borderColor={mode("gray.300", "gray.700")}
+                      name={ID}
+                      src={`https://restcountries.eu/data/${lowerCaseText(
+                        ID
+                      )}.svg`}
+                    />
+                  ) : (
+                    <Icon glyph="filter-fill" size={48} />
+                  )}
                 </a>
               </NextLink>
             </Box>
@@ -46,7 +68,7 @@ function Layout({ children }) {
                 fontWeight="bold"
                 lineHeight="normal"
               >
-                {SiteConfig.title}
+                <NextLink href="/">{SiteConfig.title}</NextLink>
               </Heading>
               <Text fontSize=".7em" lineHeight="normal">
                 {SiteConfig.description}

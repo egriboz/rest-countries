@@ -3,6 +3,7 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import NeighborsCountries from "../components/NeighborsCountries";
 // import SearchInput from "../components/searchInput";
+import lowerCaseText from "../functions/lowerCaseText";
 import SiteConfig from "../site.config";
 import fetch from "isomorphic-unfetch";
 
@@ -45,7 +46,10 @@ function Home({ countries }) {
         />
         {filteredCountries &&
           filteredCountries.map((country) => (
-            <NeighborsCountries key={country.alpha3Code} data={country} />
+            <NeighborsCountries
+              key={lowerCaseText(country.alpha3Code)}
+              data={country}
+            />
           ))}
         <Center as="small" mt="30px" color="gray.500">
           Found {filteredCountries.length} countries

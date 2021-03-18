@@ -52,7 +52,7 @@ function CountryDetail({ country }) {
   }, [country, setBorders]);
 
   return (
-    <Layout>
+    <Layout flag={country.name}>
       <Head>
         <title>{country.name}</title>
       </Head>
@@ -100,7 +100,7 @@ function CountryDetail({ country }) {
             </Box>
             <Box mt="20px" mb="30px">
               <Heading as="h1" size="md">
-                {lowerCaseText(country.name)}
+                {country.name}
                 <Badge ml="1">{country.alpha2Code}</Badge>
               </Heading>
               {country.altSpellings[2] && (
@@ -193,7 +193,7 @@ export async function getStaticPaths() {
   const countries = await data.json();
 
   const paths = countries.map((country) => {
-    return { params: { id: `${country.alpha3Code}` } };
+    return { params: { id: `${lowerCaseText(country.alpha3Code)}` } };
   });
 
   return {

@@ -2,12 +2,13 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 import { Box, Grid, Text } from "@chakra-ui/layout";
 import numberFormat from "../functions/numberFormat";
+import lowerCaseText from "../functions/lowerCaseText";
 
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import { useMediaQuery } from "@chakra-ui/media-query";
 
 function NeighborsCountries(props) {
-  const countryName = `/country/${props.data.alpha3Code}`;
+  const countryNameUrl = `/country/${lowerCaseText(props.data.alpha3Code)}`;
   const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
   const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
@@ -52,7 +53,7 @@ function NeighborsCountries(props) {
           />
         </Box>
         <Box display="flex" alignItems="center" fontWeight="semibold">
-          <NextLink href="/country/[id]" as={countryName}>
+          <NextLink href="/country/[id]" as={countryNameUrl}>
             <a className="overlayLink" fontWeight="bold">
               {props.data.name}
             </a>
