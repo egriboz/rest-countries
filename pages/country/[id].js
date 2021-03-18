@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
+import NextLink from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import Head from "next/head";
-import NextLink from "next/link";
+
 import Layout from "../../components/layout";
+import BreadCrumb from "../../components/Breadcrumb";
+
 import numberFormat from "../../functions/numberFormat";
 import lowerCaseText from "../../functions/lowerCaseText";
 import {
@@ -14,18 +17,13 @@ import {
   Heading,
   Grid,
   GridItem,
-  Image,
   Badge,
-  Button,
   Box,
   Text,
-  Breadcrumb,
-  BreadcrumbItem,
   useColorModeValue as mode,
   useMediaQuery,
   SimpleGrid,
 } from "@chakra-ui/react";
-import { ChevronRightIcon } from "@chakra-ui/icons";
 
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -60,22 +58,7 @@ function CountryDetail({ country }) {
       </Head>
 
       <Container maxW="container.lg" mt="30px">
-        <Breadcrumb
-          spacing="8px"
-          separator={<ChevronRightIcon color="gray.500" />}
-        >
-          <BreadcrumbItem>
-            <NextLink href="/">Home</NextLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <NextLink href="/">Country</NextLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem isCurrentPage>
-            <span>{country.name}</span>
-          </BreadcrumbItem>
-        </Breadcrumb>
+        <BreadCrumb name={country.name} />
       </Container>
 
       <Container mt="10px" pt="15px" pb="15px" maxW="container.lg">
@@ -110,6 +93,7 @@ function CountryDetail({ country }) {
                 width={1200}
                 height={800}
                 layout="responsive"
+                objectFit="cover"
                 src={country.flag}
                 alt={country.name}
               />
