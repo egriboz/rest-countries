@@ -5,24 +5,12 @@ import NeighborsCountries from "../components/NeighborsCountries";
 // import SearchInput from "../components/searchInput";
 import SiteConfig from "../site.config";
 import fetch from "isomorphic-unfetch";
-import { REGION } from "../constants";
+
 import Search from "../components/Search";
-import { useColorModeValue as mode } from "@chakra-ui/color-mode";
-import { useMediaQuery } from "@chakra-ui/media-query";
-import {
-  Container,
-  Flex,
-  Box,
-  Center,
-  Button,
-  ButtonGroup,
-  Text,
-  Input,
-  Spacer,
-} from "@chakra-ui/react";
+import SearchFilterButtons from "../components/SearchFilterButtons";
+import { Container, Box, Center } from "@chakra-ui/react";
 
 function Home({ countries }) {
-  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
   const [keyword, setKeyword] = useState("");
   const filteredCountries = countries.filter(
     (country) =>
@@ -45,80 +33,39 @@ function Home({ countries }) {
   }
 
   return (
-    <>
-      <Layout>
-        <Head>
-          <title>{SiteConfig.title}</title>
-        </Head>
-
-        <Container maxW="container.lg">
-          <Search onChange={onInputChange} />
-          <Flex pl="20px" pr="20px" mb="30px">
-            {!isLargerThanMD && (
-              <>
-                <Text color="gray.500">Filter by Region</Text>
-                <ButtonGroup
-                  mb="30px"
-                  ml="20px"
-                  size="xs"
-                  variant="solid"
-                  spacing="2"
-                >
-                  {REGION.map((item) => {
-                    return (
-                      <Button
-                        key={item.region}
-                        data-region={item.region}
-                        onClick={getRegion}
-                        colorScheme={item.colorscheme}
-                      >
-                        {item.title}
-                      </Button>
-                    );
-                  })}
-                </ButtonGroup>
-
-                <Spacer />
-              </>
-            )}
-            <Box
-              alignSelf="stretch"
-              textAlign={{
-                base: "center",
-                sm: "left",
-              }}
-            >
-              <Text color="gray.500">
-                Found {filteredCountries.length} countries
-              </Text>
-            </Box>
-          </Flex>
-          {filteredCountries &&
-            filteredCountries.map((country) => (
-              <NeighborsCountries key={country.alpha3Code} data={country} />
-            ))}
-          <Box>
-            <Center as="small" mt="30px" color="gray.500">
-              Found {filteredCountries.length} countries
-            </Center>
-          </Box>
-          <style jsx global>{`
-            a.overlayLink {
-              margin: 4px;
-            }
-            a.overlayLink::after {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              opacity: 0;
-            }
-          `}</style>
-        </Container>
-      </Layout>
-    </>
+    <Layout>
+      <Head>
+        <title>{SiteConfig.title}</title>
+      </Head>
+      <Container maxW="container.lg">
+        <Search onChange={onInputChange} />
+        <SearchFilterButtons
+          onClick={getRegion}
+          length={filteredCountries.length}
+        />
+        {filteredCountries &&
+          filteredCountries.map((country) => (
+            <NeighborsCountries key={country.alpha3Code} data={country} />
+          ))}
+        <Center as="small" mt="30px" color="gray.500">
+          Found {filteredCountries.length} countries
+        </Center>
+        <style jsx global>{`
+          a.overlayLink {
+            margin: 4px;
+          }
+          a.overlayLink::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+          }
+        `}</style>
+      </Container>
+    </Layout>
   );
 }
 
