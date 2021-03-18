@@ -6,6 +6,8 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 import NextLink from "next/link";
 import Layout from "../../components/layout";
+import numberFormat from "../../functions/numberFormat"
+import lowerCaseText from "../../functions/lowerCaseText"
 import {
   Container,
   Flex,
@@ -24,16 +26,6 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
-
-const numberFormat = (amount) => {
-  return new Intl.NumberFormat("en-GB", {
-    maximumSignificantDigits: 3,
-  }).format(amount);
-};
-
-const lowerCaseText = (amount) => {
-  return amount.toLowerCase();
-};
 
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -125,7 +117,7 @@ function CountryDetail({ country }) {
             </Box>
             <Box mt="20px" mb="30px">
               <Heading as="h1" size="md">
-                {country.name}
+                {lowerCaseText(country.name)}
                 <Badge ml="1">{country.alpha2Code}</Badge>
               </Heading>
               {country.altSpellings[2] && (
