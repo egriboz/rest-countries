@@ -1,42 +1,28 @@
-import React, { useState, useEffect } from "react";
-import NextLink from "next/link";
-import NextImage from "next/image";
+import React, { useState } from "react";
 import Head from "next/head";
 import Layout from "../components/layout";
 import NeighborsCountries from "../components/NeighborsCountries";
 // import SearchInput from "../components/searchInput";
-// import slug from 'slug'
 import SiteConfig from "../site.config";
-// import styles from "../styles/Home.module.css";
 import fetch from "isomorphic-unfetch";
-
 import { REGION } from "../constants";
-import numberFormat from "../functions/numberFormat";
-// import useWindowSize from "../hooks/useWindowSize"
-
+import { useColorModeValue as mode } from "@chakra-ui/color-mode";
+import { useMediaQuery } from "@chakra-ui/media-query";
 import {
+  Container,
   Flex,
+  Box,
+  Center,
   Button,
   ButtonGroup,
   Text,
-  Container,
   Input,
-  Box,
-  Grid,
-  Center,
   Spacer,
-  useColorModeValue as mode,
-  useMediaQuery,
 } from "@chakra-ui/react";
 
 function Home({ countries }) {
   const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
-  const bg = mode("white", "gray.700");
-  const bgHover = mode("white", "#282e3c");
-
   const [keyword, setKeyword] = useState("");
-
-  // const { width } = useWindowSize()
   const filteredCountries = countries.filter(
     (country) =>
       country.name.toLowerCase().includes(keyword) ||
@@ -77,7 +63,8 @@ function Home({ countries }) {
                 w="20px"
                 position="absolute"
                 zIndex="2"
-                top="22px"
+                top="50%"
+                transform="translateY(-10px)"
                 left="24px"
                 color="gray.500"
                 opacity=".5"
@@ -123,9 +110,6 @@ function Home({ countries }) {
                   {REGION.map((item) => {
                     return (
                       <Button
-                        // color={item.color}
-                        // color={mode(`${item.color}`, "gray.700")}
-                        //bg={item.background}
                         key={item.region}
                         data-region={item.region}
                         onClick={getRegion}

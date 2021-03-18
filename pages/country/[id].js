@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
-import NextLink from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import Head from "next/head";
