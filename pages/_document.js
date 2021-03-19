@@ -11,7 +11,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" style={{ scrollBehavior: "smooth" }}>
         <Head>
           <meta charSet="utf-8" />
         </Head>

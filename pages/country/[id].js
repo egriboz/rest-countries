@@ -19,6 +19,8 @@ import {
   GridItem,
   Badge,
   Button,
+  Avatar,
+  AvatarGroup,
   Box,
   Text,
   useColorModeValue as mode,
@@ -160,6 +162,23 @@ function CountryDetail({ country }) {
               </Box>
               <Box>
                 <Text color="gray.400" fontSize="xs">
+                  NEIGHBORS COUNTRIES
+                </Text>
+                <a href="#neighbors-countries">
+                  <AvatarGroup spacing="-5px" size="sm" max={2}>
+                    {borders &&
+                      borders.map((country) => (
+                        <Avatar
+                          key={country.alpha3Code}
+                          name={country.name}
+                          src={country.flag}
+                        />
+                      ))}
+                  </AvatarGroup>
+                </a>
+              </Box>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
                   CAPITAL
                 </Text>
                 <Text fontWeight="semibold" lineHeight="normal">
@@ -270,9 +289,9 @@ function CountryDetail({ country }) {
           </GridItem>
         </Grid>
       </Container>
-      <Container maxW="container.lg">
+      <Container pt="30px" maxW="container.lg" id="neighbors-countries">
         <Box>
-          <Heading as="h4" size="sm" mt="30px" mb="30px">
+          <Heading as="h4" size="sm" mb="30px">
             Neighbors Countries ({borders.length})
           </Heading>
         </Box>
