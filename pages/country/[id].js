@@ -142,7 +142,14 @@ function CountryDetail({ country }) {
             // shadow="base"
             // rounded="sm"
           >
-            <SimpleGrid columns={2} spacing={4} fontSize=".9em">
+            <SimpleGrid
+              columns={{
+                base: "1",
+                sm: "2",
+              }}
+              spacing={4}
+              fontSize=".9em"
+            >
               <Box>
                 <Text color="gray.400" fontSize="xs">
                   NATIVE NAME
