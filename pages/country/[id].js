@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import fetch from "isomorphic-unfetch";
-
+import axios from "axios";
 import Head from "next/head";
 
 import Layout from "../../components/layout";
@@ -37,6 +37,24 @@ const getCountry = async (id) => {
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
+  const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt";
+  const ACCOUNT_ID = "OQFQW9HT";
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetch(
+        `https://www.triposo.com/api/20210317/location.json?id=Turkey&account=${ACCOUNT_ID}&token=${API_TOKEN}`
+      );
+
+      const resultsData = await data.json();
+      setData(resultsData);
+      console.log(resultsData);
+      console.log(resultsData.results[0].name);
+    };
+
+    fetchData();
+  }, []);
+
   // const router = useRouter();
   // const ID = router.query.id;
   // const { asPath } = useRouter();
@@ -290,6 +308,13 @@ function CountryDetail({ country }) {
         </Grid>
       </Container>
       <Container pt="30px" maxW="container.lg" id="neighbors-countries">
+        <Box>
+          {/* <ul>
+            {data.results.images.map((item, index) => (
+              <li key={item.index}>{item.caption}</li>
+            ))}
+          </ul> */}
+        </Box>
         <Box>
           <Heading as="h4" size="sm" mb="30px">
             Neighbors Countries ({borders.length})
