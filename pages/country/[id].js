@@ -13,17 +13,19 @@ import numberFormat from "../../functions/numberFormat";
 import lowerCaseText from "../../functions/lowerCaseText";
 import {
   Container,
-  Flex,
+  Link,
   Heading,
   Grid,
   GridItem,
   Badge,
+  Button,
   Box,
   Text,
   useColorModeValue as mode,
   useMediaQuery,
   SimpleGrid,
 } from "@chakra-ui/react";
+import { ExternalLinkIcon, LinkIcon, ArrowForwardIcon } from "@chakra-ui/icons";
 
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -68,25 +70,29 @@ function CountryDetail({ country }) {
           // templateColumns="repeat(3, 1fr)"
           templateColumns={{
             base: "repeat(1, 1fr)",
-            sm: "repeat(3, 1fr)",
+            sm: "repeat(5, 1fr)",
           }}
           columnGap={{
             base: "0",
-            sm: "5",
+            sm: "0",
           }}
           rowGap={{
             base: "5",
             sm: "0",
           }}
+          bg={mode("white", "gray.700")}
+          shadow="base"
+          rounded="sm"
+          borderRadius="4px"
         >
           <GridItem
-            colSpan={1}
+            colSpan={2}
             p="15px"
             pos="relative"
-            bg={mode("white", "gray.700")}
-            shadow="base"
-            rounded="sm"
-            borderRadius="4px"
+            // bg={mode("white", "gray.700")}
+            // shadow="base"
+            // rounded="sm"
+            // borderRadius="4px"
           >
             <Box shadow="xs" lineHeight="0">
               <NextImage
@@ -109,7 +115,42 @@ function CountryDetail({ country }) {
                 </Heading>
               )}
             </Box>
+
             <SimpleGrid columns={2} spacing={4} fontSize=".9em">
+              {/* <Box>
+                <Text color="gray.400" fontSize="xs">
+                  CAPITAL
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  {country.capital}
+                </Text>
+              </Box>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  REGION
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  {country.region}
+                </Text>
+              </Box> */}
+            </SimpleGrid>
+          </GridItem>
+          <GridItem
+            colSpan={3}
+            p="15px"
+            // bg={mode("white", "gray.700")}
+            // shadow="base"
+            // rounded="sm"
+          >
+            <SimpleGrid columns={2} spacing={4} fontSize=".9em">
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  NATIVE NAME
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  {country.nativeName} / {country.altSpellings.slice(-1)[0]}
+                </Text>
+              </Box>
               <Box>
                 <Text color="gray.400" fontSize="xs">
                   CAPITAL
@@ -126,12 +167,22 @@ function CountryDetail({ country }) {
                   {country.region}
                 </Text>
               </Box>
+
               <Box>
                 <Text color="gray.400" fontSize="xs">
                   AREA km<sup>2</sup>
                 </Text>
                 <Text fontWeight="semibold" lineHeight="normal">
                   {numberFormat(country.area)}
+                </Text>
+              </Box>
+
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  SUBREGION
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  {country.subregion}
                 </Text>
               </Box>
               <Box>
@@ -142,20 +193,73 @@ function CountryDetail({ country }) {
                   {numberFormat(country.population)}
                 </Text>
               </Box>
-            </SimpleGrid>
-          </GridItem>
-          <GridItem
-            colSpan={2}
-            p="15px"
-            bg={mode("white", "gray.700")}
-            shadow="base"
-            rounded="sm"
-          >
-            <Text fontSize="sm">subregion:{country.subregion}</Text>
-            <Text>nativeName:{country.nativeName}</Text>
-            <Text>callingCodes:+{country.callingCodes}</Text>
 
-            <Text>gini:{country.gini}%</Text>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  CALLINGCODES
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  +{country.callingCodes}
+                </Text>
+              </Box>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  GINI
+                </Text>
+                <Text fontWeight="semibold" lineHeight="normal">
+                  {country.gini}%
+                </Text>
+              </Box>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  CURRENCIES
+                </Text>
+                {country.currencies &&
+                  country.currencies.map((item) => (
+                    <Text
+                      key={item.code}
+                      fontWeight="semibold"
+                      lineHeight="normal"
+                    >
+                      {item.name} ({item.code})
+                    </Text>
+                  ))}
+              </Box>
+            </SimpleGrid>
+            <SimpleGrid
+              mt="30px"
+              mb="30px"
+              columns={2}
+              spacing={4}
+              fontSize=".9em"
+            >
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  WIKIPEDIA GLOBAL
+                </Text>
+
+                <Link
+                  href={`http://wikipedia.org/wiki/${country.name}`}
+                  isExternal
+                >
+                  Wikipedia <ExternalLinkIcon />
+                </Link>
+              </Box>
+              <Box>
+                <Text color="gray.400" fontSize="xs">
+                  WIKIPEDIA LOCAL
+                </Text>
+
+                <Link
+                  href={`http://${lowerCaseText(
+                    country.alpha2Code
+                  )}.wikipedia.org/wiki/${country.name}`}
+                  isExternal
+                >
+                  Wikipedia <ExternalLinkIcon />
+                </Link>
+              </Box>
+            </SimpleGrid>
           </GridItem>
         </Grid>
       </Container>
