@@ -18,6 +18,8 @@ import {
   Grid,
   GridItem,
   Badge,
+  Flex,
+  Image,
   Button,
   Avatar,
   AvatarGroup,
@@ -37,23 +39,36 @@ const getCountry = async (id) => {
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
-  const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt";
-  const ACCOUNT_ID = "OQFQW9HT";
-  const [data, setData] = useState([]);
+  const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt"; // process.env.API_TOKEN
+  const ACCOUNT_ID = "OQFQW9HT"; // process.env.ACCOUNT_ID
+
+  const [data, setData] = useState(null);
+
+  const URL = [
+    "https://www.triposo.com/api/20210317/location.json",
+    "?",
+    `countrycode=${country.alpha2Code}`,
+    "&",
+    `account=${ACCOUNT_ID}`,
+    "&",
+    `token=${API_TOKEN}`,
+  ].join("");
+
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(
-        `https://www.triposo.com/api/20210317/location.json?id=Turkey&account=${ACCOUNT_ID}&token=${API_TOKEN}`
-      );
+      const res = await fetch(URL);
+      const newData = await res.json();
 
-      const resultsData = await data.json();
-      setData(resultsData);
-      console.log(resultsData);
-      console.log(resultsData.results[0].name);
+      setData(newData);
+      console.log(newData);
+      // console.log(data.results[0].name);
+      // data.results.map((i) => {
+      //   i.id
+      //   return console.log(i.id)
+      // })
     };
-
     fetchData();
-  }, []);
+  }, [country.alpha2Code]);
 
   // const router = useRouter();
   // const ID = router.query.id;
@@ -71,7 +86,7 @@ function CountryDetail({ country }) {
       setBorders(borders);
     };
     getBorders();
-  }, [country, setBorders]);
+  }, [country]);
 
   return (
     <Layout flag={country.name}>
@@ -307,14 +322,42 @@ function CountryDetail({ country }) {
           </GridItem>
         </Grid>
       </Container>
-      <Container pt="30px" maxW="container.lg" id="neighbors-countries">
-        <Box>
-          {/* <ul>
-            {data.results.images.map((item, index) => (
-              <li key={item.index}>{item.caption}</li>
+      <Container pt="30px" maxW="container.lg">
+        <Heading as="h4" size="sm" mb="30px">
+          Some cities {data && <span>({data.results.length})</span>}
+        </Heading>
+        <SimpleGrid mt="30px" mb="60px" minChildWidth="220px" spacing="10px">
+          {data &&
+            data.results.map((city) => (
+              <Flex
+                align="center"
+                justifyContent="center"
+                key={city.id}
+                bg={mode("white", "gray.700")}
+                shadow="base"
+                rounded="sm"
+                borderRadius="4px"
+                height="80px"
+              >
+                {city.name}
+                <Avatar src={city.images[0].sizes.thumbnail.url} />
+              </Flex>
             ))}
-          </ul> */}
-        </Box>
+        </SimpleGrid>
+        {/* <Box>
+          {data &&
+            data.results.map((city) => (
+              <li key={city.id}>
+                {city.name} <br />
+                {city.snippet}
+                {city.images.map((item) => (
+                  <Box bg="red">{item.caption}</Box>
+                ))}
+              </li>
+            ))}
+        </Box> */}
+      </Container>
+      <Container pt="30px" maxW="container.lg" id="neighbors-countries">
         <Box>
           <Heading as="h4" size="sm" mb="30px">
             Neighbors Countries ({borders.length})
