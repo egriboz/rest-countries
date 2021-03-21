@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NextImage from "next/image";
 import fetch from "isomorphic-unfetch";
-import axios from "axios";
 import Head from "next/head";
 
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/Breadcrumb";
 import NeighborsCountries from "../../components/NeighborsCountries";
+
+import City from "../../components/City";
 
 import numberFormat from "../../functions/numberFormat";
 import lowerCaseText from "../../functions/lowerCaseText";
@@ -39,40 +40,6 @@ const getCountry = async (id) => {
 // get detail
 // const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
-  const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt"; // process.env.API_TOKEN
-  const ACCOUNT_ID = "OQFQW9HT"; // process.env.ACCOUNT_ID
-
-  const [data, setData] = useState(null);
-
-  const URL = [
-    "https://www.triposo.com/api/20210317/location.json",
-    "?",
-    `countrycode=${country.alpha2Code}`,
-    "&",
-    `account=${ACCOUNT_ID}`,
-    "&",
-    `token=${API_TOKEN}`,
-  ].join("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(URL);
-      const newData = await res.json();
-
-      setData(newData);
-      console.log(newData);
-      // console.log(data.results[0].name);
-      // data.results.map((i) => {
-      //   i.id
-      //   return console.log(i.id)
-      // })
-    };
-    fetchData();
-  }, [country.alpha2Code]);
-
-  // const router = useRouter();
-  // const ID = router.query.id;
-  // const { asPath } = useRouter();
   const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
   const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
@@ -150,25 +117,6 @@ function CountryDetail({ country }) {
                 </Heading>
               )}
             </Box>
-
-            <SimpleGrid columns={2} spacing={4} fontSize=".9em">
-              {/* <Box>
-                <Text color="gray.400" fontSize="xs">
-                  CAPITAL
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.capital}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  REGION
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.region}
-                </Text>
-              </Box> */}
-            </SimpleGrid>
           </GridItem>
           <GridItem
             colSpan={3}
@@ -323,39 +271,7 @@ function CountryDetail({ country }) {
         </Grid>
       </Container>
       <Container pt="30px" maxW="container.lg">
-        <Heading as="h4" size="sm" mb="30px">
-          Some cities {data && <span>({data.results.length})</span>}
-        </Heading>
-        <SimpleGrid mt="30px" mb="60px" minChildWidth="220px" spacing="10px">
-          {data &&
-            data.results.map((city) => (
-              <Flex
-                align="center"
-                justifyContent="center"
-                key={city.id}
-                bg={mode("white", "gray.700")}
-                shadow="base"
-                rounded="sm"
-                borderRadius="4px"
-                height="80px"
-              >
-                {city.name}
-                <Avatar src={city.images[0].sizes.thumbnail.url} />
-              </Flex>
-            ))}
-        </SimpleGrid>
-        {/* <Box>
-          {data &&
-            data.results.map((city) => (
-              <li key={city.id}>
-                {city.name} <br />
-                {city.snippet}
-                {city.images.map((item) => (
-                  <Box bg="red">{item.caption}</Box>
-                ))}
-              </li>
-            ))}
-        </Box> */}
+        <City code={country.alpha2Code} />
       </Container>
       <Container pt="30px" maxW="container.lg" id="neighbors-countries">
         <Box>
