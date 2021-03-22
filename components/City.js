@@ -17,6 +17,8 @@ function City(props) {
   // function City(props) {
   const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt"; // process.env.API_TOKEN
   const ACCOUNT_ID = "OQFQW9HT"; // process.env.ACCOUNT_ID
+  const api_token = process.env.API_TOKEN;
+  const account_id = process.env.ACCOUNT_ID;
   const bg = mode("white", "gray.700");
   const [data, setData] = useState(null);
   const country2code = props.code;
@@ -25,9 +27,9 @@ function City(props) {
     "?",
     `countrycode=${country2code}`,
     "&",
-    `account=${ACCOUNT_ID}`,
+    `account=${account_id}`,
     "&",
-    `token=${API_TOKEN}`,
+    `token=${api_token}`,
   ].join("");
   const [httpStatusCode, setHttpStatusCode] = React.useState();
   useEffect(() => {
@@ -52,7 +54,7 @@ function City(props) {
     return (
       <>
         <Heading as="h4" size="sm" mb="30px">
-          Some Cities
+          Some Cities {process.env.ACCOUNT_ID}
           {/* {data && <span>({data.results.length})</span>} */}
         </Heading>
 
