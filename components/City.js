@@ -86,6 +86,7 @@ function City(props) {
                   <LinkOverlay
                     href={city.images[0].attribution.attribution_link}
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     {city.name}
                   </LinkOverlay>
