@@ -62,19 +62,19 @@ function NeighborsCountries(props) {
         {!isLargerThanMD && (
           <>
             <Box>
-              <Text color="gray.400" fontSize="xs">
+              <Text color="gray.500" fontSize="xs">
                 REGION
               </Text>
               {props.data.region}
             </Box>
             <Box>
-              <Text color="gray.400" fontSize="xs">
+              <Text color="gray.500" fontSize="xs">
                 POPULATION
               </Text>
               {numberFormat(props.data.population)}
             </Box>
             <Box>
-              <Text color="gray.400" fontSize="xs">
+              <Text color="gray.500" fontSize="xs">
                 AREA km<sup>2</sup>
               </Text>
               {numberFormat(props.data.area)}
