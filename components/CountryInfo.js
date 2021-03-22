@@ -42,7 +42,7 @@ function CountryInfo(props) {
             width={1200}
             height={800}
             layout="responsive"
-            objectFit="cover"
+            objectFit="contain"
             src={props.country.flag}
             alt={props.country.name}
           />
