@@ -26,10 +26,12 @@ This will serve the files at `http://localhost:3000/`
 - [x] Search filter
 - [x] Region filter
 - [x] Dark mode
-- [ ] Borders country [Re-fetch When Data Changes]
-- [ ] Homepage responsive control
+- [x] Borders country [Re-fetch When Data Changes]
+- [x] Homepage responsive control
 - [ ] Detail page responsive control
 - [ ] Detail page style fix
+- [ ] Add some cities (api.triposo is works...)
+
 
 ### Preview
 
