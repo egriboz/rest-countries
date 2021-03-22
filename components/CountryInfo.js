@@ -59,7 +59,7 @@ function CountryInfo(props) {
           )}
         </Box>
       </GridItem>
-      <GridItem colSpan={3} p="15px" fontSize="lg">
+      <GridItem colSpan={3} p="15px">
         <SimpleGrid
           columns={{
             base: "1",
@@ -69,7 +69,7 @@ function CountryInfo(props) {
           fontSize=".9em"
         >
           <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
+            <Text color="gray.500" fontSize="xs">
               NATIVE NAME
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import NextImage from "next/image";
-import { Avatar } from "@chakra-ui/avatar";
+import { Avatar } from "@chakra-ui/react";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import {
   Grid,
   Flex,
+  Badge,
   Text,
+  Box,
   SimpleGrid,
   Heading,
   LinkBox,
   LinkOverlay,
+  GridItem,
 } from "@chakra-ui/layout";
-import { Image } from "@chakra-ui/react";
 
 function City(props) {
   // function City(props) {
@@ -30,6 +32,8 @@ function City(props) {
     `account=${ACCOUNT_ID}`,
     "&",
     `token=${API_TOKEN}`,
+    "&",
+    `count=9`,
   ].join("");
   const [httpStatusCode, setHttpStatusCode] = React.useState();
   useEffect(() => {
@@ -39,8 +43,12 @@ function City(props) {
 
       setHttpStatusCode(data.code);
       setData(data);
+
       // console.log(data, data.code);
       // console.log(data.results[0].name);
+      // console.log(data.results.length);
+      // const size = data.results.length;
+
       // data.results.map((i) => {
       //   i.id
       //   return console.log(i.id)
@@ -48,6 +56,7 @@ function City(props) {
     };
     fetchData();
   }, [country2code]);
+
   if (httpStatusCode === 8) {
     return <p>city information is not available</p>;
   } else {
@@ -76,7 +85,19 @@ function City(props) {
                   rounded="sm"
                   borderRadius="4px"
                 >
-                  <Avatar
+                  <Box w="60px" h="60px" rounded="full" overflow="hidden">
+                    <NextImage
+                      width={400}
+                      height={400}
+                      objectFit="cover"
+                      src={city.images[0].sizes.thumbnail.url.replace(
+                        "http://",
+                        "https://"
+                      )}
+                      alt={city.name}
+                    />
+                  </Box>
+                  {/* <Avatar
                     size="lg"
                     mr="15px"
                     name={city.name}
@@ -84,14 +105,29 @@ function City(props) {
                       "http://",
                       "https://"
                     )}
-                  />
+                  /> */}
 
                   <LinkOverlay
+                    pl="15px"
                     href={city.images[0].attribution.attribution_link}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {city.name}
+                    {city.score.toFixed(1) >= 9 && (
+                      <Box
+                        position="absolute"
+                        top="15px"
+                        right="15px"
+                        w="10px"
+                        h="10px"
+                        rounded="full"
+                        bg="green.500"
+                      />
+                    )}
+                    <Text>{city.name}</Text>
+                    <Badge fontSize="0.7em">
+                      Score {city.score.toFixed(1)}
+                    </Badge>
                   </LinkOverlay>
                 </Flex>
               </LinkBox>
