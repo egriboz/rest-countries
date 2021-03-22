@@ -27,9 +27,9 @@ function City(props) {
     "?",
     `countrycode=${country2code}`,
     "&",
-    `account=${account_id}`,
+    `account=${ACCOUNT_ID}`,
     "&",
-    `token=${api_token}`,
+    `token=${API_TOKEN}`,
   ].join("");
   const [httpStatusCode, setHttpStatusCode] = React.useState();
   useEffect(() => {
