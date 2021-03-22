@@ -1,36 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import NextImage from "next/image";
+// import { useRouter } from "next/router";
+// import NextImage from "next/image";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/Breadcrumb";
 import NeighborsCountries from "../../components/NeighborsCountries";
-
+import CountryInfo from "../../components/CountryInfo";
 import City from "../../components/City";
 
-import numberFormat from "../../functions/numberFormat";
 import lowerCaseText from "../../functions/lowerCaseText";
-import {
-  Container,
-  Link,
-  Heading,
-  Grid,
-  GridItem,
-  Badge,
-  Flex,
-  Image,
-  Button,
-  Avatar,
-  AvatarGroup,
-  Box,
-  Text,
-  useColorModeValue as mode,
-  useMediaQuery,
-  SimpleGrid,
-} from "@chakra-ui/react";
-import { ExternalLinkIcon, LinkIcon, ArrowForwardIcon } from "@chakra-ui/icons";
+import { Container, Heading, Box } from "@chakra-ui/react";
 
 const getCountry = async (id) => {
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -38,11 +19,7 @@ const getCountry = async (id) => {
   return country;
 };
 // get detail
-// const CountryDetail = ({ country }) => {
 function CountryDetail({ country }) {
-  const bgHover = mode("white", "#282e3c");
-  const bg = mode("white", "gray.700");
-  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
   const [borders, setBorders] = useState([]);
 
   useEffect(() => {
@@ -66,214 +43,12 @@ function CountryDetail({ country }) {
       </Container>
 
       <Container mt="10px" pt="15px" pb="15px" maxW="container.lg">
-        <Grid
-          h="100%"
-          templateRows="repeat(1, 1fr)"
-          // templateColumns="repeat(3, 1fr)"
-          templateColumns={{
-            base: "repeat(1, 1fr)",
-            sm: "repeat(5, 1fr)",
-          }}
-          columnGap={{
-            base: "0",
-            sm: "0",
-          }}
-          rowGap={{
-            base: "5",
-            sm: "0",
-          }}
-          bg={mode("white", "gray.700")}
-          shadow="base"
-          rounded="sm"
-          borderRadius="4px"
-        >
-          <GridItem
-            colSpan={2}
-            p="15px"
-            pos="relative"
-            // bg={mode("white", "gray.700")}
-            // shadow="base"
-            // rounded="sm"
-            // borderRadius="4px"
-          >
-            <Box shadow="xs" lineHeight="0">
-              <NextImage
-                width={1200}
-                height={800}
-                layout="responsive"
-                objectFit="cover"
-                src={country.flag}
-                alt={country.name}
-              />
-            </Box>
-            <Box mt="20px" mb="30px">
-              <Heading as="h1" size="md">
-                {country.name}
-                <Badge ml="1">{country.alpha2Code}</Badge>
-              </Heading>
-              {country.altSpellings[2] && (
-                <Heading as="h2" size="sm" color="gray.600">
-                  {country.altSpellings[2]}
-                </Heading>
-              )}
-            </Box>
-          </GridItem>
-          <GridItem
-            colSpan={3}
-            p="15px"
-            // bg={mode("white", "gray.700")}
-            // shadow="base"
-            // rounded="sm"
-          >
-            <SimpleGrid
-              columns={{
-                base: "1",
-                sm: "2",
-              }}
-              spacing={4}
-              fontSize=".9em"
-            >
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  NATIVE NAME
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.nativeName} / {country.altSpellings.slice(-1)[0]}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  NEIGHBORS COUNTRIES
-                </Text>
-                <a href="#neighbors-countries">
-                  <AvatarGroup spacing="-5px" size="sm" max={2}>
-                    {borders &&
-                      borders.map((country) => (
-                        <Avatar
-                          key={country.alpha3Code}
-                          name={country.name}
-                          src={country.flag}
-                        />
-                      ))}
-                  </AvatarGroup>
-                </a>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  CAPITAL
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.capital}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  REGION
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.region}
-                </Text>
-              </Box>
-
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  AREA km<sup>2</sup>
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {numberFormat(country.area)}
-                </Text>
-              </Box>
-
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  SUBREGION
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.subregion}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  POPULATION
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {numberFormat(country.population)}
-                </Text>
-              </Box>
-
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  CALLINGCODES
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  +{country.callingCodes}
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  GINI
-                </Text>
-                <Text fontWeight="semibold" lineHeight="normal">
-                  {country.gini}%
-                </Text>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  CURRENCIES
-                </Text>
-                {country.currencies &&
-                  country.currencies.map((item) => (
-                    <Text
-                      key={item.code}
-                      fontWeight="semibold"
-                      lineHeight="normal"
-                    >
-                      {item.name} ({item.code})
-                    </Text>
-                  ))}
-              </Box>
-            </SimpleGrid>
-            <SimpleGrid
-              mt="30px"
-              mb="30px"
-              columns={2}
-              spacing={4}
-              fontSize=".9em"
-            >
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  WIKIPEDIA GLOBAL
-                </Text>
-
-                <Link
-                  href={`http://wikipedia.org/wiki/${country.name}`}
-                  isExternal
-                >
-                  Wikipedia <ExternalLinkIcon />
-                </Link>
-              </Box>
-              <Box>
-                <Text color="gray.400" fontSize="xs">
-                  WIKIPEDIA LOCAL
-                </Text>
-
-                <Link
-                  href={`http://${lowerCaseText(
-                    country.alpha2Code
-                  )}.wikipedia.org/wiki/${country.name}`}
-                  isExternal
-                >
-                  Wikipedia <ExternalLinkIcon />
-                </Link>
-              </Box>
-            </SimpleGrid>
-          </GridItem>
-        </Grid>
+        <CountryInfo country={country} />
       </Container>
       <Container pt="30px" maxW="container.lg">
         <City code={country.alpha2Code} />
       </Container>
-      <Container pt="30px" maxW="container.lg" id="neighbors-countries">
+      <Container pt="30px" maxW="container.lg">
         <Box>
           <Heading as="h4" size="sm" mb="30px">
             Neighbors Countries ({borders.length})

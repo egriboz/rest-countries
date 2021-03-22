@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-
+import NextImage from "next/image";
 import { Avatar } from "@chakra-ui/avatar";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
-import { Flex, SimpleGrid, Heading } from "@chakra-ui/layout";
+import {
+  Grid,
+  Flex,
+  Text,
+  SimpleGrid,
+  Heading,
+  LinkBox,
+  LinkOverlay,
+} from "@chakra-ui/layout";
+import { Image } from "@chakra-ui/react";
 
 const City = (props) => {
   console.log(props.code, "---");
@@ -46,22 +55,38 @@ const City = (props) => {
           {/* {data && <span>({data.results.length})</span>} */}
         </Heading>
 
-        <SimpleGrid mt="30px" mb="60px" minChildWidth="220px" spacing="10px">
+        <SimpleGrid mt="30px" mb="60px" minChildWidth="320px" spacing="15px">
           {data &&
             data.results.map((city) => (
-              <Flex
-                align="center"
-                justifyContent="center"
-                key={city.id}
-                bg={mode("white", "gray.700")}
-                shadow="base"
-                rounded="sm"
-                borderRadius="4px"
-                height="80px"
+              <LinkBox
+                w="100%"
+                maxW="100%"
+                display="block"
+                fontWeight="semibold"
               >
-                {city.name}
-                <Avatar src={city.images[0].sizes.thumbnail.url} />
-              </Flex>
+                <Flex
+                  p="15px"
+                  alignItems="center"
+                  key={city.id}
+                  bg={mode("white", "gray.700")}
+                  shadow="base"
+                  rounded="sm"
+                  borderRadius="4px"
+                >
+                  <Avatar
+                    size="lg"
+                    mr="15px"
+                    src={city.images[0].sizes.thumbnail.url}
+                  />
+
+                  <LinkOverlay
+                    href={city.images[0].attribution.attribution_link}
+                    target="_blank"
+                  >
+                    {city.name}
+                  </LinkOverlay>
+                </Flex>
+              </LinkBox>
             ))}
         </SimpleGrid>
       </>
