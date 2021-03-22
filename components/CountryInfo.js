@@ -157,7 +157,7 @@ function CountryInfo(props) {
             </Text>
 
             <Link
-              href={`http://wikipedia.org/wiki/${props.country.name}`}
+              href={`https://wikipedia.org/wiki/${props.country.name}`}
               isExternal
             >
               Wikipedia <ExternalLinkIcon />
@@ -169,7 +169,7 @@ function CountryInfo(props) {
             </Text>
 
             <Link
-              href={`http://${lowerCaseText(
+              href={`https://${lowerCaseText(
                 props.country.alpha2Code
               )}.wikipedia.org/wiki/${props.country.name}`}
               isExternal

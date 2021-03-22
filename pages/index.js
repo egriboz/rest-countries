@@ -29,7 +29,7 @@ function Home({ countries }) {
   function getRegion(e) {
     e.preventDefault();
     let dataRegion = e.target.getAttribute("data-region");
-    console.log(dataRegion);
+    // console.log(dataRegion);
     setKeyword(dataRegion);
   }
 

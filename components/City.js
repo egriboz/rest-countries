@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
 
-const City = (props) => {
-  console.log(props.code, "---");
+function City(props) {
   // function City(props) {
   const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt"; // process.env.API_TOKEN
   const ACCOUNT_ID = "OQFQW9HT"; // process.env.ACCOUNT_ID
+  const bg = mode("white", "gray.700");
   const [data, setData] = useState(null);
   const country2code = props.code;
   const URL = [
@@ -34,9 +34,10 @@ const City = (props) => {
     const fetchData = async () => {
       const res = await fetch(URL);
       const data = await res.json();
+
       setHttpStatusCode(data.code);
       setData(data);
-      console.log(data, data.code);
+      // console.log(data, data.code);
       // console.log(data.results[0].name);
       // data.results.map((i) => {
       //   i.id
@@ -59,6 +60,7 @@ const City = (props) => {
           {data &&
             data.results.map((city) => (
               <LinkBox
+                key={city.id}
                 w="100%"
                 maxW="100%"
                 display="block"
@@ -67,8 +69,7 @@ const City = (props) => {
                 <Flex
                   p="15px"
                   alignItems="center"
-                  key={city.id}
-                  bg={mode("white", "gray.700")}
+                  bg={bg}
                   shadow="base"
                   rounded="sm"
                   borderRadius="4px"
@@ -92,6 +93,6 @@ const City = (props) => {
       </>
     );
   }
-};
+}
 
 export default City;
