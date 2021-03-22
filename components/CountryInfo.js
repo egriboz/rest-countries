@@ -59,7 +59,7 @@ function CountryInfo(props) {
           )}
         </Box>
       </GridItem>
-      <GridItem colSpan={3} p="15px">
+      <GridItem colSpan={3} p="15px" fontSize="lg">
         <SimpleGrid
           columns={{
             base: "1",
@@ -69,7 +69,7 @@ function CountryInfo(props) {
           fontSize=".9em"
         >
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               NATIVE NAME
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -79,7 +79,7 @@ function CountryInfo(props) {
           </Box>
 
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               CAPITAL
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -87,7 +87,7 @@ function CountryInfo(props) {
             </Text>
           </Box>
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               REGION
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -96,7 +96,7 @@ function CountryInfo(props) {
           </Box>
 
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               AREA km<sup>2</sup>
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -105,7 +105,7 @@ function CountryInfo(props) {
           </Box>
 
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               SUBREGION
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -113,7 +113,7 @@ function CountryInfo(props) {
             </Text>
           </Box>
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               POPULATION
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -122,7 +122,7 @@ function CountryInfo(props) {
           </Box>
 
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               CALLINGCODES
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -130,7 +130,7 @@ function CountryInfo(props) {
             </Text>
           </Box>
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               GINI
             </Text>
             <Text fontWeight="semibold" lineHeight="normal">
@@ -138,7 +138,7 @@ function CountryInfo(props) {
             </Text>
           </Box>
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               CURRENCIES
             </Text>
 
@@ -152,7 +152,7 @@ function CountryInfo(props) {
         </SimpleGrid>
         <SimpleGrid mt="30px" mb="30px" columns={2} spacing={4} fontSize=".9em">
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               WIKIPEDIA GLOBAL
             </Text>
 
@@ -164,7 +164,7 @@ function CountryInfo(props) {
             </Link>
           </Box>
           <Box>
-            <Text color="gray.400" fontSize="xs">
+            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               WIKIPEDIA LOCAL
             </Text>
 
