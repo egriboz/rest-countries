@@ -77,7 +77,7 @@ function City(props) {
                   <Avatar
                     size="lg"
                     mr="15px"
-                    src={city.images[0].sizes.thumbnail.url}
+                    src={city.images[0].sizes.original.url}
                   />
 
                   <LinkOverlay
