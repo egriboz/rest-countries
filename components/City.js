@@ -77,6 +77,7 @@ function City(props) {
                   <Avatar
                     size="lg"
                     mr="15px"
+                    name={city.name}
                     src={city.images[0].sizes.thumbnail.url.replace(
                       "http://",
                       "https://"

@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ColorModeScript } from "@chakra-ui/react";
 import theme from "../theme";
+import SiteConfig from "../site.config";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -14,6 +15,7 @@ class MyDocument extends Document {
       <Html lang="en" style={{ scrollBehavior: "smooth" }}>
         <Head>
           <meta charSet="utf-8" />
+          <meta name="Description" content={SiteConfig.description} />
         </Head>
 
         <body>
