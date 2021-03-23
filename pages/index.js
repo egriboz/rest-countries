@@ -19,7 +19,7 @@ function Home({ countries }) {
   const [click, setClick] = useState(false);
 
   setTimeout(function () {
-    if (query !== undefined && router.pathname !== "/" && !click) {
+    if (query !== undefined && query.region !== undefined && !click) {
       setKeyword(query.region);
     }
   }, 0);
