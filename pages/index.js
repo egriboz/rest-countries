@@ -17,8 +17,9 @@ function Home({ countries }) {
   const query = router.query;
   const [keyword, setKeyword] = useState("");
   const [click, setClick] = useState(false);
+
   setTimeout(function () {
-    if (query !== undefined && !click) {
+    if (query !== undefined && router.pathname !== "/" && !click) {
       setKeyword(query.region);
     }
   }, 0);
