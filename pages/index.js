@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Layout from "../components/layout";
 import NeighborsCountries from "../components/NeighborsCountries";
@@ -12,7 +13,17 @@ import SearchFilterButtons from "../components/SearchFilterButtons";
 import { Container, Box, Center } from "@chakra-ui/react";
 
 function Home({ countries }) {
+  const router = useRouter();
+  const query = router.query;
   const [keyword, setKeyword] = useState("");
+  const [click, setClick] = useState(false);
+  setTimeout(function () {
+    if (query !== undefined && !click) {
+      setKeyword(query.region);
+    }
+  }, 0);
+
+  // console.log(click, "click");
   const filteredCountries = countries.filter(
     (country) =>
       country.name.toLowerCase().includes(keyword) ||
@@ -30,7 +41,15 @@ function Home({ countries }) {
     e.preventDefault();
     let dataRegion = e.target.getAttribute("data-region");
     // console.log(dataRegion);
+    setClick(true);
+    router.push({
+      query: { region: dataRegion },
+    });
+
     setKeyword(dataRegion);
+
+    // router.replace(dataRegion);
+    // console.log("query: ", query.region);
   }
 
   return (
@@ -44,6 +63,7 @@ function Home({ countries }) {
           onClick={getRegion}
           length={filteredCountries.length}
         />
+
         {filteredCountries &&
           filteredCountries.map((country) => (
             <NeighborsCountries
