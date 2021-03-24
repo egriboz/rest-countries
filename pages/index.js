@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Layout from "../components/layout";
+import Neighbors from "../components/Neighbors";
 import NeighborsCountries from "../components/NeighborsCountries";
 // import SearchInput from "../components/searchInput";
 import lowerCaseText from "../functions/lowerCaseText";
@@ -12,12 +13,24 @@ import Search from "../components/Search";
 import SearchFilterButtons from "../components/SearchFilterButtons";
 import { Container, Box, Center } from "@chakra-ui/react";
 
+// const orderBy = (countries, value, direction) => {
+//   if (direction === "asc") {
+//     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
+//   }
+
+//   if (direction === "desc") {
+//     return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
+//   }
+
+//   return countries;
+// };
+
 function Home({ countries }) {
   const router = useRouter();
   const query = router.query;
 
-  const [value, setValue] = useState();
-  const [direction, setDirection] = useState();
+  // const [value, setValue] = useState();
+  // const [direction, setDirection] = useState();
 
   const [keyword, setKeyword] = useState("");
   const [click, setClick] = useState(false);
@@ -27,41 +40,30 @@ function Home({ countries }) {
       setKeyword(query.region);
     }
   }, 0);
-  const orderBy = (countries, value, direction) => {
-    if (direction === "asc") {
-      return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-    }
-
-    if (direction === "desc") {
-      return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-    }
-
-    return countries;
-  };
 
   // console.log(click, "click");
-  const filteredCountries = countries.filter(
+  const includesCountries = countries.filter(
     (country) =>
       country.name.toLowerCase().includes(keyword) ||
       country.region.toLowerCase().includes(keyword) ||
       country.subregion.toLowerCase().includes(keyword) ||
       country.nativeName.toLowerCase().includes(keyword)
   );
-  const orderedCountries = orderBy(countries, value, direction);
-  const switchDirection = () => {
-    if (!direction) {
-      setDirection("desc");
-    } else if (direction === "desc") {
-      setDirection("asc");
-    } else {
-      setDirection(null);
-    }
-  };
+  // const orderedCountries = orderBy(countries, value, direction);
+  // const switchDirection = () => {
+  //   if (!direction) {
+  //     setDirection("desc");
+  //   } else if (direction === "desc") {
+  //     setDirection("asc");
+  //   } else {
+  //     setDirection(null);
+  //   }
+  // };
 
-  const setValueAndDirection = (value) => {
-    switchDirection();
-    setValue(value);
-  };
+  // const setValueAndDirection = (value) => {
+  //   switchDirection();
+  //   setValue(value);
+  // };
 
   // const filteredAndSortedKeywords = countries.sort(function (a, b) {
   //   return b.name.localeCompare(a.name);
@@ -98,26 +100,27 @@ function Home({ countries }) {
         <Search onChange={onInputChange} />
         <SearchFilterButtons
           onClick={getRegion}
-          length={filteredCountries.length}
+          length={includesCountries.length}
         />
-        <Box>
+        <Neighbors
+          countries={includesCountries}
+          test={includesCountries.length}
+        />
+        {/* <Box>
           <button onClick={() => setValueAndDirection("name")}>Name</button>
           <button onClick={() => setValueAndDirection("population")}>
             Test
           </button>
-        </Box>
+        </Box> */}
 
-        {orderedCountries &&
-          orderedCountries.map((country) => (
+        {/* {includesCountries &&
+          includesCountries.map((country) => (
             <NeighborsCountries
               key={lowerCaseText(country.alpha3Code)}
               data={country}
             />
-          ))}
-        <Center as="small" mt="30px" color="gray.500">
-          Found {filteredCountries.length} countries
-        </Center>
-        <style jsx global>{`
+          ))} */}
+        {/* <style jsx global>{`
           a.overlayLink {
             margin: 4px;
           }
@@ -130,7 +133,10 @@ function Home({ countries }) {
             height: 100%;
             opacity: 0;
           }
-        `}</style>
+        `}</style> */}
+        <Center as="small" mt="30px" color="gray.500">
+          Found {includesCountries.length} countries
+        </Center>
       </Container>
     </Layout>
   );
