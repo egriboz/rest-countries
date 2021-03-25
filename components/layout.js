@@ -62,12 +62,7 @@ function Layout({ children }) {
               </NextLink>
             </Box>
             <Box pl="10px">
-              <Heading
-                as="h1"
-                fontSize="1.2em"
-                fontWeight="bold"
-                lineHeight="normal"
-              >
+              <Heading fontSize="1.2em" fontWeight="bold" lineHeight="normal">
                 <NextLink href="/">{SiteConfig.title}</NextLink>
               </Heading>
               <Text fontSize=".7em" lineHeight="normal">

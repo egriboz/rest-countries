@@ -114,7 +114,7 @@ function NeighborCountries(props) {
                   as={`/country/${lowerCaseText(country.alpha3Code)}`}
                 >
                   <a className="overlayLink" fontWeight="bold">
-                    {country.name} - {country.alpha3Code}
+                    {country.name}
                   </a>
                 </NextLink>
               </Box>

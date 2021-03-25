@@ -22,7 +22,7 @@ const getCountry = async (id) => {
 // get detail
 function CountryDetail({ country }) {
   const [borders, setBorders] = useState([]);
-
+  const currentFlag = country.flag;
   useEffect(() => {
     const getBorders = async () => {
       const borders = await Promise.all(
@@ -39,11 +39,36 @@ function CountryDetail({ country }) {
         <title>{country.name}</title>
       </Head>
 
-      <Container maxW="container.lg" mt="30px">
-        <BreadCrumb name={country.name} />
+      <Container
+        maxW="100%"
+        bg="gray.800"
+        p="100px 0 100px 0"
+        // backgroundImage={`url(${country.flag})`}
+        // backgroundPosition="center"
+        // backgroundRepeat="no-repeat"
+        // backgroundSize="cover"
+
+        // filter="blur(40px)"
+        // _before={{ with: "200px", backgroundImage: "lg" }}
+      >
+        <Container maxW="container.lg" pos="relative" zIndex="1">
+          <Heading as="h1" color="white" mb="15px">
+            {country.name}
+
+            {/* ({country.altSpellings[2]}) */}
+          </Heading>
+
+          <BreadCrumb name={country.name} />
+        </Container>
       </Container>
 
-      <Container mt="10px" pt="15px" pb="15px" maxW="container.lg">
+      <Container
+        pos="relative"
+        mt="-70px"
+        pt="15px"
+        pb="15px"
+        maxW="container.lg"
+      >
         <CountryInfo country={country} />
       </Container>
       <Container pt="30px" maxW="container.lg">
