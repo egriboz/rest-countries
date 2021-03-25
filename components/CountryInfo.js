@@ -48,13 +48,14 @@ function CountryInfo(props) {
           />
         </Box>
         <Box mt="20px" mb="30px">
-          <Heading as="h1" size="md">
+          {/* <Heading size="md">
             {props.country.name}
             <Badge ml="1">{props.country.alpha2Code}</Badge>
-          </Heading>
+          </Heading> */}
           {props.country.altSpellings[2] && (
             <Heading as="h2" size="sm" color="gray.600">
               {props.country.altSpellings[2]}
+              <Badge ml="1">{props.country.alpha2Code}</Badge>
             </Heading>
           )}
         </Box>

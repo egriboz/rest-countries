@@ -52,10 +52,9 @@ function CountryDetail({ country }) {
         // _before={{ with: "200px", backgroundImage: "lg" }}
       >
         <Container maxW="container.lg" pos="relative" zIndex="1">
-          <Heading as="h1" color="white" mb="15px">
+          <Heading as="h1" color="white" mb="5px">
             {country.name}
-
-            {/* ({country.altSpellings[2]}) */}
+            {/* {country.altSpellings[2] && <> ~ {country.altSpellings[2]}</>} */}
           </Heading>
 
           <BreadCrumb name={country.name} />
