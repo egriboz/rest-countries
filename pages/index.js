@@ -3,34 +3,16 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Layout from "../components/layout";
 import Neighbors from "../components/Neighbors";
-import NeighborsCountries from "../components/NeighborsCountries";
-// import SearchInput from "../components/searchInput";
-import lowerCaseText from "../functions/lowerCaseText";
 import SiteConfig from "../site.config";
 import fetch from "isomorphic-unfetch";
 
 import Search from "../components/Search";
 import SearchFilterButtons from "../components/SearchFilterButtons";
-import { Container, Box, Center } from "@chakra-ui/react";
-
-// const orderBy = (countries, value, direction) => {
-//   if (direction === "asc") {
-//     return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-//   }
-
-//   if (direction === "desc") {
-//     return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-//   }
-
-//   return countries;
-// };
+import { Container, Center } from "@chakra-ui/react";
 
 function Home({ countries }) {
   const router = useRouter();
   const query = router.query;
-
-  // const [value, setValue] = useState();
-  // const [direction, setDirection] = useState();
 
   const [keyword, setKeyword] = useState("");
   const [click, setClick] = useState(false);
@@ -49,27 +31,6 @@ function Home({ countries }) {
       country.subregion.toLowerCase().includes(keyword) ||
       country.nativeName.toLowerCase().includes(keyword)
   );
-  // const orderedCountries = orderBy(countries, value, direction);
-  // const switchDirection = () => {
-  //   if (!direction) {
-  //     setDirection("desc");
-  //   } else if (direction === "desc") {
-  //     setDirection("asc");
-  //   } else {
-  //     setDirection(null);
-  //   }
-  // };
-
-  // const setValueAndDirection = (value) => {
-  //   switchDirection();
-  //   setValue(value);
-  // };
-
-  // const filteredAndSortedKeywords = countries.sort(function (a, b) {
-  //   return b.name.localeCompare(a.name);
-  // });
-
-  // console.log("filteredAndSortedKeywords:", filteredAndSortedKeywords);
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -106,34 +67,6 @@ function Home({ countries }) {
           countries={includesCountries}
           test={includesCountries.length}
         />
-        {/* <Box>
-          <button onClick={() => setValueAndDirection("name")}>Name</button>
-          <button onClick={() => setValueAndDirection("population")}>
-            Test
-          </button>
-        </Box> */}
-
-        {/* {includesCountries &&
-          includesCountries.map((country) => (
-            <NeighborsCountries
-              key={lowerCaseText(country.alpha3Code)}
-              data={country}
-            />
-          ))} */}
-        {/* <style jsx global>{`
-          a.overlayLink {
-            margin: 4px;
-          }
-          a.overlayLink::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-          }
-        `}</style> */}
         <Center as="small" mt="30px" color="gray.500">
           Found {includesCountries.length} countries
         </Center>

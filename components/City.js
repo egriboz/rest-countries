@@ -15,7 +15,10 @@ import {
   GridItem,
 } from "@chakra-ui/layout";
 
-function City(props) {
+function City({ countryCode, countryName }) {
+  // const code = props.code;
+  // const name = props.name;
+  // console.log(props, "City");
   // function City(props) {
   const API_TOKEN = "esezzbg9fbvgfgke78driknff8nisqnt"; // process.env.API_TOKEN
   const ACCOUNT_ID = "OQFQW9HT"; // process.env.ACCOUNT_ID
@@ -23,7 +26,7 @@ function City(props) {
   const account_id = process.env.ACCOUNT_ID;
   const bg = mode("white", "gray.700");
   const [data, setData] = useState(null);
-  const country2code = props.code;
+  const country2code = countryCode;
   const URL = [
     "https://www.triposo.com/api/20210317/location.json",
     "?",
@@ -37,7 +40,7 @@ function City(props) {
   ].join("");
   const [httpStatusCode, setHttpStatusCode] = React.useState();
   useEffect(() => {
-    const fetchData = async () => {
+    const getCity = async () => {
       const res = await fetch(URL);
       const data = await res.json();
 
@@ -54,7 +57,7 @@ function City(props) {
       //   return console.log(i.id)
       // })
     };
-    fetchData();
+    getCity();
   }, [country2code]);
 
   if (httpStatusCode === 8) {
@@ -63,7 +66,7 @@ function City(props) {
     return (
       <>
         <Heading as="h4" size="sm" mb="30px">
-          Some Cities {process.env.ACCOUNT_ID}
+          Some popular cities in {countryName} {process.env.ACCOUNT_ID}
           {/* {data && <span>({data.results.length})</span>} */}
         </Heading>
 

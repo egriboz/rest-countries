@@ -15,7 +15,9 @@ import lowerCaseText from "../../functions/lowerCaseText";
 import { Container, Heading, Box } from "@chakra-ui/react";
 
 const getCountry = async (id) => {
+  // const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
   const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+
   const country = await data.json();
   return country;
 };
@@ -71,12 +73,12 @@ function CountryDetail({ country }) {
         <CountryInfo country={country} />
       </Container>
       <Container pt="30px" maxW="container.lg">
-        <City code={country.alpha2Code} />
+        <City countryCode={country.alpha2Code} countryName={country.name} />
       </Container>
       <Container pt="30px" maxW="container.lg">
         <Box>
           <Heading as="h4" size="sm" mb="30px">
-            Neighbors Countries ({borders.length})
+            Neighbour Countries of {country.name} ({borders.length})
           </Heading>
         </Box>
         <Neighbors countries={borders} test={borders.length} />
@@ -84,20 +86,6 @@ function CountryDetail({ country }) {
           borders.map((country) => (
             <NeighborsCountries key={country.alpha3Code} data={country} />
           ))} */}
-        <style jsx global>{`
-          a.overlayLink {
-            margin: 4px;
-          }
-          a.overlayLink::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-          }
-        `}</style>
       </Container>
     </Layout>
   );

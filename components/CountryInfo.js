@@ -1,6 +1,7 @@
 import NextImage from "next/image";
 import numberFormat from "../functions/numberFormat";
 import lowerCaseText from "../functions/lowerCaseText";
+import CountryInfoItem from "../components/CountryInfoItem";
 import {
   Link,
   Heading,
@@ -11,10 +12,21 @@ import {
   Text,
   useColorModeValue as mode,
   SimpleGrid,
+  HStack,
 } from "@chakra-ui/react";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
 
-function CountryInfo(props) {
+export const Aerasup = () => {
+  return (
+    <>
+      AREA km<sup>2</sup>
+    </>
+  );
+};
+
+function CountryInfo({ country }) {
+  // console.log(props, "props");
+  // const country = props.country;
   return (
     <Grid
       h="100%"
@@ -43,19 +55,16 @@ function CountryInfo(props) {
             height={800}
             layout="responsive"
             objectFit="contain"
-            src={props.country.flag}
-            alt={props.country.name}
+            src={country.flag}
+            alt={country.name}
           />
         </Box>
         <Box mt="20px" mb="30px">
-          {/* <Heading size="md">
-            {props.country.name}
-            <Badge ml="1">{props.country.alpha2Code}</Badge>
-          </Heading> */}
-          {props.country.altSpellings[2] && (
-            <Heading as="h2" size="sm" color="gray.600">
-              {props.country.altSpellings[2]}
-              <Badge ml="1">{props.country.alpha2Code}</Badge>
+          <Heading size="md">{country.name}</Heading>
+          {country.altSpellings[2] && (
+            <Heading as="h2" size="sm">
+              {country.altSpellings[2]}
+              <Badge ml="1">{country.alpha2Code}</Badge>
             </Heading>
           )}
         </Box>
@@ -67,85 +76,38 @@ function CountryInfo(props) {
             sm: "2",
           }}
           spacing={4}
-          fontSize=".9em"
+          fontSize="1em"
         >
+          <CountryInfoItem title="DEMONYM" value={country.demonym} />
+          <CountryInfoItem
+            title="NATIVE NAME"
+            value={`${country.nativeName} ~ ${
+              country.altSpellings.slice(-1)[0]
+            }`}
+          />
+          <CountryInfoItem title="CAPITAL" value={country.capital} />
+          <CountryInfoItem title="REGION" value={country.region} />
+          <CountryInfoItem
+            title={<Aerasup />}
+            value={numberFormat(country.area)}
+          />
+          <CountryInfoItem title="SUBREGION" value={country.subregion} />
+          <CountryInfoItem
+            title="POPULATION"
+            value={numberFormat(country.population)}
+          />
+          <CountryInfoItem
+            title="CALLINGCODES"
+            value={`+${country.callingCodes}`}
+          />
+          <CountryInfoItem title="GINI" value={`${country.gini}%`} />
           <Box>
             <Text color="gray.500" fontSize="xs">
-              NATIVE NAME
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {props.country.nativeName} /{" "}
-              {props.country.altSpellings.slice(-1)[0]}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              CAPITAL
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {props.country.capital}
-            </Text>
-          </Box>
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              REGION
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {props.country.region}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              AREA km<sup>2</sup>
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {numberFormat(props.country.area)}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              SUBREGION
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {props.country.subregion}
-            </Text>
-          </Box>
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              POPULATION
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {numberFormat(props.country.population)}
-            </Text>
-          </Box>
-
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              CALLINGCODES
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              +{props.country.callingCodes}
-            </Text>
-          </Box>
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
-              GINI
-            </Text>
-            <Text fontWeight="semibold" lineHeight="normal">
-              {props.country.gini}%
-            </Text>
-          </Box>
-          <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
               CURRENCIES
             </Text>
-
-            {props.country.currencies &&
-              props.country.currencies.map((item) => (
-                <Text key={item.code} fontWeight="semibold" lineHeight="normal">
+            {country.currencies &&
+              country.currencies.map((item) => (
+                <Text key={item.code} fontWeight="bold" lineHeight="normal">
                   {item.name} ({item.code})
                 </Text>
               ))}
@@ -153,26 +115,26 @@ function CountryInfo(props) {
         </SimpleGrid>
         <SimpleGrid mt="30px" mb="30px" columns={2} spacing={4} fontSize=".9em">
           <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
+            <Text color="gray.500" fontSize="xs">
               WIKIPEDIA GLOBAL
             </Text>
 
             <Link
-              href={`https://wikipedia.org/wiki/${props.country.name}`}
+              href={`https://wikipedia.org/wiki/${country.name}`}
               isExternal
             >
               Wikipedia <ExternalLinkIcon />
             </Link>
           </Box>
           <Box>
-            <Text color="gray.500" letterSpacing="1px" fontSize="xs">
+            <Text color="gray.500" fontSize="xs">
               WIKIPEDIA LOCAL
             </Text>
 
             <Link
               href={`https://${lowerCaseText(
-                props.country.alpha2Code
-              )}.wikipedia.org/wiki/${props.country.name}`}
+                country.alpha2Code
+              )}.wikipedia.org/wiki/${country.name}`}
               isExternal
             >
               Wikipedia <ExternalLinkIcon />
