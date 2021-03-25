@@ -6,71 +6,31 @@ import { Box, Grid, Text } from "@chakra-ui/layout";
 import numberFormat from "../functions/numberFormat";
 import lowerCaseText from "../functions/lowerCaseText";
 
+import { orderBy, SortArrow } from "../functions/Sort";
+
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import { useMediaQuery } from "@chakra-ui/media-query";
-// import {
-//   Menu,
-//   MenuButton,
-//   MenuList,
-//   MenuOptionGroup,
-//   MenuItemOption,
-//   MenuDivider,
-// } from "@chakra-ui/menu";
-import { Button } from "@chakra-ui/button";
-import { ArrowDownIcon, ArrowUpIcon } from "@chakra-ui/icons";
-
-const orderBy = (countries, value, direction) => {
-  if (direction === "asc" && value !== "name") {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? 1 : -1));
-  }
-
-  if (direction === "desc" && value !== "name") {
-    return [...countries].sort((a, b) => (a[value] > b[value] ? -1 : 1));
-  }
-
-  if (direction === "asc" && value === "name") {
-    return [...countries].sort((a, b) =>
-      a[value].localeCompare > b[value].localeCompare ? 1 : -1
-    );
-  }
-
-  if (direction === "desc" && value === "name") {
-    return [...countries].sort((a, b) =>
-      a[value].localeCompare > b[value].localeCompare ? -1 : 1
-    );
-  }
-
-  return countries;
-};
 
 function NeighborCountries(props) {
-  // console.log(props, "props");
-  // console.log(props.countries, "props countries");
-
   const countries = props.countries;
-
-  // console.log(countries, "***");
 
   const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
   const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
 
-  const [value, setValue] = useState("name");
-  const [direction, setDirection] = useState("desc");
+  const [value, setValue] = useState();
+  const [direction, setDirection] = useState();
 
   const countriesOrdered = orderBy(countries, value, direction);
 
   const switchDirection = () => {
-    if (!direction || direction === "asc") {
+    if (!direction) {
       setDirection("desc");
-    } else {
+    } else if (direction === "desc") {
       setDirection("asc");
+    } else {
+      setDirection(null);
     }
-    // else if (direction === "desc") {
-    //   setDirection("asc");
-    // } else {
-    //   setDirection(null);
-    // }
   };
   const setValueAndDirection = (value) => {
     switchDirection();
@@ -93,42 +53,15 @@ function NeighborCountries(props) {
           opacity: 0;
         }
       `}</style>
-      {/* <Box>
-        <Menu closeOnSelect={true}>
-          <MenuButton as={Button} colorScheme="blue">
-            MenuItem
-          </MenuButton>
-          <MenuList minWidth="240px">
-            <MenuOptionGroup defaultValue="asc" title="Order" type="radio">
-              <MenuItemOption value="asc">Ascending</MenuItemOption>
-              <MenuDivider />
-              <MenuItemOption value="desc">Descending</MenuItemOption>
-            </MenuOptionGroup>
-            <MenuDivider />
-            <MenuOptionGroup defaultValue="abc" title="Pop" type="radio">
-              <MenuItemOption value="abc">Ascending</MenuItemOption>
-              <MenuItemOption value="cba">Descending</MenuItemOption>
-            </MenuOptionGroup>
-          </MenuList>
-        </Menu>
-      </Box> */}
 
       <Box>
         <button onClick={() => setValueAndDirection("name")}>
           Name
-          {direction === "asc" && value === "name" ? (
-            <ArrowUpIcon />
-          ) : (
-            <ArrowDownIcon />
-          )}
+          {value === "name" && <SortArrow direction={direction} />}
         </button>
         <button onClick={() => setValueAndDirection("population")}>
           Population{" "}
-          {direction === "asc" && value === "population" ? (
-            <ArrowUpIcon />
-          ) : (
-            <ArrowDownIcon />
-          )}
+          {value === "population" && <SortArrow direction={direction} />}
         </button>
       </Box>
       <Box>value: {value}</Box>
