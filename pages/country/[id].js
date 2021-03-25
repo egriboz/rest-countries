@@ -7,6 +7,7 @@ import Head from "next/head";
 import Layout from "../../components/layout";
 import BreadCrumb from "../../components/Breadcrumb";
 import NeighborsCountries from "../../components/NeighborsCountries";
+import Neighbors from "../../components/Neighbors";
 import CountryInfo from "../../components/CountryInfo";
 import City from "../../components/City";
 
@@ -54,10 +55,11 @@ function CountryDetail({ country }) {
             Neighbors Countries ({borders.length})
           </Heading>
         </Box>
-        {borders &&
+        <Neighbors countries={borders} test={borders.length} />
+        {/* {borders &&
           borders.map((country) => (
             <NeighborsCountries key={country.alpha3Code} data={country} />
-          ))}
+          ))} */}
         <style jsx global>{`
           a.overlayLink {
             margin: 4px;
