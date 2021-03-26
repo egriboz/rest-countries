@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { Box, Grid, Text } from "@chakra-ui/layout";
+import { Flex, Box, Grid, Text, Button } from "@chakra-ui/react";
+
 import numberFormat from "../functions/numberFormat";
 import lowerCaseText from "../functions/lowerCaseText";
 
@@ -10,6 +11,7 @@ import { orderBy, SortArrow } from "../functions/Sort";
 
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import { useMediaQuery } from "@chakra-ui/media-query";
+import { AddIcon } from "@chakra-ui/icons";
 
 function NeighborCountries(props) {
   const countries = props.countries;
@@ -54,18 +56,28 @@ function NeighborCountries(props) {
         }
       `}</style>
 
-      <Box>
-        <button onClick={() => setValueAndDirection("name")}>
+      <Flex justifyContent="flex-end" mb="15px">
+        <Button
+          size="xs"
+          onClick={() => setValueAndDirection("name")}
+          rightIcon={value === "name" && <SortArrow direction={direction} />}
+        >
           Name
-          {value === "name" && <SortArrow direction={direction} />}
-        </button>
-        <button onClick={() => setValueAndDirection("population")}>
+        </Button>
+
+        <Button
+          ml="10px"
+          size="xs"
+          onClick={() => setValueAndDirection("population")}
+          rightIcon={
+            value === "population" && <SortArrow direction={direction} />
+          }
+        >
           Population{" "}
-          {value === "population" && <SortArrow direction={direction} />}
-        </button>
-      </Box>
-      <Box>value: {value}</Box>
-      <Box>direction: {direction}</Box>
+        </Button>
+      </Flex>
+      {/* <Box>value: {value}</Box>
+      <Box>direction: {direction}</Box> */}
 
       {countriesOrdered &&
         countriesOrdered.map((country) => (

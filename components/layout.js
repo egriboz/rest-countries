@@ -62,11 +62,11 @@ function Layout({ children }) {
               </NextLink>
             </Box>
             <Box pl="10px">
-              <Heading fontSize="1.2em" fontWeight="bold" lineHeight="normal">
+              <Heading fontSize="1em" fontWeight="bold" lineHeight="normal">
                 <NextLink href="/">{SiteConfig.title}</NextLink>
               </Heading>
-              <Text fontSize=".7em" lineHeight="normal">
-                {SiteConfig.description}
+              <Text fontSize="1em" fontWeight="bold" lineHeight="normal">
+                <NextLink href="/">{SiteConfig.subtitle}</NextLink>
               </Text>
             </Box>
           </Flex>
@@ -83,9 +83,10 @@ function Layout({ children }) {
         maxW="100%"
         borderTopWidth="1px"
         mt="45px"
-        pt="30px"
-        pb="30px"
+        pt="130px"
+        pb="130px"
         borderColor={mode("gray.200", "gray.700")}
+        bg={mode("gray.200", "gray.900")}
       >
         <Container maxW="container.lg">
           <Center>footer</Center>

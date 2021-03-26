@@ -27,6 +27,7 @@ export const Aerasup = () => {
 function CountryInfo({ country }) {
   // console.log(props, "props");
   // const country = props.country;
+  const borderColor = mode("gray.100", "whiteAlpha.50");
   return (
     <Grid
       h="100%"
@@ -47,8 +48,16 @@ function CountryInfo({ country }) {
       shadow="base"
       rounded="sm"
       borderRadius="4px"
+      overflow="hidden"
     >
-      <GridItem colSpan={2} p="15px" pos="relative">
+      <GridItem
+        colSpan={2}
+        p={{
+          base: "15px",
+          sm: "15px 0px 15px 15px",
+        }}
+        pos="relative"
+      >
         <Box shadow="xs" lineHeight="0">
           <NextImage
             width={1200}
@@ -60,9 +69,9 @@ function CountryInfo({ country }) {
           />
         </Box>
         <Box mt="20px" mb="30px">
-          <Heading size="md">{country.name}</Heading>
+          {/* <Heading size="md">{country.name}</Heading> */}
           {country.altSpellings[2] && (
-            <Heading as="h2" size="sm">
+            <Heading as="h2" size="md">
               {country.altSpellings[2]}
               <Badge ml="1">{country.alpha2Code}</Badge>
             </Heading>
@@ -70,6 +79,11 @@ function CountryInfo({ country }) {
         </Box>
       </GridItem>
       <GridItem colSpan={3} p="15px">
+        {/* <SimpleGrid>
+          <Heading as="h2" p="15px 0 15px 0" fontSize="1.4em">
+            Geography
+          </Heading>
+        </SimpleGrid> */}
         <SimpleGrid
           columns={{
             base: "1",
@@ -101,7 +115,7 @@ function CountryInfo({ country }) {
             value={`+${country.callingCodes}`}
           />
           <CountryInfoItem title="GINI" value={`${country.gini}%`} />
-          <Box>
+          <Box border="1px" p="15px" rounded="2px" borderColor={borderColor}>
             <Text color="gray.500" fontSize="xs">
               CURRENCIES
             </Text>

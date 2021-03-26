@@ -1,8 +1,13 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useColorModeValue as mode } from "@chakra-ui/react";
 
-function CountryInfoItem({ title, value, ...rest }) {
+function CountryInfoItem({ title, value }) {
   return (
-    <Box {...rest}>
+    <Box
+      border="1px"
+      p="15px"
+      rounded="2px"
+      borderColor={mode("gray.100", "whiteAlpha.50")}
+    >
       <Text color="gray.500" fontSize="xs">
         {title}
       </Text>

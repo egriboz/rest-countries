@@ -1,5 +1,6 @@
 module.exports = {
-  title: "Country Information",
+  title: "Country",
+  subtitle: "Info",
   description: "Get information about countries",
   siteUrl: "https://egriboz.com",
   googleAnalytic: "X-XXXXXXXXXX",

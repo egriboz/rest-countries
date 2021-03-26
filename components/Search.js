@@ -3,13 +3,7 @@ import { Flex, Box } from "@chakra-ui/layout";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 function Search(props) {
   return (
-    <Flex
-      mt={{
-        base: "50px",
-        sm: "70px",
-      }}
-      mb="30px"
-    >
+    <Flex mb="30px">
       <Box flex="1" position="relative">
         <Box
           w="20px"
