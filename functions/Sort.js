@@ -1,4 +1,5 @@
 import { ArrowDownIcon, ArrowUpIcon, UpDownIcon } from "@chakra-ui/icons";
+import { render } from "react-dom";
 
 export const orderBy = (countries, value, direction) => {
   if (direction === "asc" && value !== "name") {
@@ -24,7 +25,9 @@ export const orderBy = (countries, value, direction) => {
   return countries;
 };
 export const SortArrow = ({ direction }) => {
-  if (!direction) {
+  console.log(direction, "direction - Sort.js");
+
+  if (direction == null) {
     return <UpDownIcon />;
   }
 

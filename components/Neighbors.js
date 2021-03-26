@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import NextImage from "next/image";
 import NextLink from "next/link";
@@ -11,7 +11,7 @@ import { orderBy, SortArrow } from "../functions/Sort";
 
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import { useMediaQuery } from "@chakra-ui/media-query";
-import { AddIcon } from "@chakra-ui/icons";
+import { UpDownIcon } from "@chakra-ui/icons";
 
 function NeighborCountries(props) {
   const countries = props.countries;
@@ -21,7 +21,7 @@ function NeighborCountries(props) {
   const bg = mode("white", "gray.700");
 
   const [value, setValue] = useState();
-  const [direction, setDirection] = useState();
+  const [direction, setDirection] = useState(null);
 
   const countriesOrdered = orderBy(countries, value, direction);
 
@@ -38,7 +38,7 @@ function NeighborCountries(props) {
     switchDirection();
     setValue(value);
   };
-
+  console.log(direction, "direction - Neightbor.js");
   return (
     <>
       <style jsx global>{`
@@ -57,10 +57,23 @@ function NeighborCountries(props) {
       `}</style>
 
       <Flex justifyContent="flex-end" mb="15px">
-        <Button
+        {/* <Button
           size="xs"
           onClick={() => setValueAndDirection("name")}
           rightIcon={value === "name" && <SortArrow direction={direction} />}
+        >
+          Name
+        </Button> */}
+        <Button
+          size="xs"
+          onClick={() => setValueAndDirection("name")}
+          rightIcon={
+            value === "name" ? (
+              <SortArrow direction={direction} />
+            ) : (
+              <UpDownIcon />
+            )
+          }
         >
           Name
         </Button>
@@ -70,10 +83,14 @@ function NeighborCountries(props) {
           size="xs"
           onClick={() => setValueAndDirection("population")}
           rightIcon={
-            value === "population" && <SortArrow direction={direction} />
+            value === "population" ? (
+              <SortArrow direction={direction} />
+            ) : (
+              <UpDownIcon />
+            )
           }
         >
-          Population{" "}
+          Population
         </Button>
       </Flex>
       {/* <Box>value: {value}</Box>
