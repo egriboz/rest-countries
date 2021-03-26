@@ -38,7 +38,7 @@ function NeighborCountries(props) {
     switchDirection();
     setValue(value);
   };
-  console.log(direction, "direction - Neightbor.js");
+
   return (
     <>
       <style jsx global>{`
