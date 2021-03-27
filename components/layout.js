@@ -89,7 +89,49 @@ function Layout({ children }) {
         bg={mode("gray.200", "gray.900")}
       >
         <Container maxW="container.lg">
-          <Center>footer</Center>
+          <Center>
+            <Box>
+              <ul>
+                <li>
+                  <a href="/?region=asia">asia</a>
+                </li>
+                <li>
+                  <a href="/?region=oceania">oceania</a>
+                </li>
+                <li>
+                  <a href="/?region=africa">africa</a>
+                </li>
+                <li>
+                  <a href="/?region=polar">polar</a>
+                </li>
+              </ul>
+            </Box>
+            <Box>
+              NextLink
+              <ul>
+                <li>
+                  <NextLink href="/?region=asia">
+                    <a>asia</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=oceania">
+                    <a>oceania</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=africa">
+                    <a>africa</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=polar">
+                    <a>polar</a>
+                  </NextLink>
+                </li>
+              </ul>
+            </Box>
+          </Center>
         </Container>
       </Container>
     </>
