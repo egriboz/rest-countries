@@ -12,7 +12,7 @@ import CountryInfo from "../../components/CountryInfo";
 import City from "../../components/City";
 
 import lowerCaseText from "../../functions/lowerCaseText";
-import { Container, Heading, Box } from "@chakra-ui/react";
+import { Container, Heading, Box, AlertIcon, Alert } from "@chakra-ui/react";
 
 const getCountry = async (id) => {
   // const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
@@ -77,9 +77,16 @@ function CountryDetail({ country }) {
       </Container>
       <Container pt="30px" maxW="container.lg">
         <Box>
-          <Heading as="h4" size="sm" mb="30px">
-            Neighbour Countries of {country.name} ({borders.length})
-          </Heading>
+          {borders.length > 0 ? (
+            <Heading as="h4" size="sm" mb="30px">
+              Neighbour Countries of {country.name} ({borders.length})
+            </Heading>
+          ) : (
+            <Alert status="info">
+              <AlertIcon />
+              Neighbour countries is not available
+            </Alert>
+          )}
         </Box>
         <Neighbors countries={borders} test={borders.length} />
         {/* {borders &&

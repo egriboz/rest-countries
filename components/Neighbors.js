@@ -55,44 +55,45 @@ function NeighborCountries(props) {
           opacity: 0;
         }
       `}</style>
-
-      <Flex justifyContent="flex-end" mb="15px">
-        {/* <Button
+      {/* <Button
           size="xs"
           onClick={() => setValueAndDirection("name")}
           rightIcon={value === "name" && <SortArrow direction={direction} />}
         >
           Name
         </Button> */}
-        <Button
-          size="xs"
-          onClick={() => setValueAndDirection("name")}
-          rightIcon={
-            value === "name" ? (
-              <SortArrow direction={direction} />
-            ) : (
-              <UpDownIcon />
-            )
-          }
-        >
-          Name
-        </Button>
+      {countriesOrdered.length > 0 && (
+        <Flex justifyContent="flex-end" mb="15px">
+          <Button
+            size="xs"
+            onClick={() => setValueAndDirection("name")}
+            rightIcon={
+              value === "name" ? (
+                <SortArrow direction={direction} />
+              ) : (
+                <UpDownIcon />
+              )
+            }
+          >
+            Name
+          </Button>
 
-        <Button
-          ml="10px"
-          size="xs"
-          onClick={() => setValueAndDirection("population")}
-          rightIcon={
-            value === "population" ? (
-              <SortArrow direction={direction} />
-            ) : (
-              <UpDownIcon />
-            )
-          }
-        >
-          Population
-        </Button>
-      </Flex>
+          <Button
+            ml="10px"
+            size="xs"
+            onClick={() => setValueAndDirection("population")}
+            rightIcon={
+              value === "population" ? (
+                <SortArrow direction={direction} />
+              ) : (
+                <UpDownIcon />
+              )
+            }
+          >
+            Population
+          </Button>
+        </Flex>
+      )}
       {/* <Box>value: {value}</Box>
       <Box>direction: {direction}</Box> */}
 

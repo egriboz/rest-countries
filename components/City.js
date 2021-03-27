@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NextImage from "next/image";
-import { Avatar } from "@chakra-ui/react";
+import { Alert, AlertIcon, Avatar } from "@chakra-ui/react";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 import {
   Grid,
@@ -61,7 +61,12 @@ function City({ countryCode, countryName }) {
   }, [country2code]);
 
   if (httpStatusCode === 8) {
-    return <p>city information is not available</p>;
+    return (
+      <Alert status="info">
+        <AlertIcon />
+        City information is not available
+      </Alert>
+    );
   } else {
     return (
       <>
