@@ -57,7 +57,7 @@ function Home({ countries }) {
       <Head>
         <title>{SiteConfig.title}</title>
       </Head>
-      <Container
+      {/* <Container
         maxW="100%"
         bg={mode("gray.200", "gray.900")}
         p="80px 0 100px 0"
@@ -69,11 +69,16 @@ function Home({ countries }) {
         // filter="blur(40px)"
         // _before={{ with: "200px", backgroundImage: "lg" }}
       >
-        <Container maxW="container.lg">
-          <Center fontSize="1.8em" color={mode("gray.900", "gray.50")}>
-            {SiteConfig.description}
-          </Center>
-        </Container>
+        
+      </Container> */}
+      <Container maxW="container.lg">
+        <Center
+          p="80px 0 100px 0"
+          fontSize="1.8em"
+          color={mode("gray.900", "gray.50")}
+        >
+          {SiteConfig.description}
+        </Center>
       </Container>
       <Container
         maxW="container.lg"
