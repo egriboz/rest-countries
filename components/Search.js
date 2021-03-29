@@ -29,7 +29,7 @@ function Search(props) {
           pt="30px"
           pb="30px"
           fontSize={{
-            base: "initial",
+            base: ".8em",
             sm: "md",
           }}
           fontWeight="medium"

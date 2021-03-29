@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import NextImage from "next/image";
 import NextLink from "next/link";
-import { Flex, Box, Grid, Text, Button } from "@chakra-ui/react";
+import { Flex, Box, Grid, Text, Button, GridItem } from "@chakra-ui/react";
 
 import numberFormat from "../functions/numberFormat";
 import lowerCaseText from "../functions/lowerCaseText";
@@ -108,10 +108,14 @@ function NeighborCountries(props) {
             <Grid
               templateColumns={{
                 base: "35px 1fr",
-                md: "min-content 2fr 1fr 1fr 1fr",
+                md: "min-content 1fr 1fr 1fr 1fr",
               }}
               gap={5}
               bg={bg}
+              minH={{
+                base: "136px",
+                md: "auto",
+              }}
               shadow="base"
               rounded="sm"
               p="10"
@@ -124,14 +128,12 @@ function NeighborCountries(props) {
                 shadow: "lg",
               }}
             >
-              <Box
+              <GridItem
                 display="flex"
                 alignSelf="center"
                 w="45px"
                 h="30px"
                 borderRadius="2px"
-                display="flex"
-                alignItems="center"
                 shadow="xs"
               >
                 <NextImage
@@ -142,8 +144,12 @@ function NeighborCountries(props) {
                   alt={country.name}
                   src={country.flag}
                 />
-              </Box>
-              <Box display="flex" alignItems="center" fontWeight="semibold">
+              </GridItem>
+              <GridItem
+                display="flex"
+                alignItems="center"
+                fontWeight="semibold"
+              >
                 <NextLink
                   href="/country/[id]"
                   as={`/country/${lowerCaseText(country.alpha3Code)}`}
@@ -152,29 +158,30 @@ function NeighborCountries(props) {
                     {country.name}
                   </a>
                 </NextLink>
-              </Box>
-              {!isLargerThanMD && (
-                <>
-                  <Box>
-                    <Text color="gray.500" fontSize="xs">
-                      REGION
-                    </Text>
-                    {country.region}
-                  </Box>
-                  <Box>
-                    <Text color="gray.500" fontSize="xs">
-                      POPULATION
-                    </Text>
-                    {numberFormat(country.population)}
-                  </Box>
-                  <Box>
-                    <Text color="gray.500" fontSize="xs">
-                      AREA km<sup>2</sup>
-                    </Text>
-                    {numberFormat(country.area)}
-                  </Box>
-                </>
-              )}
+              </GridItem>
+              {/* {!isLargerThanMD && (
+                <> */}
+              <GridItem>
+                <Text color="gray.500" fontSize="xs">
+                  REGION
+                </Text>
+                {country.region}
+              </GridItem>
+
+              <GridItem>
+                <Text color="gray.500" fontSize="xs">
+                  POPULATION
+                </Text>
+                {numberFormat(country.population)}
+              </GridItem>
+              <GridItem>
+                <Text color="gray.500" fontSize="xs">
+                  AREA km<sup>2</sup>
+                </Text>
+                {numberFormat(country.area)}
+              </GridItem>
+              {/* </>
+              )} */}
             </Grid>
           </Box>
         ))}

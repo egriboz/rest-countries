@@ -92,6 +92,7 @@ function City({ countryCode, countryName }) {
                   shadow="base"
                   rounded="sm"
                   borderRadius="4px"
+                  minH="102px"
                 >
                   <Box w="60px" h="60px" rounded="full" overflow="hidden">
                     <NextImage
