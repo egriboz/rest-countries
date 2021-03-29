@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Layout from "../components/layout";
@@ -8,7 +8,7 @@ import fetch from "isomorphic-unfetch";
 
 import Search from "../components/Search";
 import SearchFilterButtons from "../components/SearchFilterButtons";
-import { Container, Center } from "@chakra-ui/react";
+import { Container, Center, Box, Button } from "@chakra-ui/react";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 function Home({ countries }) {
   const router = useRouter();
@@ -17,11 +17,23 @@ function Home({ countries }) {
   const [keyword, setKeyword] = useState("");
   const [click, setClick] = useState(false);
 
-  setTimeout(function () {
-    if (query !== undefined && query.region !== undefined && !click) {
+  useEffect(() => {
+    // setTimeout(function () {
+    //   // query !== undefined && query.region !== undefined && !click
+    //   if (query !== undefined && query.region !== undefined) {
+    //     setKeyword(query.region);
+    //     router.push({
+    //       query: { region: query.region },
+    //     });
+    //   }
+    // }, 0);
+    if (query !== undefined && query.region !== undefined) {
       setKeyword(query.region);
+      router.push({
+        query: { region: query.region },
+      });
     }
-  }, 0);
+  }, [query.region]);
 
   // console.log(click, "click");
   const includesCountries = countries.filter(
@@ -39,18 +51,22 @@ function Home({ countries }) {
 
   function getRegion(e) {
     e.preventDefault();
-    let dataRegion = e.target.getAttribute("data-region");
-    // console.log(dataRegion);
-    setClick(true);
+    const dataRegion = e.target.getAttribute("data-region");
+    //setClick(true);
     router.push({
       query: { region: dataRegion },
     });
-
     setKeyword(dataRegion);
-
     // router.replace(dataRegion);
     // console.log("query: ", query.region);
   }
+
+  // setTimeout(function () {
+  //   if (query !== undefined && query.region !== undefined && !click) {
+  //     setKeyword(query.region);
+  //     console.log(query.region);
+  //   }
+  // }, 0);
 
   return (
     <Layout>
@@ -109,6 +125,7 @@ function Home({ countries }) {
         <Neighbors
           countries={includesCountries}
           test={includesCountries.length}
+          keyword={keyword}
         />
         <Center as="small" mt="30px" color="gray.500">
           Found {includesCountries.length} countries
@@ -127,4 +144,5 @@ export const getStaticProps = async () => {
     },
   };
 };
+
 export default Home;

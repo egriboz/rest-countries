@@ -38,7 +38,9 @@ function NeighborCountries(props) {
     switchDirection();
     setValue(value);
   };
-
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <>
       <style jsx global>{`
@@ -64,6 +66,9 @@ function NeighborCountries(props) {
         </Button> */}
       {countriesOrdered.length > 0 && (
         <Flex justifyContent="flex-end" mb="15px">
+          <Box flex="1" pl="5px" fontWeight="bold">
+            {capitalizeFirstLetter(props.keyword)}
+          </Box>
           <Button
             size="xs"
             onClick={() => setValueAndDirection("name")}

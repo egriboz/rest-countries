@@ -88,7 +88,7 @@ function CountryDetail({ country }) {
             </Alert>
           )}
         </Box>
-        <Neighbors countries={borders} test={borders.length} />
+        <Neighbors countries={borders} test={borders.length} keyword="" />
         {/* {borders &&
           borders.map((country) => (
             <NeighborsCountries key={country.alpha3Code} data={country} />

@@ -89,8 +89,9 @@ function Layout({ children }) {
         bg={mode("gray.200", "gray.900")}
       >
         <Container maxW="container.lg">
-          <Center>
-            <Box>
+          <Flex>
+            <Box flex="1">
+              Normal Link
               <ul>
                 <li>
                   <a href="/?region=asia">asia</a>
@@ -111,27 +112,37 @@ function Layout({ children }) {
               <ul>
                 <li>
                   <NextLink href="/?region=asia">
-                    <a>asia</a>
-                  </NextLink>
-                </li>
-                <li>
-                  <NextLink href="/?region=oceania">
-                    <a>oceania</a>
+                    <a>Asia</a>
                   </NextLink>
                 </li>
                 <li>
                   <NextLink href="/?region=africa">
-                    <a>africa</a>
+                    <a>Africa</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=americas">
+                    <a>Americas</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=europe">
+                    <a>Europe</a>
+                  </NextLink>
+                </li>
+                <li>
+                  <NextLink href="/?region=oceania">
+                    <a>Oceania</a>
                   </NextLink>
                 </li>
                 <li>
                   <NextLink href="/?region=polar">
-                    <a>polar</a>
+                    <a>Polar</a>
                   </NextLink>
                 </li>
               </ul>
             </Box>
-          </Center>
+          </Flex>
         </Container>
       </Container>
     </>
