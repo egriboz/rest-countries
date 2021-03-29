@@ -45,7 +45,7 @@ function NeighborCountries(props) {
     <>
       <style jsx global>{`
         a.overlayLink {
-          margin: 4px;
+          margin: 4px 0;
         }
         a.overlayLink::after {
           content: "";
@@ -106,8 +106,12 @@ function NeighborCountries(props) {
         countriesOrdered.map((country) => (
           <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
             <Grid
+              templateRows={{
+                base: "repeat(2, 1fr)",
+                md: "repeat(1, 1fr)",
+              }}
               templateColumns={{
-                base: "35px 1fr",
+                base: "min-content 1fr 1fr 1fr 1fr",
                 md: "min-content 1fr 1fr 1fr 1fr",
               }}
               gap={5}
@@ -129,8 +133,13 @@ function NeighborCountries(props) {
               }}
             >
               <GridItem
-                display="flex"
-                alignSelf="center"
+                rowSpan={{
+                  base: "4",
+                  md: "1",
+                }}
+                colSpan={1}
+                // display="flex"
+                // alignSelf="center"
                 w="45px"
                 h="30px"
                 borderRadius="2px"
@@ -146,8 +155,13 @@ function NeighborCountries(props) {
                 />
               </GridItem>
               <GridItem
-                display="flex"
-                alignItems="center"
+                rowSpan={1}
+                colSpan={{
+                  base: "4",
+                  md: "1",
+                }}
+                // display="flex"
+                // alignItems="center"
                 fontWeight="semibold"
               >
                 <NextLink
@@ -161,20 +175,39 @@ function NeighborCountries(props) {
               </GridItem>
               {/* {!isLargerThanMD && (
                 <> */}
-              <GridItem>
+              <GridItem
+                colSpan={{
+                  base: "5",
+                  md: "1",
+                }}
+                gridColumnStart={{
+                  base: "2",
+                  md: "auto",
+                }}
+              >
                 <Text color="gray.500" fontSize="xs">
                   REGION
                 </Text>
                 {country.region}
               </GridItem>
 
-              <GridItem>
+              <GridItem
+                colSpan={{
+                  base: "5",
+                  md: "1",
+                }}
+              >
                 <Text color="gray.500" fontSize="xs">
                   POPULATION
                 </Text>
                 {numberFormat(country.population)}
               </GridItem>
-              <GridItem>
+              <GridItem
+                colSpan={{
+                  base: "5",
+                  md: "1",
+                }}
+              >
                 <Text color="gray.500" fontSize="xs">
                   AREA km<sup>2</sup>
                 </Text>

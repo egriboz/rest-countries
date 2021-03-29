@@ -10,23 +10,15 @@ import Search from "../components/Search";
 import SearchFilterButtons from "../components/SearchFilterButtons";
 import { Container, Center, Box, Button } from "@chakra-ui/react";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
+
 function Home({ countries }) {
   const router = useRouter();
   const query = router.query;
 
   const [keyword, setKeyword] = useState("");
-  const [click, setClick] = useState(false);
+  // const [click, setClick] = useState(false);
 
   useEffect(() => {
-    // setTimeout(function () {
-    //   // query !== undefined && query.region !== undefined && !click
-    //   if (query !== undefined && query.region !== undefined) {
-    //     setKeyword(query.region);
-    //     router.push({
-    //       query: { region: query.region },
-    //     });
-    //   }
-    // }, 0);
     if (query !== undefined && query.region !== undefined) {
       setKeyword(query.region);
       router.push({
