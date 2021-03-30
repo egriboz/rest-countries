@@ -1,7 +1,5 @@
 const numberFormat = (amount) => {
-  return new Intl.NumberFormat("en-GB", {
-    maximumSignificantDigits: 3,
-  }).format(amount);
+  return new Intl.NumberFormat("en-GB").format(amount);
 };
 
-export default numberFormat
+export default numberFormat;
