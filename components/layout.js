@@ -16,6 +16,7 @@ import {
   Flex,
   Container,
   Spacer,
+  HStack,
   VStack,
   Grid,
 } from "@chakra-ui/react";
@@ -38,7 +39,7 @@ function Layout({ children }) {
         borderColor={mode("gray.200", "gray.700")}
       >
         <Flex pt="10px" pb="10px">
-          <Flex alignItems="center">
+          <Flex alignItems="center" color={mode("purple.800", "white")}>
             <Box>
               <NextLink href="/">
                 <a>
@@ -63,10 +64,10 @@ function Layout({ children }) {
               </NextLink>
             </Box>
             <Box pl="10px">
-              <Heading fontSize="1em" fontWeight="bold" lineHeight="normal">
+              <Heading fontSize="1em" fontWeight="black" lineHeight="normal">
                 <NextLink href="/">{SiteConfig.title}</NextLink>
               </Heading>
-              <Text fontSize="1em" fontWeight="bold" lineHeight="normal">
+              <Text fontSize="1em" fontWeight="black" lineHeight="normal">
                 <NextLink href="/">{SiteConfig.subtitle}</NextLink>
               </Text>
             </Box>
@@ -98,9 +99,21 @@ function Layout({ children }) {
             }}
           >
             <Box>
-              <Text fontWeight="bold">
-                {SiteConfig.title} {SiteConfig.subtitle}
-              </Text>
+              <HStack
+                spacing={2}
+                fontSize=".9em"
+                lineHeight="normal"
+                align="left"
+                color={mode("purple.800", "white")}
+              >
+                <Box>
+                  <Icon glyph="compass" size={34} />
+                </Box>
+                <Box>
+                  <Text fontWeight="bold">{SiteConfig.title}</Text>
+                  <Text fontWeight="bold">{SiteConfig.subtitle}</Text>
+                </Box>
+              </HStack>
             </Box>
 
             <Box>
