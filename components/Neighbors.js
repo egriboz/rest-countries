@@ -10,13 +10,12 @@ import lowerCaseText from "../functions/lowerCaseText";
 import { orderBy, SortArrow } from "../functions/Sort";
 
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
-import { useMediaQuery } from "@chakra-ui/media-query";
+import useWindowSize from "../hooks/useWindowSize";
 import { UpDownIcon } from "@chakra-ui/icons";
 
 function NeighborCountries(props) {
   const countries = props.countries;
-
-  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
+  const { width } = useWindowSize();
   const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
 
@@ -105,119 +104,89 @@ function NeighborCountries(props) {
 
       {countriesOrdered &&
         countriesOrdered.map((country) => (
-          <Box pos="relative" as="div" maxW="100%" key={country.alpha3Code}>
-            <Grid
-              templateRows={{
-                base: "repeat(2, 1fr)",
-                md: "repeat(1, 1fr)",
-              }}
-              templateColumns={{
-                base: "min-content 1fr 1fr 1fr 1fr",
-                md: "min-content 1fr 1fr 1fr 1fr",
-              }}
-              gap={5}
-              bg={bg}
-              minH={{
-                base: "136px",
-                md: "auto",
-              }}
-              shadow="base"
-              rounded="sm"
-              p="10"
-              mb="15px"
-              style={{ transition: "all .3s" }}
-              // hover mode hooks hatası veriyor!
-              _hover={{
-                bg: bgHover,
-                //transform: "scale(1.008)",
-                shadow: "lg",
-              }}
+          // <Box as="section" pos="relative" maxW="100%" key={country.alpha3Code}>
+          <Grid
+            pos="relative"
+            maxW="100%"
+            key={country.alpha3Code}
+            templateColumns={{
+              base: "min-content 1fr",
+              md: "min-content 1fr 1fr 1fr 1fr",
+            }}
+            alignContent="center"
+            gap={5}
+            bg={bg}
+            minH={{
+              base: "106px",
+              md: "126px",
+            }}
+            padding={{
+              base: "0 25px",
+              md: "30px",
+            }}
+            shadow="base"
+            rounded="sm"
+            mb="15px"
+            style={{ transition: "all .3s" }}
+            // hover mode hooks hatası veriyor!
+            _hover={{
+              bg: bgHover,
+              //transform: "scale(1.008)",
+              shadow: "lg",
+            }}
+          >
+            <Box
+              display="flex"
+              alignSelf="center"
+              w="45px"
+              h="30px"
+              borderRadius="2px"
+              shadow="xs"
             >
-              <GridItem
-                rowSpan={{
-                  base: "4",
-                  md: "1",
-                }}
-                colSpan={1}
-                // display="flex"
-                // alignSelf="center"
-                w="45px"
-                h="30px"
-                borderRadius="2px"
-                shadow="xs"
+              <NextImage
+                className="avatar"
+                width={45}
+                height={30}
+                objectFit="cover"
+                alt={country.name}
+                src={country.flag}
+              />
+            </Box>
+            <Box display="flex" alignSelf="center" fontWeight="semibold">
+              <NextLink
+                href="/country/[id]"
+                as={`/country/${lowerCaseText(country.alpha3Code)}`}
               >
-                <NextImage
-                  className="avatar"
-                  width={45}
-                  height={30}
-                  objectFit="cover"
-                  alt={country.name}
-                  src={country.flag}
-                />
-              </GridItem>
-              <GridItem
-                rowSpan={1}
-                colSpan={{
-                  base: "4",
-                  md: "1",
-                }}
-                // display="flex"
-                // alignItems="center"
-                fontWeight="semibold"
-              >
-                <NextLink
-                  href="/country/[id]"
-                  as={`/country/${lowerCaseText(country.alpha3Code)}`}
-                >
-                  <a className="overlayLink" fontWeight="bold">
-                    {country.name}
-                  </a>
-                </NextLink>
-              </GridItem>
-              {/* {!isLargerThanMD && (
-                <> */}
-              <GridItem
-                colSpan={{
-                  base: "5",
-                  md: "1",
-                }}
-                gridColumnStart={{
-                  base: "2",
-                  md: "auto",
-                }}
-              >
-                <Text color="gray.500" fontSize="xs">
-                  REGION
-                </Text>
-                {country.region}
-              </GridItem>
+                <a className="overlayLink" fontWeight="bold">
+                  {country.name}
+                </a>
+              </NextLink>
+            </Box>
+            {width > 768 && (
+              <>
+                <Box>
+                  <Text color="gray.500" fontSize="xs">
+                    REGION
+                  </Text>
+                  {country.region}
+                </Box>
 
-              <GridItem
-                colSpan={{
-                  base: "5",
-                  md: "1",
-                }}
-              >
-                <Text color="gray.500" fontSize="xs">
-                  POPULATION
-                </Text>
-                {numberFormat(country.population)}
-              </GridItem>
-              <GridItem
-                colSpan={{
-                  base: "5",
-                  md: "1",
-                }}
-              >
-                <Text color="gray.500" fontSize="xs">
-                  AREA km<sup>2</sup>
-                </Text>
-                {numberFormat(country.area)}
-              </GridItem>
-              {/* </>
-              )} */}
-            </Grid>
-          </Box>
+                <Box>
+                  <Text color="gray.500" fontSize="xs">
+                    POPULATION
+                  </Text>
+                  {numberFormat(country.population)}
+                </Box>
+                <Box>
+                  <Text color="gray.500" fontSize="xs">
+                    AREA km<sup>2</sup>
+                  </Text>
+                  {numberFormat(country.area)}
+                </Box>
+              </>
+            )}
+          </Grid>
+          // </Box>
         ))}
     </>
   );

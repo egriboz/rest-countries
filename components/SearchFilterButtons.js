@@ -1,17 +1,18 @@
 import { Button, ButtonGroup } from "@chakra-ui/button";
 import { Flex, Text, Box, Spacer } from "@chakra-ui/layout";
-import { useMediaQuery } from "@chakra-ui/media-query";
 import { REGION } from "../constants";
+import useWindowSize from "../hooks/useWindowSize";
 
 function SearchFilterButtons(props) {
-  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
+  const { width } = useWindowSize();
   return (
     <Flex pl="20px" pr="20px" mb="30px">
-      {!isLargerThanMD && (
+      {width > 768 && (
         <>
           <Text color="gray.500" fontSize="sm">
             Filter by Region
           </Text>
+
           <ButtonGroup
             mb="30px"
             ml="20px"

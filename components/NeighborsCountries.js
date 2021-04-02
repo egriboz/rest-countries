@@ -5,11 +5,11 @@ import numberFormat from "../functions/numberFormat";
 import lowerCaseText from "../functions/lowerCaseText";
 
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
-import { useMediaQuery } from "@chakra-ui/media-query";
+import useWindowSize from "../hooks/useWindowSize";
 
 function NeighborsCountries(props) {
   const countryNameUrl = `/country/${lowerCaseText(props.data.alpha3Code)}`;
-  const [isLargerThanMD] = useMediaQuery("(max-width: 48em)");
+  const { width } = useWindowSize();
   const bgHover = mode("white", "#282e3c");
   const bg = mode("white", "gray.700");
   return (
@@ -59,7 +59,7 @@ function NeighborsCountries(props) {
             </a>
           </NextLink>
         </Box>
-        {!isLargerThanMD && (
+        {width > 768 && (
           <>
             <Box>
               <Text color="gray.500" fontSize="xs">
