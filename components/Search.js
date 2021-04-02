@@ -29,13 +29,13 @@ function Search(props) {
           pt="30px"
           pb="30px"
           fontSize={{
-            base: ".8em",
+            base: "16px",
             sm: "md",
           }}
           fontWeight="medium"
           rounded="full"
           paddingLeft="60px"
-          placeholder="Search by Country Name or Region"
+          placeholder="Search by Country Name or Region Name"
           bg={mode("white", "gray.700")}
           color="brand"
           onChange={props.onChange}

@@ -16,7 +16,8 @@ import {
   Flex,
   Container,
   Spacer,
-  Center,
+  VStack,
+  Grid,
 } from "@chakra-ui/react";
 
 function Layout({ children }) {
@@ -27,10 +28,7 @@ function Layout({ children }) {
     <>
       <Head>
         <title>{SiteConfig.title}</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
       <Container
@@ -59,7 +57,7 @@ function Layout({ children }) {
                       )}.svg`}
                     />
                   ) : (
-                    <Icon glyph="filter-fill" size={48} />
+                    <Icon glyph="compass" size={48} />
                   )}
                 </a>
               </NextLink>
@@ -86,66 +84,81 @@ function Layout({ children }) {
         maxW="100%"
         borderTopWidth="1px"
         mt="45px"
-        pt="130px"
-        pb="130px"
+        pt="70px"
+        pb="90px"
         borderColor={mode("gray.200", "gray.700")}
         bg={mode("gray.200", "gray.900")}
       >
         <Container maxW="container.lg">
-          <Flex>
-            <Box flex="1">
-              Normal Link
-              <ul>
-                <li>
-                  <a href="/?region=asia">asia</a>
-                </li>
-                <li>
-                  <a href="/?region=oceania">oceania</a>
-                </li>
-                <li>
-                  <a href="/?region=africa">africa</a>
-                </li>
-                <li>
-                  <a href="/?region=polar">polar</a>
-                </li>
-              </ul>
-            </Box>
+          <Grid
+            gap={10}
+            templateColumns={{
+              base: "repeat(1, 1fr)",
+              md: "3fr 1fr max-content",
+            }}
+          >
             <Box>
-              NextLink
-              <ul>
-                <li>
+              <Text fontWeight="bold">
+                {SiteConfig.title} {SiteConfig.subtitle}
+              </Text>
+            </Box>
+
+            <Box>
+              <Text fontWeight="bold" mb="15px">
+                Region
+              </Text>
+
+              <VStack spacing={2} align="left">
+                <Box>
                   <NextLink href="/?region=asia">
                     <a>Asia</a>
                   </NextLink>
-                </li>
-                <li>
+                </Box>
+                <Box>
                   <NextLink href="/?region=africa">
                     <a>Africa</a>
                   </NextLink>
-                </li>
-                <li>
+                </Box>
+                <Box>
                   <NextLink href="/?region=americas">
                     <a>Americas</a>
                   </NextLink>
-                </li>
-                <li>
+                </Box>
+                <Box>
                   <NextLink href="/?region=europe">
                     <a>Europe</a>
                   </NextLink>
-                </li>
-                <li>
+                </Box>
+                <Box>
                   <NextLink href="/?region=oceania">
                     <a>Oceania</a>
                   </NextLink>
-                </li>
-                <li>
+                </Box>
+                <Box>
                   <NextLink href="/?region=polar">
                     <a>Polar</a>
                   </NextLink>
-                </li>
-              </ul>
+                </Box>
+              </VStack>
             </Box>
-          </Flex>
+            {/* <Box>
+              <Text fontWeight="bold">Some Country</Text>
+
+              <VStack spacing={2} align="left">
+                <Box>
+                  <NextLink href="/country/tur">
+                    <a>Turkey</a>
+                  </NextLink>
+                </Box>
+              </VStack>
+            </Box> */}
+            <Box>
+              <Text fontWeight="bold" mb="15px">
+                About
+              </Text>
+              <Text>{SiteConfig.description}</Text>
+            </Box>
+          </Grid>
         </Container>
       </Container>
     </>
