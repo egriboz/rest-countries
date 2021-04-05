@@ -4,6 +4,10 @@ module.exports = {
   future: {
     webpack5: true,
   },
+  webpack: function (config, options) {
+    config.experiments = {};
+    return config;
+  },
   images: {
     domains: ["restcountries.eu", "api-images-www.triposo.com"],
   },
