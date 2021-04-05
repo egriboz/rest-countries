@@ -1,7 +1,7 @@
 {
-  "name": "rest-api",
+  "name": "country-info",
   "version": "1.0.0",
-  "description": "---",
+  "description": "Get information about countries",
   "main": "index.js",
   "scripts": {
     "dev": "next",
