@@ -113,7 +113,13 @@ function Home({ countries }) {
           length={includesCountries.length}
         />
       </Container>
-      <Container maxW="container.lg">
+      <Container
+        maxW="container.lg"
+        pt={{
+          base: "30px",
+          sm: "100px",
+        }}
+      >
         <Neighbors
           countries={includesCountries}
           test={includesCountries.length}
