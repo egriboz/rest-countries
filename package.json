@@ -1,11 +1,12 @@
 {
   "name": "country-info",
-  "version": "1.0.0",
+  "version": "v1.22.10",
   "description": "Get information about countries",
   "main": "index.js",
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "build-html": "next build && next export",
     "start": "next start"
   },
   "author": "",
