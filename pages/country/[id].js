@@ -16,7 +16,7 @@ import { Container, Heading, Box, AlertIcon, Alert } from "@chakra-ui/react";
 
 const getCountry = async (id) => {
   // const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
-  const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const data = await fetch(`https://restcountries.com/v2/alpha/${id}`);
 
   const country = await data.json();
   return country;
@@ -24,7 +24,7 @@ const getCountry = async (id) => {
 // get detail
 function CountryDetail({ country }) {
   const [borders, setBorders] = useState([]);
-  const currentFlag = country.flag;
+  const currentFlag = country.flags.[0];
   useEffect(() => {
     const getBorders = async () => {
       const borders = await Promise.all(
@@ -99,7 +99,7 @@ function CountryDetail({ country }) {
 }
 
 export async function getStaticPaths() {
-  const data = await fetch("https://restcountries.eu/rest/v2/all/");
+  const data = await fetch("https://restcountries.com/v2/all/");
   const countries = await data.json();
 
   const paths = countries.map((country) => {

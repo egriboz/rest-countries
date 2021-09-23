@@ -1,6 +1,6 @@
 import { Button, ButtonGroup } from "@chakra-ui/button";
 import { Flex, Text, Box, Spacer } from "@chakra-ui/layout";
-import { REGION } from "../constants";
+import { CONTINENT } from "../constants";
 import useWindowSize from "../hooks/useWindowSize";
 
 function SearchFilterButtons(props) {
@@ -10,7 +10,7 @@ function SearchFilterButtons(props) {
       {width > 768 && (
         <>
           <Text color="gray.500" fontSize="sm">
-            Filter by Region
+            Filter by continent
           </Text>
 
           <ButtonGroup
@@ -20,11 +20,11 @@ function SearchFilterButtons(props) {
             variant="solid"
             spacing="2"
           >
-            {REGION.map((item) => {
+            {CONTINENT.map((item) => {
               return (
                 <Button
-                  key={item.region}
-                  data-region={item.region}
+                  key={item.continent}
+                  data-continent={item.continent}
                   onClick={props.onClick}
                   colorScheme={item.colorscheme}
                 >

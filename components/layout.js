@@ -53,10 +53,11 @@ function Layout({ children }) {
                       borderWidth="1px"
                       borderColor={mode("gray.300", "gray.700")}
                       name={ID}
-                      src={`https://restcountries.eu/data/${lowerCaseText(
+                      src={`https://restcountries.com/data/${lowerCaseText(
                         ID
                       )}.svg`}
                     />
+                    
                   ) : (
                     <Icon glyph="compass" size={48} />
                   )}
@@ -118,37 +119,37 @@ function Layout({ children }) {
 
             <Box>
               <Text fontWeight="bold" mb="15px">
-                Region
+                Continent
               </Text>
 
               <VStack spacing={2} align="left">
                 <Box>
-                  <NextLink href="/?region=asia">
+                  <NextLink href="/?continent=asia">
                     <a>Asia</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?region=africa">
+                  <NextLink href="/?continent=africa">
                     <a>Africa</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?region=americas">
+                  <NextLink href="/?continent=americas">
                     <a>Americas</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?region=europe">
+                  <NextLink href="/?continent=europe">
                     <a>Europe</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?region=oceania">
+                  <NextLink href="/?continent=oceania">
                     <a>Oceania</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?region=polar">
+                  <NextLink href="/?continent=polar">
                     <a>Polar</a>
                   </NextLink>
                 </Box>

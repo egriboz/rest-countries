@@ -49,7 +49,7 @@ function NeighborsCountries(props) {
             height={30}
             objectFit="cover"
             alt={props.data.name}
-            src={props.data.flag}
+            src={props.data.flags.[0]}
           />
         </Box>
         <Box display="flex" alignItems="center" fontWeight="semibold">
@@ -63,9 +63,9 @@ function NeighborsCountries(props) {
           <>
             <Box>
               <Text color="gray.500" fontSize="xs">
-                REGION
+                Continent
               </Text>
-              {props.data.region}
+              {props.data.continent}
             </Box>
             <Box>
               <Text color="gray.500" fontSize="xs">

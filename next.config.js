@@ -5,7 +5,7 @@ module.exports = {
     webpack5: true,
   },
   images: {
-    domains: ["restcountries.eu", "api-images-www.triposo.com"],
+    domains: ["restcountries.com", "api-images-www.triposo.com"],
   },
 
   sassOptions: {

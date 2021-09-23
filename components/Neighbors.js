@@ -149,7 +149,7 @@ function NeighborCountries(props) {
                 height={30}
                 objectFit="cover"
                 alt={country.name}
-                src={country.flag}
+                src={country.flags.[0]}
               />
             </Box>
             <Box display="flex" alignSelf="center" fontWeight="semibold">
@@ -166,9 +166,9 @@ function NeighborCountries(props) {
               <>
                 <Box>
                   <Text color="gray.500" fontSize="xs">
-                    REGION
+                    CONTINENT
                   </Text>
-                  {country.region}
+                  {country.continent}
                 </Box>
 
                 <Box>

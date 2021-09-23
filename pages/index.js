@@ -19,44 +19,58 @@ function Home({ countries }) {
   // const [click, setClick] = useState(false);
 
   useEffect(() => {
-    if (query !== undefined && query.region !== undefined) {
-      setKeyword(query.region);
+    if (query !== undefined && query.continent !== undefined) {
+      setKeyword(query.continent);
       router.push({
-        query: { region: query.region },
+        query: { continent: query.continent },
       });
     }
-  }, [query.region]);
+  }, [query.continent]);
 
   // console.log(click, "click");
-  const includesCountries = countries.filter(
-    (country) =>
+  
+  {/* 
+    const includesCountries = countries.filter( function (country) {
+      return country.name.toLowerCase().includes(keyword)
+    });
+
+    const includesCountries = countries.filter( (country) =>
       country.name.toLowerCase().includes(keyword) ||
-      country.region.toLowerCase().includes(keyword) ||
-      country.subregion.toLowerCase().includes(keyword) ||
       country.nativeName.toLowerCase().includes(keyword)
   );
+
+  */}
+  
+  const includesCountries = countries.filter(function (country) {
+    if (country.continent) {
+      return country.continent.toLowerCase().includes(keyword) || country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
+    } else {
+      return country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
+    }
+  });
 
   const onInputChange = (e) => {
     e.preventDefault();
     setKeyword(e.target.value.toLowerCase());
   };
 
-  function getRegion(e) {
+  function getContinent(e) {
     e.preventDefault();
-    const dataRegion = e.target.getAttribute("data-region");
+    const dataContinent = e.target.getAttribute("data-continent").toLowerCase();
     //setClick(true);
     router.push({
-      query: { region: dataRegion },
+      query: { continent: dataContinent },
     });
-    setKeyword(dataRegion);
-    // router.replace(dataRegion);
-    // console.log("query: ", query.region);
+    
+    setKeyword(dataContinent);
+    // router.replace(dataContinent);
+    // console.log("query: ", query.continent);
   }
 
   // setTimeout(function () {
-  //   if (query !== undefined && query.region !== undefined && !click) {
-  //     setKeyword(query.region);
-  //     console.log(query.region);
+  //   if (query !== undefined && query.continent !== undefined && !click) {
+  //     setKeyword(query.continent);
+  //     console.log(query.continent);
   //   }
   // }, 0);
 
@@ -109,7 +123,7 @@ function Home({ countries }) {
         }}
       >
         <SearchFilterButtons
-          onClick={getRegion}
+          onClick={getContinent}
           length={includesCountries.length}
         />
       </Container>
@@ -134,7 +148,7 @@ function Home({ countries }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://restcountries.eu/rest/v2/all/");
+  const res = await fetch("https://restcountries.com/v2/all/");
   const countries = await res.json();
   return {
     props: {

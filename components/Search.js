@@ -35,7 +35,7 @@ function Search(props) {
           fontWeight="medium"
           rounded="full"
           paddingLeft="60px"
-          placeholder="Search by Country Name or Region Name"
+          placeholder="Search by Country Name or Continent Name"
           bg={mode("white", "gray.700")}
           color="brand"
           onChange={props.onChange}

@@ -24,14 +24,13 @@ This will serve the files at `http://localhost:3000/`
 ### Todo
 
 - [x] Search filter
-- [x] Region filter
+- [x] Continent filter
 - [x] Dark mode
 - [x] Borders country [Re-fetch When Data Changes]
 - [x] Homepage responsive control
 - [ ] Detail page responsive control
 - [ ] Detail page style fix
 - [ ] Add some cities (api.triposo is works...)
-
 
 ### Preview
 

@@ -64,7 +64,7 @@ function CountryInfo({ country }) {
             height={800}
             layout="responsive"
             objectFit="contain"
-            src={country.flag}
+            src={country.flags.[0]}
             alt={country.name}
           />
         </Box>
@@ -92,7 +92,7 @@ function CountryInfo({ country }) {
           spacing={4}
           fontSize="1em"
         >
-          <CountryInfoItem title="DEMONYM" value={country.demonym} />
+          {/*<CountryInfoItem title="DEMONYM" value={country.demonym} />*/}
           <CountryInfoItem
             title="NATIVE NAME"
             value={`${country.nativeName} ~ ${
@@ -100,12 +100,12 @@ function CountryInfo({ country }) {
             }`}
           />
           <CountryInfoItem title="CAPITAL" value={country.capital} />
-          <CountryInfoItem title="REGION" value={country.region} />
+          <CountryInfoItem title="CONTINENT" value={country.continent} />
           <CountryInfoItem
             title={<Aerasup />}
             value={numberFormat(country.area)}
           />
-          <CountryInfoItem title="SUBREGION" value={country.subregion} />
+          <CountryInfoItem title="CONTINENT" value={country.continent} />
           <CountryInfoItem
             title="POPULATION"
             value={numberFormat(country.population)}
