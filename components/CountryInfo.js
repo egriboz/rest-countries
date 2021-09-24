@@ -69,13 +69,7 @@ function CountryInfo({ country }) {
           />
         </Box>
         <Box mt="20px" mb="30px">
-          {/* <Heading size="md">{country.name}</Heading> */}
-          {country.altSpellings[2] && (
-            <Heading as="h2" size="md">
-              {country.altSpellings[2]}
-              <Badge ml="1">{country.alpha2Code}</Badge>
-            </Heading>
-          )}
+          {country.name}
         </Box>
       </GridItem>
       <GridItem colSpan={3} p="15px">
@@ -95,9 +89,7 @@ function CountryInfo({ country }) {
           {/*<CountryInfoItem title="DEMONYM" value={country.demonym} />*/}
           <CountryInfoItem
             title="NATIVE NAME"
-            value={`${country.nativeName} ~ ${
-              country.altSpellings.slice(-1)[0]
-            }`}
+            value={country.nativeName}
           />
           <CountryInfoItem title="CAPITAL" value={country.capital} />
           <CountryInfoItem title="CONTINENT" value={country.continent} />
