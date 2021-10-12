@@ -49,7 +49,7 @@ function NeighborsCountries(props) {
             height={30}
             objectFit="cover"
             alt={props.data.name}
-            src={props.data.flags.[0]}
+            src={props.data.flag}
           />
         </Box>
         <Box display="flex" alignItems="center" fontWeight="semibold">

@@ -45,18 +45,10 @@ function CountryDetail({ country }) {
         maxW="100%"
         bg="gray.800"
         p="100px 0 100px 0"
-        // backgroundImage={`url(${country.flag})`}
-        // backgroundPosition="center"
-        // backgroundRepeat="no-repeat"
-        // backgroundSize="cover"
-
-        // filter="blur(40px)"
-        // _before={{ with: "200px", backgroundImage: "lg" }}
       >
         <Container maxW="container.lg" pos="relative" zIndex="1">
           <Heading as="h1" color="white" mb="5px">
             {country.name}
-            {/* {country.altSpellings[2] && <> ~ {country.altSpellings[2]}</>} */}
           </Heading>
 
           <BreadCrumb name={country.name} />

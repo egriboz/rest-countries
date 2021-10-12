@@ -16,7 +16,6 @@ function Home({ countries }) {
   const query = router.query;
 
   const [keyword, setKeyword] = useState("");
-  // const [click, setClick] = useState(false);
 
   useEffect(() => {
     if (query !== undefined && query.continent !== undefined) {
@@ -26,20 +25,7 @@ function Home({ countries }) {
       });
     }
   }, [query.continent]);
-
-  // console.log(click, "click");
   
-  {/* 
-    const includesCountries = countries.filter( function (country) {
-      return country.name.toLowerCase().includes(keyword)
-    });
-
-    const includesCountries = countries.filter( (country) =>
-      country.name.toLowerCase().includes(keyword) ||
-      country.nativeName.toLowerCase().includes(keyword)
-  );
-
-  */}
   
   const includesCountries = countries.filter(function (country) {
     if (country.continent) {
@@ -63,36 +49,14 @@ function Home({ countries }) {
     });
     
     setKeyword(dataContinent);
-    // router.replace(dataContinent);
-    // console.log("query: ", query.continent);
   }
-
-  // setTimeout(function () {
-  //   if (query !== undefined && query.continent !== undefined && !click) {
-  //     setKeyword(query.continent);
-  //     console.log(query.continent);
-  //   }
-  // }, 0);
 
   return (
     <Layout>
       <Head>
         <title>{SiteConfig.title}</title>
       </Head>
-      {/* <Container
-        maxW="100%"
-        bg={mode("gray.200", "gray.900")}
-        p="80px 0 100px 0"
-        // backgroundImage={`url(${country.flag})`}
-        // backgroundPosition="center"
-        // backgroundRepeat="no-repeat"
-        // backgroundSize="cover"
 
-        // filter="blur(40px)"
-        // _before={{ with: "200px", backgroundImage: "lg" }}
-      >
-        
-      </Container> */}
       <Container maxW="container.lg">
         <Center
           p="80px 0 100px 0"

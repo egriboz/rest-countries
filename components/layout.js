@@ -44,19 +44,20 @@ function Layout({ children }) {
               <NextLink href="/">
                 <a>
                   {ID ? (
-                    <Avatar
-                      p="2"
-                      w="48px"
-                      h="48px"
-                      filter="invert(0)"
-                      backgroundColor="transparent"
-                      borderWidth="1px"
-                      borderColor={mode("gray.300", "gray.700")}
-                      name={ID}
-                      src={`https://restcountries.com/data/${lowerCaseText(
-                        ID
-                      )}.svg`}
-                    />
+                    <Icon glyph="compass" size={48} />
+                    // <Avatar
+                    //   p="2"
+                    //   w="48px"
+                    //   h="48px"
+                    //   filter="invert(0)"
+                    //   backgroundColor="transparent"
+                    //   borderWidth="1px"
+                    //   borderColor={mode("gray.300", "gray.700")}
+                    //   name={ID}
+                    //   src={`https://restcountries.com/data/${lowerCaseText(
+                    //     ID
+                    //   )}.svg`}
+                    // />
                     
                   ) : (
                     <Icon glyph="compass" size={48} />
@@ -155,17 +156,6 @@ function Layout({ children }) {
                 </Box>
               </VStack>
             </Box>
-            {/* <Box>
-              <Text fontWeight="bold">Some Country</Text>
-
-              <VStack spacing={2} align="left">
-                <Box>
-                  <NextLink href="/country/tur">
-                    <a>Turkey</a>
-                  </NextLink>
-                </Box>
-              </VStack>
-            </Box> */}
             <Box>
               <Text fontWeight="bold" mb="15px">
                 About

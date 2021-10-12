@@ -64,7 +64,7 @@ function CountryInfo({ country }) {
             height={800}
             layout="responsive"
             objectFit="contain"
-            src={country.flags.[0]}
+            src={country.flag}
             alt={country.name}
           />
         </Box>
@@ -73,11 +73,6 @@ function CountryInfo({ country }) {
         </Box>
       </GridItem>
       <GridItem colSpan={3} p="15px">
-        {/* <SimpleGrid>
-          <Heading as="h2" p="15px 0 15px 0" fontSize="1.4em">
-            Geography
-          </Heading>
-        </SimpleGrid> */}
         <SimpleGrid
           columns={{
             base: "1",
