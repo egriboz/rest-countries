@@ -120,37 +120,37 @@ function Layout({ children }) {
 
             <Box>
               <Text fontWeight="bold" mb="15px">
-                Continent
+                Region
               </Text>
 
               <VStack spacing={2} align="left">
                 <Box>
-                  <NextLink href="/?continent=asia">
+                  <NextLink href="/?region=asia">
                     <a>Asia</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?continent=africa">
+                  <NextLink href="/?region=africa">
                     <a>Africa</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?continent=americas">
+                  <NextLink href="/?region=americas">
                     <a>Americas</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?continent=europe">
+                  <NextLink href="/?region=europe">
                     <a>Europe</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?continent=oceania">
+                  <NextLink href="/?region=oceania">
                     <a>Oceania</a>
                   </NextLink>
                 </Box>
                 <Box>
-                  <NextLink href="/?continent=polar">
+                  <NextLink href="/?region=polar">
                     <a>Polar</a>
                   </NextLink>
                 </Box>

@@ -64,9 +64,11 @@ function CountryDetail({ country }) {
       >
         <CountryInfo country={country} />
       </Container>
+
       <Container pt="30px" maxW="container.lg">
         <City countryCode={country.alpha2Code} countryName={country.name} />
       </Container>
+      
       <Container pt="30px" maxW="container.lg">
         <Box>
           {borders.length > 0 ? (

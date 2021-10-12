@@ -166,9 +166,9 @@ function NeighborCountries(props) {
               <>
                 <Box>
                   <Text color="gray.500" fontSize="xs">
-                    CONTINENT
+                    REGION
                   </Text>
-                  {country.continent}
+                  {country.region}
                 </Box>
 
                 <Box>

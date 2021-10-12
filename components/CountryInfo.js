@@ -82,17 +82,17 @@ function CountryInfo({ country }) {
           fontSize="1em"
         >
           {/*<CountryInfoItem title="DEMONYM" value={country.demonym} />*/}
-          <CountryInfoItem
+          {/* <CountryInfoItem
             title="NATIVE NAME"
             value={country.nativeName}
           />
           <CountryInfoItem title="CAPITAL" value={country.capital} />
-          <CountryInfoItem title="CONTINENT" value={country.continent} />
+          <CountryInfoItem title="REGION" value={country.region} />
           <CountryInfoItem
             title={<Aerasup />}
             value={numberFormat(country.area)}
           />
-          <CountryInfoItem title="CONTINENT" value={country.continent} />
+          <CountryInfoItem title="REGION" value={country.region} />
           <CountryInfoItem
             title="POPULATION"
             value={numberFormat(country.population)}
@@ -112,7 +112,7 @@ function CountryInfo({ country }) {
                   {item.name} ({item.code})
                 </Text>
               ))}
-          </Box>
+          </Box> */}
         </SimpleGrid>
         <SimpleGrid mt="30px" mb="30px" columns={2} spacing={4} fontSize=".9em">
           <Box>

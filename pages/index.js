@@ -18,18 +18,18 @@ function Home({ countries }) {
   const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
-    if (query !== undefined && query.continent !== undefined) {
-      setKeyword(query.continent);
+    if (query !== undefined && query.region !== undefined) {
+      setKeyword(query.region);
       router.push({
-        query: { continent: query.continent },
+        query: { region: query.region },
       });
     }
-  }, [query.continent]);
+  }, [query.region]);
   
   
   const includesCountries = countries.filter(function (country) {
-    if (country.continent) {
-      return country.continent.toLowerCase().includes(keyword) || country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
+    if (country.region) {
+      return country.region.toLowerCase().includes(keyword) || country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
     } else {
       return country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
     }
@@ -40,15 +40,15 @@ function Home({ countries }) {
     setKeyword(e.target.value.toLowerCase());
   };
 
-  function getContinent(e) {
+  function getRegion(e) {
     e.preventDefault();
-    const dataContinent = e.target.getAttribute("data-continent").toLowerCase();
+    const dataRegion = e.target.getAttribute("data-region").toLowerCase();
     //setClick(true);
     router.push({
-      query: { continent: dataContinent },
+      query: { region: dataRegion },
     });
     
-    setKeyword(dataContinent);
+    setKeyword(dataRegion);
   }
 
   return (
@@ -87,7 +87,7 @@ function Home({ countries }) {
         }}
       >
         <SearchFilterButtons
-          onClick={getContinent}
+          onClick={getRegion}
           length={includesCountries.length}
         />
       </Container>

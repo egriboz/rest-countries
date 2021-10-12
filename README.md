@@ -24,7 +24,7 @@ This will serve the files at `http://localhost:3000/`
 ### Todo
 
 - [x] Search filter
-- [x] Continent filter
+- [x] Region filter
 - [x] Dark mode
 - [x] Borders country [Re-fetch When Data Changes]
 - [x] Homepage responsive control
