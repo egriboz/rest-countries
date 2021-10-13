@@ -81,27 +81,32 @@ function CountryInfo({ country }) {
           spacing={4}
           fontSize="1em"
         >
-          {/*<CountryInfoItem title="DEMONYM" value={country.demonym} />*/}
-          {/* <CountryInfoItem
+          
+          {country.name && <CountryInfoItem
+            title="NATIVE NAME"
+            value={country.name}
+          />
+          }
+          {country.nativeName && <CountryInfoItem
             title="NATIVE NAME"
             value={country.nativeName}
-          />
-          <CountryInfoItem title="CAPITAL" value={country.capital} />
-          <CountryInfoItem title="REGION" value={country.region} />
-          <CountryInfoItem
+          />}
+          {country.capital && <CountryInfoItem title="CAPITAL" value={country.capital} />}
+          {country.region && <CountryInfoItem title="REGION" value={country.region} />}
+          
+          {country.area && <CountryInfoItem
             title={<Aerasup />}
             value={numberFormat(country.area)}
-          />
-          <CountryInfoItem title="REGION" value={country.region} />
-          <CountryInfoItem
+          />}
+          {country.population && <CountryInfoItem
             title="POPULATION"
             value={numberFormat(country.population)}
-          />
-          <CountryInfoItem
+          />}
+          {country.callingCodes && <CountryInfoItem
             title="CALLINGCODES"
             value={`+${country.callingCodes}`}
-          />
-          <CountryInfoItem title="GINI" value={`${country.gini}%`} />
+          />}
+          {country.gini && <CountryInfoItem title="GINI" value={`${country.gini}%`} />}
           <Box border="1px" p="15px" rounded="2px" borderColor={borderColor}>
             <Text color="gray.500" fontSize="xs">
               CURRENCIES
@@ -112,7 +117,7 @@ function CountryInfo({ country }) {
                   {item.name} ({item.code})
                 </Text>
               ))}
-          </Box> */}
+          </Box>
         </SimpleGrid>
         <SimpleGrid mt="30px" mb="30px" columns={2} spacing={4} fontSize=".9em">
           <Box>
