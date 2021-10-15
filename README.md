@@ -1,7 +1,7 @@
 ###
 
 ####
-
+<img src="https://wakatime.com/badge/github/egriboz/rest-countries.svg"/>
 # Country Information
 
 Get information about countries via a RESTful API
