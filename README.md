@@ -2,6 +2,7 @@
 
 ####
 <img src="https://wakatime.com/badge/github/egriboz/rest-countries.svg"/>
+[![wakatime](https://wakatime.com/badge/github/egriboz/rest-countries.svg)](https://wakatime.com/badge/github/egriboz/rest-countries)
 # Country Information
 
 Get information about countries via a RESTful API
