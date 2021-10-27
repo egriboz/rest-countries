@@ -63,7 +63,7 @@ function NeighborsCountries(props) {
           <>
             <Box>
               <Text color="gray.500" fontSize="xs">
-                REGION
+                Region
               </Text>
               {props.data.region}
             </Box>

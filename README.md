@@ -1,6 +1,7 @@
 ###
 
 ####
+<img src="https://wakatime.com/badge/github/egriboz/rest-countries.svg"/>
 
 # Country Information
 
@@ -31,7 +32,6 @@ This will serve the files at `http://localhost:3000/`
 - [ ] Detail page responsive control
 - [ ] Detail page style fix
 - [ ] Add some cities (api.triposo is works...)
-
 
 ### Preview
 

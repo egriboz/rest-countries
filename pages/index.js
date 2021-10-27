@@ -16,7 +16,6 @@ function Home({ countries }) {
   const query = router.query;
 
   const [keyword, setKeyword] = useState("");
-  // const [click, setClick] = useState(false);
 
   useEffect(() => {
     if (query !== undefined && query.region !== undefined) {
@@ -26,15 +25,15 @@ function Home({ countries }) {
       });
     }
   }, [query.region]);
-
-  // console.log(click, "click");
-  const includesCountries = countries.filter(
-    (country) =>
-      country.name.toLowerCase().includes(keyword) ||
-      country.region.toLowerCase().includes(keyword) ||
-      country.subregion.toLowerCase().includes(keyword) ||
-      country.nativeName.toLowerCase().includes(keyword)
-  );
+  
+  
+  const includesCountries = countries.filter(function (country) {
+    if (country.region) {
+      return country.region.toLowerCase().includes(keyword) || country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
+    } else {
+      return country.name.toLowerCase().includes(keyword) || country.nativeName.toLowerCase().includes(keyword);
+    }
+  });
 
   const onInputChange = (e) => {
     e.preventDefault();
@@ -43,42 +42,21 @@ function Home({ countries }) {
 
   function getRegion(e) {
     e.preventDefault();
-    const dataRegion = e.target.getAttribute("data-region");
+    const dataRegion = e.target.getAttribute("data-region").toLowerCase();
     //setClick(true);
     router.push({
       query: { region: dataRegion },
     });
+    
     setKeyword(dataRegion);
-    // router.replace(dataRegion);
-    // console.log("query: ", query.region);
   }
-
-  // setTimeout(function () {
-  //   if (query !== undefined && query.region !== undefined && !click) {
-  //     setKeyword(query.region);
-  //     console.log(query.region);
-  //   }
-  // }, 0);
 
   return (
     <Layout>
       <Head>
         <title>{SiteConfig.title}</title>
       </Head>
-      {/* <Container
-        maxW="100%"
-        bg={mode("gray.200", "gray.900")}
-        p="80px 0 100px 0"
-        // backgroundImage={`url(${country.flag})`}
-        // backgroundPosition="center"
-        // backgroundRepeat="no-repeat"
-        // backgroundSize="cover"
 
-        // filter="blur(40px)"
-        // _before={{ with: "200px", backgroundImage: "lg" }}
-      >
-        
-      </Container> */}
       <Container maxW="container.lg">
         <Center
           p="80px 0 100px 0"
@@ -134,7 +112,7 @@ function Home({ countries }) {
 }
 
 export const getStaticProps = async () => {
-  const res = await fetch("https://restcountries.eu/rest/v2/all/");
+  const res = await fetch("https://restcountries.com/v2/all/");
   const countries = await res.json();
   return {
     props: {

@@ -10,7 +10,7 @@ function SearchFilterButtons(props) {
       {width > 768 && (
         <>
           <Text color="gray.500" fontSize="sm">
-            Filter by Region
+            Filter by region
           </Text>
 
           <ButtonGroup

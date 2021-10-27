@@ -69,21 +69,10 @@ function CountryInfo({ country }) {
           />
         </Box>
         <Box mt="20px" mb="30px">
-          {/* <Heading size="md">{country.name}</Heading> */}
-          {country.altSpellings[2] && (
-            <Heading as="h2" size="md">
-              {country.altSpellings[2]}
-              <Badge ml="1">{country.alpha2Code}</Badge>
-            </Heading>
-          )}
+          {country.name}
         </Box>
       </GridItem>
       <GridItem colSpan={3} p="15px">
-        {/* <SimpleGrid>
-          <Heading as="h2" p="15px 0 15px 0" fontSize="1.4em">
-            Geography
-          </Heading>
-        </SimpleGrid> */}
         <SimpleGrid
           columns={{
             base: "1",
@@ -92,29 +81,32 @@ function CountryInfo({ country }) {
           spacing={4}
           fontSize="1em"
         >
-          <CountryInfoItem title="DEMONYM" value={country.demonym} />
-          <CountryInfoItem
+          
+          {country.name && <CountryInfoItem
             title="NATIVE NAME"
-            value={`${country.nativeName} ~ ${
-              country.altSpellings.slice(-1)[0]
-            }`}
+            value={country.name}
           />
-          <CountryInfoItem title="CAPITAL" value={country.capital} />
-          <CountryInfoItem title="REGION" value={country.region} />
-          <CountryInfoItem
+          }
+          {country.nativeName && <CountryInfoItem
+            title="NATIVE NAME"
+            value={country.nativeName}
+          />}
+          {country.capital && <CountryInfoItem title="CAPITAL" value={country.capital} />}
+          {country.region && <CountryInfoItem title="REGION" value={country.region} />}
+          
+          {country.area && <CountryInfoItem
             title={<Aerasup />}
             value={numberFormat(country.area)}
-          />
-          <CountryInfoItem title="SUBREGION" value={country.subregion} />
-          <CountryInfoItem
+          />}
+          {country.population && <CountryInfoItem
             title="POPULATION"
             value={numberFormat(country.population)}
-          />
-          <CountryInfoItem
+          />}
+          {country.callingCodes && <CountryInfoItem
             title="CALLINGCODES"
             value={`+${country.callingCodes}`}
-          />
-          <CountryInfoItem title="GINI" value={`${country.gini}%`} />
+          />}
+          {country.gini && <CountryInfoItem title="GINI" value={`${country.gini}%`} />}
           <Box border="1px" p="15px" rounded="2px" borderColor={borderColor}>
             <Text color="gray.500" fontSize="xs">
               CURRENCIES

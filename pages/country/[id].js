@@ -16,7 +16,7 @@ import { Container, Heading, Box, AlertIcon, Alert } from "@chakra-ui/react";
 
 const getCountry = async (id) => {
   // const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
-  const data = await fetch(`https://restcountries.eu/rest/v2/alpha/${id}`);
+  const data = await fetch(`https://restcountries.com/v2/alpha/${id}`);
 
   const country = await data.json();
   return country;
@@ -24,7 +24,7 @@ const getCountry = async (id) => {
 // get detail
 function CountryDetail({ country }) {
   const [borders, setBorders] = useState([]);
-  const currentFlag = country.flag;
+  const currentFlag = country.flags.[0];
   useEffect(() => {
     const getBorders = async () => {
       const borders = await Promise.all(
@@ -45,18 +45,10 @@ function CountryDetail({ country }) {
         maxW="100%"
         bg="gray.800"
         p="100px 0 100px 0"
-        // backgroundImage={`url(${country.flag})`}
-        // backgroundPosition="center"
-        // backgroundRepeat="no-repeat"
-        // backgroundSize="cover"
-
-        // filter="blur(40px)"
-        // _before={{ with: "200px", backgroundImage: "lg" }}
       >
         <Container maxW="container.lg" pos="relative" zIndex="1">
           <Heading as="h1" color="white" mb="5px">
             {country.name}
-            {/* {country.altSpellings[2] && <> ~ {country.altSpellings[2]}</>} */}
           </Heading>
 
           <BreadCrumb name={country.name} />
@@ -72,9 +64,11 @@ function CountryDetail({ country }) {
       >
         <CountryInfo country={country} />
       </Container>
+
       <Container pt="30px" maxW="container.lg">
         <City countryCode={country.alpha2Code} countryName={country.name} />
       </Container>
+      
       <Container pt="30px" maxW="container.lg">
         <Box>
           {borders.length > 0 ? (
@@ -99,7 +93,7 @@ function CountryDetail({ country }) {
 }
 
 export async function getStaticPaths() {
-  const data = await fetch("https://restcountries.eu/rest/v2/all/");
+  const data = await fetch("https://restcountries.com/v2/all/");
   const countries = await data.json();
 
   const paths = countries.map((country) => {
