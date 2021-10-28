@@ -24,7 +24,7 @@ const getCountry = async (id) => {
 // get detail
 function CountryDetail({ country }) {
   const [borders, setBorders] = useState([]);
-  const currentFlag = country.flags.[0];
+  const currentFlag = country.flags[0];
   useEffect(() => {
     const getBorders = async () => {
       const borders = await Promise.all(
@@ -41,11 +41,7 @@ function CountryDetail({ country }) {
         <title>{country.name}</title>
       </Head>
 
-      <Container
-        maxW="100%"
-        bg="gray.800"
-        p="100px 0 100px 0"
-      >
+      <Container maxW="100%" bg="gray.800" p="100px 0 100px 0">
         <Container maxW="container.lg" pos="relative" zIndex="1">
           <Heading as="h1" color="white" mb="5px">
             {country.name}
@@ -68,7 +64,7 @@ function CountryDetail({ country }) {
       <Container pt="30px" maxW="container.lg">
         <City countryCode={country.alpha2Code} countryName={country.name} />
       </Container>
-      
+
       <Container pt="30px" maxW="container.lg">
         <Box>
           {borders.length > 0 ? (
