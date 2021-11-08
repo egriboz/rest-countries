@@ -1,7 +1,7 @@
 ###
 
 ####
-<img src="https://wakatime.com/badge/github/egriboz/rest-countries.svg"/>
+<!--<img src="https://wakatime.com/badge/github/egriboz/rest-countries.svg"/>-->
 
 # Country Information
 
