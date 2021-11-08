@@ -11,27 +11,6 @@ import SearchFilterButtons from "../components/SearchFilterButtons";
 import { Container, Center, Box, Button } from "@chakra-ui/react";
 import { useColorModeValue as mode } from "@chakra-ui/color-mode";
 
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 3,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-  },
-  mobile: {
-    breakpoint: { max: 768, min: 0 },
-    items: 1,
-  },
-};
 function Home({ countries }) {
   const router = useRouter();
   const query = router.query;
@@ -113,12 +92,6 @@ function Home({ countries }) {
           sm: "0px 50px",
         }}
       >
-        <Carousel responsive={responsive}>
-          <div>Item 1</div>
-          <div>Item 2</div>
-          <div>Item 3</div>
-          <div>Item 4</div>
-        </Carousel>
         <SearchFilterButtons
           onClick={getRegion}
           length={includesCountries.length}
