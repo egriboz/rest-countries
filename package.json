@@ -7,6 +7,7 @@
     "dev": "next",
     "build": "next build",
     "build-html": "next build && next export",
+    "export": "next export",
     "start": "next start"
   },
   "author": "",
@@ -26,6 +27,7 @@
     "supercons": "^0.0.1"
   },
   "devDependencies": {
-    "prettier": "^2.1.2"
+    "prettier": "^2.1.2",
+    "serve": "11.2.0"
   }
 }
